@@ -11,8 +11,11 @@ import {
   APIInteractionResponse,
   APIEmbed,
   APIApplicationCommandInteraction,
+  APIMessageComponentInteraction,
 } from 'discord-api-types/v10';
 import { verify } from 'tweetnacl';
+
+const STAFF_ROLE_ID = '1419223859483115591';
 
 function respond(response: APIInteractionResponse) {
   return new NextResponse(JSON.stringify(response), {
@@ -76,6 +79,13 @@ export async function POST(req: NextRequest) {
 
   if (interaction.type === InteractionType.ApplicationCommand) {
     const command = interaction as APIApplicationCommandInteraction;
+    const memberRoles = command.member?.roles as string[] | undefined;
+
+    // Role check for all application commands
+    if (!memberRoles || !memberRoles.includes(STAFF_ROLE_ID)) {
+        return respondEphimerally('You do not have permission to use this command.');
+    }
+    
     const staffMember = command.member?.user;
 
     if (!staffMember) {
@@ -117,6 +127,14 @@ export async function POST(req: NextRequest) {
   }
 
   if (interaction.type === InteractionType.MessageComponent) {
+    const componentInteraction = interaction as APIMessageComponentInteraction;
+    const memberRoles = componentInteraction.member?.roles as string[] | undefined;
+    
+    // Role check for all message components
+    if (!memberRoles || !memberRoles.includes(STAFF_ROLE_ID)) {
+        return respondEphimerally('You do not have permission to use this button.');
+    }
+
     if (!interaction.member) {
         return respondEphimerally("Could not identify the user clicking the button.");
     }
