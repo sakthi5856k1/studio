@@ -165,7 +165,17 @@ export async function getApplicationStatus(applicationId: string): Promise<Statu
     const validIdRegex = /^TP-\d{4}$/;
 
     if (validIdRegex.test(applicationId)) {
-        return { applicationId, status: 'Accepted' };
+        // Mock statuses based on the last digit for variety
+        const lastDigit = parseInt(applicationId.slice(-1));
+        if (lastDigit < 3) {
+            return { applicationId, status: 'Pending' };
+        } else if (lastDigit < 6) {
+            return { applicationId, status: 'Accepted' };
+        } else if (lastDigit < 8) {
+            return { applicationId, status: 'Rejected' };
+        } else {
+            return { applicationId, status: 'Interview' };
+        }
     }
 
     return { applicationId, status: 'NotFound' };
