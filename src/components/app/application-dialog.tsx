@@ -18,8 +18,8 @@ export function ApplicationDialog() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        {/* The dialog can be triggered by any element that has the data-apply-btn attribute */}
-        <div id="apply-trigger-placeholder" className="hidden" />
+        {/* This is a hidden trigger that we can programmatically click */}
+        <Button id="hidden-apply-trigger" className="hidden" />
       </DialogTrigger>
       <DialogContent className="sm:max-w-[800px]">
         <DialogHeader>
@@ -36,9 +36,9 @@ if (typeof window !== 'undefined') {
   document.addEventListener('click', (event) => {
     const target = event.target as HTMLElement;
     if (target.closest('[data-apply-btn]')) {
-      const trigger = document.getElementById('apply-trigger-placeholder');
+      const trigger = document.getElementById('hidden-apply-trigger');
       if (trigger) {
-        (trigger.firstChild as HTMLElement)?.click();
+        trigger.click();
       }
     }
   });
