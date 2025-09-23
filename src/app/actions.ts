@@ -151,3 +151,41 @@ export async function submitApplication(data: ApplicationData): Promise<SubmitRe
         return { success: false, message: 'An unexpected error occurred.' };
     }
 }
+
+
+export type StatusResult = {
+    applicationId: string;
+    status: 'Pending' | 'Accepted' | 'Rejected' | 'Interview' | 'NotFound';
+}
+
+// This is a mock function. In a real application, you would query a database.
+export async function getApplicationStatus(applicationId: string): Promise<StatusResult> {
+    await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate network delay
+
+    const statusId = parseInt(applicationId.slice(-1)) % 4; // Use last digit to get a status
+
+    let status: StatusResult['status'];
+    switch (statusId) {
+        case 0:
+            status = 'Pending';
+            break;
+        case 1:
+            status = 'Accepted';
+            break;
+        case 2:
+            status = 'Rejected';
+            break;
+        case 3:
+            status = 'Interview';
+            break;
+        default:
+            status = 'Pending';
+    }
+
+    // Simulate a not found case as well
+    if (applicationId.slice(-1) === '9') {
+        return { applicationId, status: 'NotFound' };
+    }
+
+    return { applicationId, status };
+}

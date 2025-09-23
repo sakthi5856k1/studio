@@ -50,7 +50,7 @@ export function Header() {
             <DropdownMenuContent>
               <DropdownMenuItem data-apply-btn>Apply</DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link href="/maintenance">Application Status</Link>
+                <Link href="/application-status">Application Status</Link>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -90,7 +90,7 @@ export function Header() {
                     <DropdownMenuContent>
                       <DropdownMenuItem data-apply-btn>Apply</DropdownMenuItem>
                       <DropdownMenuItem asChild>
-                        <Link href="/maintenance">Application Status</Link>
+                        <Link href="/application-status">Application Status</Link>
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
