@@ -10,6 +10,7 @@ import {
   APIInteraction,
   APIInteractionResponse,
   APIEmbed,
+  APIApplicationCommandInteraction,
 } from 'discord-api-types/v10';
 import { verify } from 'tweetnacl';
 
@@ -71,6 +72,19 @@ export async function POST(req: NextRequest) {
 
   if (interaction.type === InteractionType.Ping) {
     return respond({ type: InteractionResponseType.Pong });
+  }
+
+  if (interaction.type === InteractionType.ApplicationCommand) {
+    const command = interaction as APIApplicationCommandInteraction;
+
+    if (command.data.name === 'hello') {
+      return respond({
+        type: InteractionResponseType.ChannelMessageWithSource,
+        data: {
+          content: 'Hello! I am the Tamil Pasanga VTC bot, here to help.',
+        },
+      });
+    }
   }
 
   if (interaction.type === InteractionType.MessageComponent) {
