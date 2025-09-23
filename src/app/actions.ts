@@ -76,12 +76,6 @@ export async function submitApplication(data: ApplicationData) {
                 label: 'Accept for Interview',
                 custom_id: `interview_${steamId}`,
               },
-              {
-                type: 2, // Button
-                style: 2, // Secondary
-                label: 'Finished',
-                custom_id: `finished_${steamId}`,
-              },
             ],
           },
         ],
