@@ -29,6 +29,19 @@ function respondEphimerally(content: string) {
     });
 }
 
+async function sendFollowupMessage(interactionToken: string, content: string) {
+  const fetch = (await import('node-fetch')).default;
+  const url = `https://discord.com/api/v10/webhooks/${process.env.DISCORD_APPLICATION_ID}/${interactionToken}`;
+  
+  await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ content }),
+  });
+}
+
 export async function POST(req: NextRequest) {
   const signature = req.headers.get('x-signature-ed25519');
   const timestamp = req.headers.get('x-signature-timestamp');
@@ -74,33 +87,30 @@ export async function POST(req: NextRequest) {
 
     let statusText = '';
     let color = originalEmbed.color;
-    let dmMessage = '';
+    let followupMessage = '';
 
     switch (action) {
       case 'accept':
         statusText = `Accepted by ${staffMember.username}`;
         color = 5763719; // Green
-        dmMessage = `🎉 Congratulations! Your application (\`${applicationId}\`) to Tamil Pasanga VTC has been **Accepted**! Welcome to the team!`;
+        followupMessage = `✅ **Application Accepted** | \`${applicationId}\` has been accepted by <@${staffMember.id}>.`;
         break;
       case 'reject':
         statusText = `Rejected by ${staffMember.username}`;
         color = 15548997; // Red
-        dmMessage = `😔 We regret to inform you that your application (\`${applicationId}\`) to Tamil Pasanga VTC has been **Rejected**. Thank you for your interest.`;
+        followupMessage = `❌ **Application Rejected** | \`${applicationId}\` has been rejected by <@${staffMember.id}>.`;
         break;
       case 'interview':
         statusText = `Interview scheduled by ${staffMember.username}`;
         color = 3447003; // Blue
-        dmMessage = `👍 Your application (\`${applicationId}\`) has passed the initial screening! Please join our Discord server and contact a staff member to schedule your interview.`;
+        followupMessage = `💬 **Interview Stage** | \`${applicationId}\` has been moved to the interview stage by <@${staffMember.id}>.`;
         break;
       default:
         return respondEphimerally('Unknown action.');
     }
     
-    // TODO: Find the applicant's Discord user ID to send a DM.
-    // This currently requires you to manually find the user based on the application details.
-    // A future improvement could be storing the user's Discord ID during application.
-
-    // For now, we just update the original message.
+    // We must acknowledge the interaction first by updating the message.
+    // A follow-up response can be sent after.
     const updatedEmbed: APIEmbed = {
         ...originalEmbed,
         color,
@@ -110,6 +120,13 @@ export async function POST(req: NextRequest) {
         ]
     };
 
+    // Use a Promise to send the followup after responding to the interaction
+    if (followupMessage) {
+      // We don't await this, because we need to send the initial response quickly.
+      sendFollowupMessage(interaction.token, followupMessage).catch(console.error);
+    }
+
+    // Respond to the initial interaction to update the message
     return respond({
         type: InteractionResponseType.UpdateMessage,
         data: {
