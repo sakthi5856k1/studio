@@ -1,7 +1,32 @@
 {
   "newsletters": [
-    { "id": "newsletter-1", "title": "Q2 2024 Logistics Report", "date": "June 15, 2024", "author": "Jane Doe", "imageId": "newsletter-1" },
-    { "id": "newsletter-2", "title": "New Fleet Expansion", "date": "May 28, 2024", "author": "John Smith", "imageId": "newsletter-2" },
-    { "id": "newsletter-3", "title": "Community Spotlight: April", "date": "April 30, 2024", "author": "Admin", "imageId": "newsletter-3" }
+    {
+      "id": "newsletter-1758671620485",
+      "title": "Test",
+      "date": "September 23, 2025",
+      "author": "Sakthi",
+      "imageId": "newsletter-1758671620485"
+    },
+    {
+      "id": "newsletter-1",
+      "title": "Q2 2024 Logistics Report",
+      "date": "June 15, 2024",
+      "author": "Jane Doe",
+      "imageId": "newsletter-1"
+    },
+    {
+      "id": "newsletter-2",
+      "title": "New Fleet Expansion",
+      "date": "May 28, 2024",
+      "author": "John Smith",
+      "imageId": "newsletter-2"
+    },
+    {
+      "id": "newsletter-3",
+      "title": "Community Spotlight: April",
+      "date": "April 30, 2024",
+      "author": "Admin",
+      "imageId": "newsletter-3"
+    }
   ]
 }

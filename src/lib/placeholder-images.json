@@ -1,6 +1,12 @@
 {
   "placeholderImages": [
     {
+      "id": "newsletter-1758671620485",
+      "description": "Image for Test",
+      "imageUrl": "https://cdn.discordapp.com/attachments/1281551151418048677/1418938706231955456/ets2_20250919_180622_00.PNG?ex=68d3e5a6&is=68d29426&hm=63fec816b7c08dc69bd79c7b85b97f97ac0c8a55e441a9ddedfe224480ba57bb&",
+      "imageHint": "custom article"
+    },
+    {
       "id": "hero-truck",
       "description": "A branded truck on the road, representing Nexon Logistics.",
       "imageUrl": "https://media.discordapp.net/attachments/1281551151418048677/1417735782223056929/IMG_20250917_102508.jpg?ex=68d379d6&is=68d22856&hm=a557f1ba374f82770c80ad045ba6838cc0e0f99a01dd3079b9036c8039f67d23&=&format=webp&width=1389&height=684",
