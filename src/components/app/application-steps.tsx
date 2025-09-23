@@ -13,7 +13,11 @@ export function ApplicationSteps() {
     <section id="process" className="py-16 md:py-24 bg-card">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-headline">How to Apply</h2>
+          <h2 className="text-3xl md:text-4xl font-headline">
+            <span className="animate-rgb-text bg-gradient-to-r from-red-500 via-green-500 to-blue-500 bg-clip-text text-transparent [background-size:200%_auto]">
+              How to Apply
+            </span>
+          </h2>
           <p className="text-muted-foreground mt-2">A simple three-step process to join our team.</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
