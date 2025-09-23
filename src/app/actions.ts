@@ -21,7 +21,7 @@ const applicationSchemaBase = z.object({
     }),
 });
 
-export const applicationSchema = applicationSchemaBase.superRefine((data, ctx) => {
+const refinedApplicationSchema = applicationSchemaBase.superRefine((data, ctx) => {
     if (data.howYouFound === 'friends' && (!data.friendsMention || data.friendsMention.trim().length === 0)) {
         ctx.addIssue({
             code: z.ZodIssueCode.custom,
@@ -38,6 +38,7 @@ export const applicationSchema = applicationSchemaBase.superRefine((data, ctx) =
     }
 });
 
+export const applicationSchema = refinedApplicationSchema;
 
 export type ApplicationData = z.infer<typeof applicationSchema>;
 
