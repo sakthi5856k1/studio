@@ -1,3 +1,4 @@
+
 'use server';
 
 import { z } from 'zod';
@@ -53,6 +54,7 @@ export async function submitApplication(data: ApplicationData) {
     };
     
     const payload = {
+        content: '',
         embeds: [embed],
         components: [
           {
