@@ -30,6 +30,14 @@ const heroSlides = [
     buttonLink: '#',
     imageId: 'hero-truck-2',
   },
+  {
+    id: 'hero-3',
+    title: 'Join Us',
+    subtitle: 'Be part of something bigger.',
+    buttonText: 'Get Started',
+    buttonLink: '#apply',
+    imageId: 'hero-truck-3',
+  }
 ];
 
 export function Hero() {
