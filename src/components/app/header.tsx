@@ -1,13 +1,7 @@
 import Link from 'next/link';
 import { Logo } from '@/components/app/logo';
 import { Button } from '@/components/ui/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { ChevronDown, Menu } from 'lucide-react';
+import { Menu } from 'lucide-react';
 import {
   Sheet,
   SheetContent,
@@ -15,15 +9,12 @@ import {
 } from '@/components/ui/sheet';
 
 const navLinks = [
-  { href: '#', label: 'Home' },
-  { href: '#apply', label: 'Application' },
-  { href: '#about', label: 'About' },
-  { href: '#staff', label: 'Staff' },
-];
-
-const moreLinks = [
-    { href: "#gallery", label: "Gallery" },
-    { href: "#events", label: "Events" },
+  { href: '/', label: 'Home' },
+  { href: '/maintenance', label: 'Application' },
+  { href: '/maintenance', label: 'About' },
+  { href: '/maintenance', label: 'Staff' },
+  { href: '/maintenance', label: 'Gallery' },
+  { href: '/maintenance', label: 'Events' },
 ];
 
 export function Header() {
@@ -36,22 +27,10 @@ export function Header() {
         </Link>
         <nav className="hidden md:flex items-center gap-6 text-sm text-white">
           {navLinks.map((link) => (
-            <Link key={link.href} href={link.href} className="hover:text-primary transition-colors">
+            <Link key={link.href + link.label} href={link.href} className="hover:text-primary transition-colors">
               {link.label}
             </Link>
           ))}
-          <DropdownMenu>
-            <DropdownMenuTrigger className="flex items-center gap-1 hover:text-primary transition-colors outline-none">
-              More <ChevronDown className="h-4 w-4" />
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              {moreLinks.map((link) => (
-                <DropdownMenuItem key={link.href} asChild>
-                  <Link href={link.href}>{link.label}</Link>
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
         </nav>
         <div className="hidden md:block">
           <Button asChild className="rounded-full">
@@ -72,8 +51,8 @@ export function Header() {
                           <span className="text-xl font-headline">Tamil Pasanga</span>
                         </Link>
                         <nav className="flex flex-col gap-4 text-lg">
-                           {[...navLinks, ...moreLinks].map((link) => (
-                                <Link key={link.href} href={link.href} className="hover:text-primary transition-colors">
+                           {navLinks.map((link) => (
+                                <Link key={link.href + link.label} href={link.href} className="hover:text-primary transition-colors">
                                     {link.label}
                                 </Link>
                             ))}
