@@ -20,10 +20,10 @@ export function Hero() {
       <div className="absolute inset-0 bg-black/60" />
       <div className="relative z-10 max-w-4xl mx-auto px-4">
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-headline">
-          <span className="text-primary">Great Experience</span>, We Believe In Quality Not Quantity
+          Welcome to <span className="text-primary">Tamil Pasanga</span>
         </h1>
         <p className="mt-4 text-lg md:text-xl text-gray-300">
-          Gateway to New Horizons with Tamil Pasanga.
+          Your gateway to new horizons. We believe in quality, not quantity.
         </p>
         <Button size="lg" className="mt-8 rounded-full text-lg px-8 py-6 font-semibold" asChild>
           <a href="#apply">Apply</a>
