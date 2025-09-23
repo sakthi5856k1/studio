@@ -163,10 +163,20 @@ export async function getApplicationStatus(applicationId: string): Promise<Statu
     await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate network delay
 
     const validIdRegex = /^TP-\d{4}$/;
-
-    if (validIdRegex.test(applicationId)) {
-        return { applicationId, status: 'Accepted' };
+    if (!validIdRegex.test(applicationId)) {
+        return { applicationId, status: 'NotFound' };
     }
 
-    return { applicationId, status: 'NotFound' };
+    // Simulate different statuses based on the application ID for testing
+    const lastDigit = parseInt(applicationId.slice(-1), 10);
+
+    if (lastDigit >= 0 && lastDigit <= 3) {
+        return { applicationId, status: 'Accepted' };
+    } else if (lastDigit >= 4 && lastDigit <= 6) {
+        return { applicationId, status: 'Pending' };
+    } else if (lastDigit === 7) {
+        return { applicationId, status: 'Interview' };
+    } else {
+        return { applicationId, status: 'Rejected' };
+    }
 }
