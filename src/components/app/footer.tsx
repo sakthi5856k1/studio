@@ -11,7 +11,7 @@ export function Footer() {
           <div className="md:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-4">
               <Logo size={24} />
-              <span className="text-lg font-headline text-white">Tamil Pasanga</span>
+              <span className="text-lg font-headline animate-rgb-text bg-gradient-to-r from-red-500 via-green-500 to-blue-500 bg-clip-text text-transparent [background-size:200%_auto]">Tamil Pasanga</span>
             </Link>
             <p className="text-sm">Gateway to New Horizons.</p>
           </div>
