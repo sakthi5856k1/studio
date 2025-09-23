@@ -10,6 +10,7 @@ export function CurrentYear() {
     }, []);
 
     if (!year) {
+        // Return a placeholder or null to avoid hydration mismatch
         return null;
     }
 
