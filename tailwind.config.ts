@@ -92,11 +92,17 @@ export default {
           '0%': { 'background-position': '200% 0' },
           '100%': { 'background-position': '-200% 0' },
         },
+        'pan-bg': {
+          '0%': { 'object-position': '0% 50%' },
+          '50%': { 'object-position': '100% 50%' },
+          '100%': { 'object-position': '0% 50%' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
         'rgb-text': 'rgb-text 6s linear infinite',
+        'pan-bg': 'pan-bg 40s linear infinite',
       },
     },
   },
