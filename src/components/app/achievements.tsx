@@ -19,7 +19,7 @@ export function Achievements() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {achievements.map((item, index) => (
-            <Card key={index} className="p-8 text-center bg-card border-border/50">
+            <Card key={index} className="p-8 text-center bg-card border-border/50 shadow-lg hover:shadow-primary/20 transition-shadow duration-300">
               <CardContent className="flex flex-col items-center gap-4">
                 <div className="text-primary">{item.icon}</div>
                 <p className="text-5xl font-bold font-headline text-primary">{item.value}</p>
