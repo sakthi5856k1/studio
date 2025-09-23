@@ -88,21 +88,16 @@ export default {
             height: '0',
           },
         },
-        'neon-glow': {
-          '0%, 100%': {
-            'text-shadow':
-              '0 0 5px hsl(var(--primary)), 0 0 10px hsl(var(--primary)), 0 0 20px hsl(var(--primary)), 0 0 40px hsl(var(--primary))',
-          },
-          '50%': {
-            'text-shadow':
-              '0 0 2px hsl(var(--primary)), 0 0 5px hsl(var(--primary)), 0 0 10px hsl(var(--primary)), 0 0 20px hsl(var(--primary))',
-          },
+        'rgb-text': {
+          '0%': { 'background-position': '0% 50%' },
+          '50%': { 'background-position': '100% 50%' },
+          '100%': { 'background-position': '0% 50%' },
         },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
-        'neon-glow': 'neon-glow 2s ease-in-out infinite',
+        'rgb-text': 'rgb-text 6s ease-in-out infinite',
       },
     },
   },
