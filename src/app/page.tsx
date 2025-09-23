@@ -1,4 +1,5 @@
 import { Header } from '@/components/app/header';
+import { Hero } from '@/components/app/hero';
 import { Features } from '@/components/app/features';
 import { ApplicationSteps } from '@/components/app/application-steps';
 import { Achievements } from '@/components/app/achievements';
@@ -10,7 +11,8 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen bg-background">
       <Header />
-      <main className="flex-grow pt-20">
+      <main className="flex-grow">
+        <Hero />
         <Features />
         <ApplicationSteps />
         <Achievements />
