@@ -7,7 +7,7 @@ const applicationSchema = z.object({
     name: z.string().min(1, 'Name is required'),
     discordTag: z.string().min(1, 'Discord Tag is required'),
     email: z.string().email('Invalid email address'),
-    steamUrl: z.string().url('Invalid Steam profile URL'),
+    steamUrl: z.string().url('Invalid Steam profile URL. Please enter a full URL.'),
     experience: z.enum(['fresher', 'experienced'], {
         errorMap: () => ({ message: 'Please select your experience level' }),
     }),
@@ -21,7 +21,7 @@ const applicationSchema = z.object({
     }),
 }).refine(data => {
     if (data.howYouFound === 'friends') {
-        return !!data.friendsMention && data.friendsMention.length > 0;
+        return !!data.friendsMention && data.friendsMention.trim().length > 0;
     }
     return true;
 }, {
@@ -29,7 +29,7 @@ const applicationSchema = z.object({
     path: ['friendsMention'],
 }).refine(data => {
     if (data.howYouFound === 'others') {
-        return !!data.othersMention && data.othersMention.length > 0;
+        return !!data.othersMention && data.othersMention.trim().length > 0;
     }
     return true;
 }, {

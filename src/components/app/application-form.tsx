@@ -80,6 +80,8 @@ export function ApplicationForm({ onFormSubmit }: { onFormSubmit?: () => void })
       email: '',
       steamUrl: '',
       terms: false,
+      friendsMention: '',
+      othersMention: '',
     },
   });
 
