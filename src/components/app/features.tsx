@@ -1,5 +1,9 @@
+"use client";
+
+import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Blocks, FileText, Store, Truck, Gamepad2, Users, ClipboardCheck, HeartHandshake, Trophy, LayoutDashboard, Award, Palette, Map, Milestone } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 const features = [
   { icon: <Blocks size={32} />, title: "Division", description: "Structured divisions for various logistic operations." },
@@ -19,7 +23,13 @@ const features = [
   { icon: <Milestone size={32} />, title: "Celestial Milestone Tracker", description: "Our drivers and pilots have journeyed incredible distances, pushing boundaries and breaking limits." },
 ];
 
+const INITIAL_VISIBLE_FEATURES = 6;
+
 export function Features() {
+  const [showAll, setShowAll] = useState(false);
+
+  const visibleFeatures = showAll ? features : features.slice(0, INITIAL_VISIBLE_FEATURES);
+
   return (
     <section id="features" className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-4">
@@ -28,7 +38,7 @@ export function Features() {
           <p className="text-muted-foreground mt-2">Everything you need for a premier logistics experience.</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {features.map((feature, index) => (
+          {visibleFeatures.map((feature, index) => (
             <Card key={index} className="bg-card border-border/50 text-center p-6 shadow-lg hover:shadow-primary/20 transition-shadow duration-300">
               <CardHeader className="items-center">
                 <div className="p-4 bg-primary/10 rounded-full text-primary mb-4">
@@ -42,6 +52,13 @@ export function Features() {
             </Card>
           ))}
         </div>
+        {!showAll && features.length > INITIAL_VISIBLE_FEATURES && (
+          <div className="text-center mt-12">
+            <Button size="lg" variant="outline" className="rounded-full border-primary text-primary hover:bg-primary hover:text-primary-foreground" onClick={() => setShowAll(true)}>
+              View All Features
+            </Button>
+          </div>
+        )}
       </div>
     </section>
   );
