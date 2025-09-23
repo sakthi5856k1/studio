@@ -41,6 +41,12 @@
       "description": "Image for the third newsletter issue.",
       "imageUrl": "https://images.unsplash.com/photo-1636715080304-541bdb358f3a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHx3YXJlaG91c2UlMjBpbnRlcmlvcnxlbnwwfHx8fDE3NTg1ODY1MjV8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "warehouse interior"
+    },
+    {
+      "id": "create-news-banner",
+      "description": "Banner for create news page.",
+      "imageUrl": "https://images.unsplash.com/photo-1725352566305-7b8ca9346771?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxhYnN0cmFjdCUyMHdyaXRlcnxlbnwwfHx8fDE3NTg2NzEzODJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "abstract writer"
     }
   ]
 }
