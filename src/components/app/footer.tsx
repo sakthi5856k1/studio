@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Truck } from 'lucide-react';
+import { Logo } from '@/components/app/logo';
 import { Button } from '@/components/ui/button';
 import { CurrentYear } from './current-year';
 
@@ -10,7 +10,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div className="md:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-4">
-              <Truck className="text-primary" size={24} />
+              <Logo size={24} />
               <span className="text-lg font-headline text-white">Tamil Pasanga</span>
             </Link>
             <p className="text-sm">Gateway to New Horizons.</p>
