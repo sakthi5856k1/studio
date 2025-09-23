@@ -162,30 +162,11 @@ export type StatusResult = {
 export async function getApplicationStatus(applicationId: string): Promise<StatusResult> {
     await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate network delay
 
-    const statusId = parseInt(applicationId.slice(-1)) % 4; // Use last digit to get a status
+    const validIdRegex = /^TP-\d{4}$/;
 
-    let status: StatusResult['status'];
-    switch (statusId) {
-        case 0:
-            status = 'Pending';
-            break;
-        case 1:
-            status = 'Accepted';
-            break;
-        case 2:
-            status = 'Rejected';
-            break;
-        case 3:
-            status = 'Interview';
-            break;
-        default:
-            status = 'Pending';
+    if (validIdRegex.test(applicationId)) {
+        return { applicationId, status: 'Accepted' };
     }
 
-    // Simulate a not found case as well
-    if (applicationId.slice(-1) === '9') {
-        return { applicationId, status: 'NotFound' };
-    }
-
-    return { applicationId, status };
+    return { applicationId, status: 'NotFound' };
 }
