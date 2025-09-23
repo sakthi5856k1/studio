@@ -114,3 +114,30 @@ export async function submitApplication(data: ApplicationData): Promise<SubmitRe
         return { success: false, message: 'An unexpected error occurred.' };
     }
 }
+
+export type ApplicationStatusResult = {
+    applicationId: string;
+    status: 'Pending' | 'Accepted' | 'Rejected' | 'Interview' | 'Not Found';
+};
+
+export async function getApplicationStatus(
+  applicationId: string
+): Promise<ApplicationStatusResult> {
+    const validIdRegex = /^TP-\d{4}$/;
+    if (!validIdRegex.test(applicationId)) {
+        return { applicationId, status: 'Not Found' };
+    }
+
+    // For testing, return a status based on the last digit of the ID
+    const lastDigit = parseInt(applicationId.slice(-1), 10);
+
+    if (lastDigit >= 0 && lastDigit <= 3) {
+        return { applicationId, status: 'Pending' };
+    } else if (lastDigit >= 4 && lastDigit <= 6) {
+        return { applicationId, status: 'Accepted' };
+    } else if (lastDigit === 7) {
+        return { applicationId, status: 'Interview' };
+    } else {
+        return { applicationId, status: 'Rejected' };
+    }
+}
