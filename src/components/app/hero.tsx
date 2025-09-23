@@ -12,7 +12,7 @@ export function Hero() {
           src={heroImage.imageUrl}
           alt={heroImage.description}
           fill
-          className="object-cover animate-pan-bg"
+          className="object-cover"
           priority
           data-ai-hint={heroImage.imageHint}
         />
