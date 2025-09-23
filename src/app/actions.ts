@@ -3,7 +3,7 @@
 
 import { z } from 'zod';
 
-const applicationSchema = z.object({
+const applicationSchemaBase = z.object({
     name: z.string().min(1, 'Name is required'),
     discordTag: z.string().min(1, 'Discord Tag is required'),
     email: z.string().email('Invalid email address'),
@@ -19,22 +19,23 @@ const applicationSchema = z.object({
     terms: z.literal<boolean>(true, {
         errorMap: () => ({ message: 'You must accept the terms and conditions' }),
     }),
-}).refine(data => {
-    if (data.howYouFound === 'friends') {
-        return !!data.friendsMention && data.friendsMention.trim().length > 0;
+});
+
+export const applicationSchema = applicationSchemaBase.superRefine((data, ctx) => {
+    if (data.howYouFound === 'friends' && (!data.friendsMention || data.friendsMention.trim().length === 0)) {
+        ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: 'Please mention your friend(s)',
+            path: ['friendsMention'],
+        });
     }
-    return true;
-}, {
-    message: 'Please mention your friend(s)',
-    path: ['friendsMention'],
-}).refine(data => {
-    if (data.howYouFound === 'others') {
-        return !!data.othersMention && data.othersMention.trim().length > 0;
+    if (data.howYouFound === 'others' && (!data.othersMention || data.othersMention.trim().length === 0)) {
+        ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: 'Please specify how you found us',
+            path: ['othersMention'],
+        });
     }
-    return true;
-}, {
-    message: 'Please specify how you found us',
-    path: ['othersMention'],
 });
 
 
@@ -100,7 +101,7 @@ export async function submitApplication(data: ApplicationData): Promise<SubmitRe
     };
     
     const payload = {
-        content: '',
+        content: `New application from ${name}`,
         embeds: [embed],
         components: [
           {

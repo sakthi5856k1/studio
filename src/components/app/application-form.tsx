@@ -4,7 +4,6 @@
 import { useState, useEffect } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
 import {
   Form,
   FormControl,
@@ -26,44 +25,10 @@ import {
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
 import { useToast } from '@/hooks/use-toast';
-import { submitApplication, type SubmitResult, type ApplicationData } from '@/app/actions';
+import { submitApplication, type SubmitResult, type ApplicationData, applicationSchema } from '@/app/actions';
 import { Loader2 } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '../ui/textarea';
-
-const applicationSchema = z.object({
-  name: z.string().min(1, 'Name is required'),
-  discordTag: z.string().min(1, 'Discord Tag is required'),
-  email: z.string().email('Invalid email address'),
-  steamUrl: z.string().url('Invalid Steam profile URL. Please enter a full URL.'),
-  experience: z.enum(['fresher', 'experienced'], {
-      errorMap: () => ({ message: 'Please select your experience level' }),
-  }),
-  howYouFound: z.enum(['truckersmp', 'friends', 'others'], {
-      errorMap: () => ({ message: 'Please select an option' }),
-  }),
-  friendsMention: z.string().optional(),
-  othersMention: z.string().optional(),
-  terms: z.literal<boolean>(true, {
-    errorMap: () => ({ message: 'You must accept the terms and conditions' }),
-  }),
-}).refine(data => {
-    if (data.howYouFound === 'friends') {
-        return !!data.friendsMention && data.friendsMention.trim().length > 0;
-    }
-    return true;
-}, {
-    message: 'Please mention your friend(s)',
-    path: ['friendsMention'],
-}).refine(data => {
-    if (data.howYouFound === 'others') {
-        return !!data.othersMention && data.othersMention.trim().length > 0;
-    }
-    return true;
-}, {
-    message: 'Please specify how you found us',
-    path: ['othersMention'],
-});
 
 
 export function ApplicationForm({ onFormSubmit }: { onFormSubmit?: () => void }) {
