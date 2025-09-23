@@ -20,7 +20,7 @@ export function ApplicationSteps() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {steps.map((step, index) => (
-            <Card key={index} className="flex flex-col text-center p-6 shadow-lg border-border/50">
+            <Card key={index} className="flex flex-col text-center p-6 shadow-lg border-border/50 hover:shadow-primary/20 transition-shadow duration-300">
               <CardHeader className="items-center">
                 <div className="p-4 bg-primary/10 rounded-full text-primary mb-4">
                   {step.icon}
