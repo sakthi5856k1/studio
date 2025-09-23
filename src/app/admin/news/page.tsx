@@ -53,9 +53,11 @@ export default function NewsAdminPage() {
                             </Button>
                           </DropdownMenuTrigger>
                           <DropdownMenuContent align="end">
-                            <DropdownMenuItem>
-                              <FilePenLine className="mr-2 h-4 w-4" />
-                              Edit
+                            <DropdownMenuItem asChild>
+                              <Link href={`/admin/news/edit/${article.id}`}>
+                                <FilePenLine className="mr-2 h-4 w-4" />
+                                Edit
+                              </Link>
                             </DropdownMenuItem>
                             <DropdownMenuItem className="text-red-500">
                               <Trash2 className="mr-2 h-4 w-4" />
