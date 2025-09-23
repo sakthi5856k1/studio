@@ -48,10 +48,7 @@ export function Header() {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-              <DropdownMenuItem data-apply-btn>Apply</DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link href="/application-status">Application Status</Link>
-              </DropdownMenuItem>
+              <DropdownMenuItem data-apply-btn>Apply Now</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </nav>
@@ -88,10 +85,7 @@ export function Header() {
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
-                      <DropdownMenuItem data-apply-btn>Apply</DropdownMenuItem>
-                      <DropdownMenuItem asChild>
-                        <Link href="/application-status">Application Status</Link>
-                      </DropdownMenuItem>
+                      <DropdownMenuItem data-apply-btn>Apply Now</DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </nav>
