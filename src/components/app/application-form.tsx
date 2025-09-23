@@ -2,7 +2,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import {
@@ -14,7 +14,6 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import {
@@ -29,18 +28,43 @@ import {
 import { useToast } from '@/hooks/use-toast';
 import { submitApplication, type ApplicationData } from '@/app/actions';
 import { Loader2 } from 'lucide-react';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Textarea } from '../ui/textarea';
 
 const applicationSchema = z.object({
   name: z.string().min(1, 'Name is required'),
   discordTag: z.string().min(1, 'Discord Tag is required'),
   email: z.string().email('Invalid email address'),
-  steamId: z.string().min(1, 'Steam ID is required'),
-  experience: z.string().min(1, 'Please describe your experience.'),
-  howYouFound: z.string().min(1, 'Please let us know how you found us.'),
+  steamUrl: z.string().url('Invalid Steam profile URL. Please enter a full URL.'),
+  experience: z.enum(['fresher', 'experienced'], {
+      errorMap: () => ({ message: 'Please select your experience level' }),
+  }),
+  howYouFound: z.enum(['truckersmp', 'friends', 'others'], {
+      errorMap: () => ({ message: 'Please select an option' }),
+  }),
+  friendsMention: z.string().optional(),
+  othersMention: z.string().optional(),
   terms: z.literal<boolean>(true, {
     errorMap: () => ({ message: 'You must accept the terms and conditions' }),
   }),
+}).refine(data => {
+    if (data.howYouFound === 'friends') {
+        return !!data.friendsMention && data.friendsMention.trim().length > 0;
+    }
+    return true;
+}, {
+    message: 'Please mention your friend(s)',
+    path: ['friendsMention'],
+}).refine(data => {
+    if (data.howYouFound === 'others') {
+        return !!data.othersMention && data.othersMention.trim().length > 0;
+    }
+    return true;
+}, {
+    message: 'Please specify how you found us',
+    path: ['othersMention'],
 });
+
 
 export function ApplicationForm({ onFormSubmit }: { onFormSubmit?: () => void }) {
   const [isTermsRead, setIsTermsRead] = useState(false);
@@ -54,12 +78,16 @@ export function ApplicationForm({ onFormSubmit }: { onFormSubmit?: () => void })
       name: '',
       discordTag: '',
       email: '',
-      steamId: '',
-      experience: '',
-      howYouFound: '',
+      steamUrl: '',
       terms: false,
     },
   });
+
+  const howYouFoundValue = useWatch({
+    control: form.control,
+    name: 'howYouFound',
+  });
+
 
   async function onSubmit(data: ApplicationData) {
     setIsSubmitting(true);
@@ -80,7 +108,7 @@ export function ApplicationForm({ onFormSubmit }: { onFormSubmit?: () => void })
       toast({
         variant: 'destructive',
         title: 'Error',
-        description: result.message,
+        description: result.message || 'An error occurred',
       });
     }
   }
@@ -88,8 +116,8 @@ export function ApplicationForm({ onFormSubmit }: { onFormSubmit?: () => void })
   return (
     <>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <FormField
               control={form.control}
               name="name"
@@ -135,52 +163,102 @@ export function ApplicationForm({ onFormSubmit }: { onFormSubmit?: () => void })
             />
             <FormField
               control={form.control}
-              name="steamId"
+              name="steamUrl"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Steam ID</FormLabel>
+                  <FormLabel>Steam Profile URL</FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter your Steam64 ID" {...field} />
+                    <Input placeholder="https://steamcommunity.com/id/yourprofile" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
           </div>
-          <FormField
-            control={form.control}
-            name="experience"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Your Experience</FormLabel>
-                <FormControl>
-                  <Textarea
-                    placeholder="Tell us about your trucking experience (e.g., years playing, other VTCs)."
-                    className="min-h-[100px]"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="howYouFound"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>How did you find our VTC?</FormLabel>
-                <FormControl>
-                  <Textarea
-                    placeholder="e.g., Discord, a friend, TruckersMP forums, etc."
-                    className="min-h-[100px]"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <FormField
+              control={form.control}
+              name="experience"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Your Experience</FormLabel>
+                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select your experience level" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="fresher">Fresher</SelectItem>
+                      <SelectItem value="experienced">Experienced</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="howYouFound"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>How did you find our VTC?</FormLabel>
+                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select an option" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="truckersmp">TruckersMP</SelectItem>
+                      <SelectItem value="friends">Friends</SelectItem>
+                      <SelectItem value="others">Others</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+
+          {howYouFoundValue === 'friends' && (
+             <FormField
+                control={form.control}
+                name="friendsMention"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Friend's Name(s)</FormLabel>
+                    <FormControl>
+                      <Textarea
+                        placeholder="Please mention the friend(s) who referred you."
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+          )}
+
+          {howYouFoundValue === 'others' && (
+             <FormField
+                control={form.control}
+                name="othersMention"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Please Specify</FormLabel>
+                    <FormControl>
+                      <Textarea
+                        placeholder="e.g., Discord, TruckersMP forums, etc."
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+          )}
+
           <FormField
             control={form.control}
             name="terms"

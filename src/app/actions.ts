@@ -7,13 +7,36 @@ const applicationSchema = z.object({
     name: z.string().min(1, 'Name is required'),
     discordTag: z.string().min(1, 'Discord Tag is required'),
     email: z.string().email('Invalid email address'),
-    steamId: z.string().min(1, 'Steam ID is required'),
-    experience: z.string().min(1, 'Experience is required'),
-    howYouFound: z.string().min(1, 'This field is required'),
+    steamUrl: z.string().url('Invalid Steam profile URL'),
+    experience: z.enum(['fresher', 'experienced'], {
+        errorMap: () => ({ message: 'Please select your experience level' }),
+    }),
+    howYouFound: z.enum(['truckersmp', 'friends', 'others'], {
+        errorMap: () => ({ message: 'Please select an option' }),
+    }),
+    friendsMention: z.string().optional(),
+    othersMention: z.string().optional(),
     terms: z.literal<boolean>(true, {
         errorMap: () => ({ message: 'You must accept the terms and conditions' }),
     }),
+}).refine(data => {
+    if (data.howYouFound === 'friends') {
+        return !!data.friendsMention && data.friendsMention.length > 0;
+    }
+    return true;
+}, {
+    message: 'Please mention your friend(s)',
+    path: ['friendsMention'],
+}).refine(data => {
+    if (data.howYouFound === 'others') {
+        return !!data.othersMention && data.othersMention.length > 0;
+    }
+    return true;
+}, {
+    message: 'Please specify how you found us',
+    path: ['othersMention'],
 });
+
 
 export type ApplicationData = z.infer<typeof applicationSchema>;
 
@@ -28,13 +51,21 @@ export async function submitApplication(data: ApplicationData) {
         };
     }
 
-    const { name, discordTag, email, steamId, experience, howYouFound } = validation.data;
+    const { name, discordTag, email, steamUrl, experience, howYouFound, friendsMention, othersMention } = validation.data;
     const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
 
     if (!webhookUrl) {
         console.error('DISCORD_WEBHOOK_URL is not set in .env file');
         return { success: false, message: 'Server configuration error.' };
     }
+
+    let howFoundValue = howYouFound;
+    if (howYouFound === 'friends' && friendsMention) {
+        howFoundValue = `Friends: ${friendsMention}`;
+    } else if (howYouFound === 'others' && othersMention) {
+        howFoundValue = `Others: ${othersMention}`;
+    }
+
 
     const embed = {
         title: 'New VTC Application',
@@ -43,9 +74,9 @@ export async function submitApplication(data: ApplicationData) {
             { name: 'Name', value: name, inline: true },
             { name: 'Discord Tag', value: discordTag, inline: true },
             { name: 'Email', value: email, inline: true },
-            { name: 'Steam ID', value: steamId, inline: true },
+            { name: 'Steam Profile', value: steamUrl, inline: false },
             { name: 'Experience', value: experience },
-            { name: 'How they found us', value: howYouFound },
+            { name: 'How they found us', value: howFoundValue },
         ],
         timestamp: new Date().toISOString(),
         footer: {
@@ -64,19 +95,19 @@ export async function submitApplication(data: ApplicationData) {
                 type: 2, // Button
                 style: 3, // Success
                 label: 'Accept',
-                custom_id: `accept_${steamId}`,
+                custom_id: `accept_${steamUrl}`,
               },
               {
                 type: 2, // Button
                 style: 4, // Danger
                 label: 'Reject',
-                custom_id: `reject_${steamId}`,
+                custom_id: `reject_${steamUrl}`,
               },
               {
                 type: 2, // Button
                 style: 1, // Primary
                 label: 'Accept for Interview',
-                custom_id: `interview_${steamId}`,
+                custom_id: `interview_${steamUrl}`,
               },
             ],
           },
