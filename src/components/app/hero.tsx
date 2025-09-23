@@ -23,7 +23,7 @@ export function Hero() {
           <span className="text-primary">Great Experience</span>, We Believe In Quality Not Quantity
         </h1>
         <p className="mt-4 text-lg md:text-xl text-gray-300">
-          Gateway to New Horizons with Nexon Logistics.
+          Gateway to New Horizons with Tamil Pasanga.
         </p>
         <Button size="lg" className="mt-8 rounded-full text-lg px-8 py-6 font-semibold" asChild>
           <a href="#apply">Apply</a>

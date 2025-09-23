@@ -11,7 +11,7 @@ export function Footer() {
           <div className="md:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-4">
               <Truck className="text-primary" size={24} />
-              <span className="text-lg font-headline text-white">Nexon Logistics</span>
+              <span className="text-lg font-headline text-white">Tamil Pasanga</span>
             </Link>
             <p className="text-sm">Gateway to New Horizons.</p>
           </div>
@@ -42,7 +42,7 @@ export function Footer() {
           </div>
         </div>
         <div className="border-t border-border/50 pt-8 text-center text-sm">
-          <p>&copy; <CurrentYear /> Nexon Logistics Hub. All Rights Reserved.</p>
+          <p>&copy; <CurrentYear /> Tamil Pasanga Hub. All Rights Reserved.</p>
         </div>
       </div>
     </footer>

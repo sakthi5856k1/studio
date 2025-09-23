@@ -8,7 +8,7 @@ export function Header() {
       <div className="container mx-auto flex justify-between items-center">
         <Link href="/" className="flex items-center gap-2">
           <Truck className="text-primary" size={28} />
-          <span className="text-xl font-headline text-white">Nexon Logistics</span>
+          <span className="text-xl font-headline text-white">Tamil Pasanga</span>
         </Link>
         <nav className="hidden md:flex items-center gap-6 text-sm">
           <Link href="#features" className="hover:text-primary transition-colors">Features</Link>

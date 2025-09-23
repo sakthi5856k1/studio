@@ -21,7 +21,7 @@ export function Testimonial() {
         <Card className="bg-transparent border-0 shadow-none">
           <CardContent className="p-0">
             <blockquote className="text-xl md:text-2xl italic">
-              “Nexon Logistics has been a game-changer. The community is fantastic, and the management truly cares about its drivers. It’s more than just a VTC; it’s a family.”
+              “Tamil Pasanga has been a game-changer. The community is fantastic, and the management truly cares about its drivers. It’s more than just a VTC; it’s a family.”
             </blockquote>
             <p className="mt-6 font-semibold text-lg">Alex Johnson</p>
             <p className="text-sm text-primary">Veteran Driver</p>

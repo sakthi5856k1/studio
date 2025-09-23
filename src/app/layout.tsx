@@ -3,7 +3,7 @@ import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 
 export const metadata: Metadata = {
-  title: 'Nexon Logistics Hub',
+  title: 'Tamil Pasanga Hub',
   description: 'Great Experience, We Believe In Quality Not Quantity',
 };
 
