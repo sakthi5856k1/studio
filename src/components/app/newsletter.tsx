@@ -2,8 +2,10 @@ import Image from 'next/image';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { Newsletters } from '@/lib/newsletter-data';
 import { Calendar, User } from 'lucide-react';
+import newsData from '@/lib/news-articles.json';
+
+const newsletters = newsData.newsletters;
 
 export function Newsletter() {
   return (
@@ -14,7 +16,7 @@ export function Newsletter() {
           <p className="text-muted-foreground mt-2">Stay up-to-date with the latest from Tamil Pasanga.</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {Newsletters.map((item) => {
+          {newsletters.map((item) => {
             const image = PlaceHolderImages.find(img => img.id === item.imageId);
             return (
               <Card key={item.id} className="flex flex-col bg-card border-border/50 shadow-lg overflow-hidden hover:shadow-primary/20 transition-shadow duration-300">

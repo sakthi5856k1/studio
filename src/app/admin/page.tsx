@@ -13,27 +13,25 @@ export default function AdminPage() {
             <Shield className="mx-auto h-16 w-16 text-primary" />
             <h1 className="text-4xl font-headline">Admin Panel</h1>
             <p className="text-muted-foreground">
-              Welcome to the admin area. Select a section to manage.
+              Welcome to the admin area. Manage your site content here.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <Card className="text-left hover:shadow-primary/20 transition-shadow duration-300">
-              <CardHeader className="flex flex-row items-center justify-between pb-2">
-                <CardTitle className="text-sm font-medium">
-                  Manage News
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-left">
+            <Card className="bg-card hover:shadow-primary/20 transition-shadow">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Newspaper size={20} />
+                  <span>Manage News</span>
                 </CardTitle>
-                <Newspaper className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
-                <p className="text-xs text-muted-foreground mb-4">
-                  Create, edit, and delete news articles.
-                </p>
-                <Button asChild size="sm">
+                <p className="text-muted-foreground mb-4">Create, edit, and delete news articles for the homepage.</p>
+                <Button asChild>
                   <Link href="/admin/news">Go to News</Link>
                 </Button>
               </CardContent>
             </Card>
-            {/* Add other management cards here in the future */}
           </div>
         </div>
       </main>
