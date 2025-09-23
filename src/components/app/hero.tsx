@@ -41,11 +41,11 @@ export function Hero() {
         plugins={[Autoplay({ delay: 5000, stopOnInteraction: true })]}
         opts={{ loop: true }}
       >
-        <CarouselContent className="h-full">
+        <CarouselContent>
           {heroSlides.map((slide) => {
             const image = PlaceHolderImages.find(img => img.id === slide.imageId);
             return (
-              <CarouselItem key={slide.id} className="h-full">
+              <CarouselItem key={slide.id}>
                 <div className="relative w-full h-full flex items-center justify-center text-center text-white">
                   {image && (
                     <Image
