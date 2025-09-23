@@ -23,8 +23,8 @@ export function Testimonial() {
             <blockquote className="text-xl md:text-2xl italic">
               “Tamil Pasanga has been a game-changer. The community is fantastic, and the management truly cares about its drivers. It’s more than just a VTC; it’s a family.”
             </blockquote>
-            <p className="mt-6 font-semibold text-lg">Alex Johnson</p>
-            <p className="text-sm text-primary">Veteran Driver</p>
+            <p className="mt-6 font-semibold text-lg">powerful gaming</p>
+            <p className="text-sm text-primary">managing Director</p>
           </CardContent>
         </Card>
       </div>
