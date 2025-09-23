@@ -10,8 +10,8 @@ import {
 
 const navLinks = [
   { href: '/', label: 'Home' },
+  { href: '/about', label: 'About' },
   { href: '/maintenance', label: 'Application' },
-  { href: '/maintenance', label: 'About' },
   { href: '/maintenance', label: 'Staff' },
   { href: '/maintenance', label: 'Gallery' },
   { href: '/maintenance', label: 'Events' },
