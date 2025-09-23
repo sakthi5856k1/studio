@@ -16,9 +16,11 @@ export default function NewsAdminPage() {
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between mb-8">
             <h1 className="text-3xl font-headline">Manage News Articles</h1>
-            <Button>
-              <PlusCircle className="mr-2 h-4 w-4" />
-              Create New
+            <Button asChild>
+              <Link href="/admin/news/create">
+                <PlusCircle className="mr-2 h-4 w-4" />
+                Create New
+              </Link>
             </Button>
           </div>
 
