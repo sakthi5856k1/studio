@@ -57,7 +57,7 @@ export function Newsletter() {
         </div>
         <div className="text-center mt-12">
             <Button size="lg" variant="outline" className="rounded-full border-primary text-primary hover:bg-primary hover:text-primary-foreground" asChild>
-                <Link href="/admin/news">View All News</Link>
+                <Link href="/news">View All News</Link>
             </Button>
         </div>
       </div>
