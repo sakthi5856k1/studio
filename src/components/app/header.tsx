@@ -34,8 +34,8 @@ export function Header() {
           ))}
         </nav>
         <div className="hidden md:block">
-          <Button asChild className="rounded-full">
-            <Link href="#apply">Apply Now</Link>
+          <Button className="rounded-full" data-apply-btn>
+            Apply Now
           </Button>
         </div>
         <div className="md:hidden">
@@ -58,8 +58,8 @@ export function Header() {
                                 </Link>
                             ))}
                         </nav>
-                        <Button asChild className="rounded-full">
-                            <Link href="#apply">Apply Now</Link>
+                        <Button className="rounded-full" data-apply-btn>
+                           Apply Now
                         </Button>
                     </div>
                 </SheetContent>

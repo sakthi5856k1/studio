@@ -31,8 +31,9 @@ const heroSlides = [
     title: 'Great Experience',
     subtitle: 'We Believe In Quality Not Quantity',
     buttonText: 'Apply',
-    buttonLink: '#apply',
+    buttonLink: '#',
     imageId: 'hero-truck',
+    'data-apply-btn': true,
   },
   {
     id: 'hero-2',
@@ -47,7 +48,7 @@ const heroSlides = [
     title: 'Join Us',
     subtitle: 'Be part of something bigger.',
     buttonText: 'Discord',
-    buttonLink: '#apply',
+    buttonLink: '#',
     imageId: 'hero-truck-3',
     icon: <DiscordIcon />,
   }
@@ -68,6 +69,7 @@ export function Hero() {
       <CarouselContent>
         {heroSlides.map((slide) => {
           const image = PlaceHolderImages.find((img) => img.id === slide.imageId);
+          const buttonProps = { ...(slide['data-apply-btn'] ? { 'data-apply-btn': true } : {})};
           return (
             <CarouselItem key={slide.id}>
               <section className="relative h-[80vh] w-full flex items-center justify-center text-white">
@@ -89,7 +91,7 @@ export function Hero() {
                   <p className="mt-4 text-lg md:text-xl text-muted-foreground drop-shadow-md">
                     {slide.subtitle}
                   </p>
-                  <Button asChild size="lg" className="mt-8 rounded-full">
+                  <Button asChild size="lg" className="mt-8 rounded-full" {...buttonProps}>
                     <Link href={slide.buttonLink}>
                       {slide.icon}
                       {slide.buttonText}

@@ -3,6 +3,7 @@ import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import { SnowEffect } from '@/components/app/snow-effect';
 import './snow.css';
+import { ApplicationDialog } from '@/components/app/application-dialog';
 
 export const metadata: Metadata = {
   title: 'Tamil Pasanga Hub',
@@ -27,6 +28,7 @@ export default function RootLayout({
       <body className="font-body antialiased">
         <SnowEffect />
         {children}
+        <ApplicationDialog />
         <Toaster />
       </body>
     </html>

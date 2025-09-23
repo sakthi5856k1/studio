@@ -42,7 +42,7 @@ const applicationSchema = z.object({
   }),
 });
 
-export function ApplicationForm() {
+export function ApplicationForm({ onFormSubmit }: { onFormSubmit?: () => void }) {
   const [isTermsRead, setIsTermsRead] = useState(false);
   const [isTermsModalOpen, setIsTermsModalOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -73,6 +73,9 @@ export function ApplicationForm() {
       });
       form.reset();
       setIsTermsRead(false);
+      if (onFormSubmit) {
+        onFormSubmit();
+      }
     } else {
       toast({
         variant: 'destructive',
@@ -83,84 +86,46 @@ export function ApplicationForm() {
   }
 
   return (
-    <section id="apply" className="py-16 md:py-24 bg-card">
-      <div className="container mx-auto px-4 max-w-3xl">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-headline">Apply Now</h2>
-          <p className="text-muted-foreground mt-2">
-            Join the Tamil Pasanga VTC family.
-          </p>
-        </div>
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Full Name</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Enter your full name" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="discordTag"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Discord Tag</FormLabel>
-                    <FormControl>
-                      <Input placeholder="e.g., username#1234" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Email Address</FormLabel>
-                    <FormControl>
-                      <Input
-                        type="email"
-                        placeholder="your.email@example.com"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="steamId"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Steam ID</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Enter your Steam64 ID" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
+    <>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <FormField
               control={form.control}
-              name="experience"
+              name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Your Experience</FormLabel>
+                  <FormLabel>Full Name</FormLabel>
                   <FormControl>
-                    <Textarea
-                      placeholder="Tell us about your trucking experience (e.g., years playing, other VTCs)."
-                      className="min-h-[100px]"
+                    <Input placeholder="Enter your full name" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="discordTag"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Discord Tag</FormLabel>
+                  <FormControl>
+                    <Input placeholder="e.g., username#1234" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Email Address</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="email"
+                      placeholder="your.email@example.com"
                       {...field}
                     />
                   </FormControl>
@@ -170,56 +135,86 @@ export function ApplicationForm() {
             />
             <FormField
               control={form.control}
-              name="howYouFound"
+              name="steamId"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>How did you find our VTC?</FormLabel>
+                  <FormLabel>Steam ID</FormLabel>
                   <FormControl>
-                    <Textarea
-                      placeholder="e.g., Discord, a friend, TruckersMP forums, etc."
-                      className="min-h-[100px]"
-                      {...field}
-                    />
+                    <Input placeholder="Enter your Steam64 ID" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="terms"
-              render={({ field }) => (
-                <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
-                  <FormControl>
-                    <Checkbox
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                      disabled={!isTermsRead || isSubmitting}
-                    />
-                  </FormControl>
-                  <div className="space-y-1 leading-none">
-                    <FormLabel>
-                      I agree to the terms and conditions.
-                    </FormLabel>
-                    <Button
-                      type="button"
-                      variant="link"
-                      className="p-0 h-auto text-primary"
-                      onClick={() => setIsTermsModalOpen(true)}
-                    >
-                      Click here to read the terms.
-                    </Button>
-                    <FormMessage />
-                  </div>
-                </FormItem>
-              )}
-            />
-            <Button type="submit" className="w-full rounded-full" size="lg" disabled={isSubmitting}>
-              {isSubmitting ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Submitting...</> : 'Submit Application'}
-            </Button>
-          </form>
-        </Form>
-      </div>
+          </div>
+          <FormField
+            control={form.control}
+            name="experience"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Your Experience</FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder="Tell us about your trucking experience (e.g., years playing, other VTCs)."
+                    className="min-h-[100px]"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="howYouFound"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>How did you find our VTC?</FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder="e.g., Discord, a friend, TruckersMP forums, etc."
+                    className="min-h-[100px]"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="terms"
+            render={({ field }) => (
+              <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
+                <FormControl>
+                  <Checkbox
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                    disabled={!isTermsRead || isSubmitting}
+                  />
+                </FormControl>
+                <div className="space-y-1 leading-none">
+                  <FormLabel>
+                    I agree to the terms and conditions.
+                  </FormLabel>
+                  <Button
+                    type="button"
+                    variant="link"
+                    className="p-0 h-auto text-primary"
+                    onClick={() => setIsTermsModalOpen(true)}
+                  >
+                    Click here to read the terms.
+                  </Button>
+                  <FormMessage />
+                </div>
+              </FormItem>
+            )}
+          />
+          <Button type="submit" className="w-full rounded-full" size="lg" disabled={isSubmitting}>
+            {isSubmitting ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Submitting...</> : 'Submit Application'}
+          </Button>
+        </form>
+      </Form>
 
       <AlertDialog open={isTermsModalOpen} onOpenChange={setIsTermsModalOpen}>
         <AlertDialogContent>
@@ -253,6 +248,6 @@ export function ApplicationForm() {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
-    </section>
+    </>
   );
 }
