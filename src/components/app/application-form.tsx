@@ -25,7 +25,8 @@ import {
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
 import { useToast } from '@/hooks/use-toast';
-import { submitApplication, type SubmitResult, type ApplicationData, applicationSchema } from '@/app/actions';
+import { submitApplication, type SubmitResult } from '@/app/actions';
+import { type ApplicationData, applicationSchema } from '@/lib/schemas';
 import { Loader2 } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '../ui/textarea';

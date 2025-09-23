@@ -21,7 +21,7 @@ export function Testimonial() {
         <Card className="bg-transparent border-0 shadow-none">
           <CardContent className="p-0">
             <blockquote className="text-xl md:text-2xl italic">
-              “Tamil Pasanga has been a Logistics. The community is fantastic, and the management truly cares about its drivers. It’s more than just a VTC; it’s a family.”
+              “Tamil Pasanga has been a game-changer for my virtual trucking experience. The community is fantastic, and the management truly cares about its drivers. It’s more than just a VTC; it’s a family.”
             </blockquote>
             <p className="mt-6 font-semibold text-lg">Powerful Gaming</p>
             <p className="text-sm text-primary">Managing Director</p>
