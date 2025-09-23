@@ -6,6 +6,7 @@ import { Achievements } from '@/components/app/achievements';
 import { Testimonial } from '@/components/app/testimonial';
 import { Newsletter } from '@/components/app/newsletter';
 import { Footer } from '@/components/app/footer';
+import { ApplicationForm } from '@/components/app/application-form';
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
         <Hero />
         <About />
         <ApplicationSteps />
+        <ApplicationForm />
         <Achievements />
         <Testimonial />
         <Newsletter />
