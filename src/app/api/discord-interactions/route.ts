@@ -76,6 +76,11 @@ export async function POST(req: NextRequest) {
 
   if (interaction.type === InteractionType.ApplicationCommand) {
     const command = interaction as APIApplicationCommandInteraction;
+    const staffMember = command.member?.user;
+
+    if (!staffMember) {
+      return respondEphimerally("Could not identify the user running the command.");
+    }
 
     if (command.data.name === 'hello') {
       return respond({
@@ -83,6 +88,30 @@ export async function POST(req: NextRequest) {
         data: {
           content: 'Hello! I am the Tamil Pasanga VTC bot, here to help.',
         },
+      });
+    }
+
+    if (command.data.name === 'accept' || command.data.name === 'reject') {
+      const applicationId = (command.data.options?.[0] as any)?.value;
+      if (!applicationId) {
+        return respondEphimerally('You must provide an Application ID.');
+      }
+      
+      const action = command.data.name;
+      let followupMessage = '';
+
+      if (action === 'accept') {
+        followupMessage = `✅ **Application Accepted** | \`${applicationId}\` has been manually accepted by <@${staffMember.id}>.`;
+      } else {
+        followupMessage = `❌ **Application Rejected** | \`${applicationId}\` has been manually rejected by <@${staffMember.id}>.`;
+      }
+      
+      // Acknowledge the command immediately
+      return respond({
+          type: InteractionResponseType.ChannelMessageWithSource,
+          data: {
+              content: followupMessage,
+          },
       });
     }
   }
