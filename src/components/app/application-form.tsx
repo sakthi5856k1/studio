@@ -1,7 +1,7 @@
 
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -26,7 +26,7 @@ import {
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
 import { useToast } from '@/hooks/use-toast';
-import { submitApplication, type ApplicationData } from '@/app/actions';
+import { submitApplication, type SubmitResult, type ApplicationData } from '@/app/actions';
 import { Loader2 } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '../ui/textarea';
@@ -70,7 +70,20 @@ export function ApplicationForm({ onFormSubmit }: { onFormSubmit?: () => void })
   const [isTermsRead, setIsTermsRead] = useState(false);
   const [isTermsModalOpen, setIsTermsModalOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submissionResult, setSubmissionResult] = useState<SubmitResult | null>(null);
   const { toast } = useToast();
+
+  useEffect(() => {
+    if (submissionResult?.success && submissionResult.applicationId) {
+      const timer = setTimeout(() => {
+        setSubmissionResult(null);
+        if (onFormSubmit) {
+          onFormSubmit();
+        }
+      }, 30000);
+      return () => clearTimeout(timer);
+    }
+  }, [submissionResult, onFormSubmit]);
 
   const form = useForm<ApplicationData>({
     resolver: zodResolver(applicationSchema),
@@ -97,15 +110,9 @@ export function ApplicationForm({ onFormSubmit }: { onFormSubmit?: () => void })
     setIsSubmitting(false);
 
     if (result.success) {
-      toast({
-        title: 'Success!',
-        description: result.message,
-      });
+      setSubmissionResult(result);
       form.reset();
       setIsTermsRead(false);
-      if (onFormSubmit) {
-        onFormSubmit();
-      }
     } else {
       toast({
         variant: 'destructive',
@@ -113,6 +120,18 @@ export function ApplicationForm({ onFormSubmit }: { onFormSubmit?: () => void })
         description: result.message || 'An error occurred',
       });
     }
+  }
+
+  if (submissionResult?.success) {
+    return (
+      <div className="text-center py-12">
+        <h2 className="text-2xl font-bold text-primary">Application Submitted!</h2>
+        <p className="text-muted-foreground mt-2">Thank you for applying.</p>
+        <p className="mt-4">Your Application ID is:</p>
+        <p className="text-3xl font-bold text-primary mt-2">{submissionResult.applicationId}</p>
+        <p className="text-sm text-muted-foreground mt-4">You can close this window. It will close automatically in 30 seconds.</p>
+      </div>
+    );
   }
 
   return (

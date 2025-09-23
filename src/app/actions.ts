@@ -40,7 +40,21 @@ const applicationSchema = z.object({
 
 export type ApplicationData = z.infer<typeof applicationSchema>;
 
-export async function submitApplication(data: ApplicationData) {
+export type SubmitResult = {
+    success: boolean;
+    message: string;
+    applicationId?: string;
+    errors?: Record<string, string[] | undefined>;
+}
+
+// In a real application, you would use a database to generate a unique sequential ID.
+// For this prototype, we'll generate a random one.
+function generateApplicationId() {
+    const randomNumber = Math.floor(Math.random() * 9000) + 1000;
+    return `TP-${randomNumber}`;
+}
+
+export async function submitApplication(data: ApplicationData): Promise<SubmitResult> {
     const validation = applicationSchema.safeParse(data);
 
     if (!validation.success) {
@@ -53,6 +67,7 @@ export async function submitApplication(data: ApplicationData) {
 
     const { name, discordTag, email, steamUrl, experience, howYouFound, friendsMention, othersMention } = validation.data;
     const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
+    const applicationId = generateApplicationId();
 
     if (!webhookUrl) {
         console.error('DISCORD_WEBHOOK_URL is not set in .env file');
@@ -68,7 +83,7 @@ export async function submitApplication(data: ApplicationData) {
 
 
     const embed = {
-        title: 'New VTC Application',
+        title: `New VTC Application - ${applicationId}`,
         color: 3977201, // Medium Sea Green
         fields: [
             { name: 'Name', value: name, inline: true },
@@ -95,19 +110,19 @@ export async function submitApplication(data: ApplicationData) {
                 type: 2, // Button
                 style: 3, // Success
                 label: 'Accept',
-                custom_id: `accept_${steamUrl}`,
+                custom_id: `accept_${applicationId}`,
               },
               {
                 type: 2, // Button
                 style: 4, // Danger
                 label: 'Reject',
-                custom_id: `reject_${steamUrl}`,
+                custom_id: `reject_${applicationId}`,
               },
               {
                 type: 2, // Button
                 style: 1, // Primary
                 label: 'Accept for Interview',
-                custom_id: `interview_${steamUrl}`,
+                custom_id: `interview_${applicationId}`,
               },
             ],
           },
@@ -130,7 +145,7 @@ export async function submitApplication(data: ApplicationData) {
             return { success: false, message: 'Failed to submit application.' };
         }
 
-        return { success: true, message: 'Application submitted successfully!' };
+        return { success: true, message: 'Application submitted successfully!', applicationId };
     } catch (error) {
         console.error('Error submitting application to Discord:', error);
         return { success: false, message: 'An unexpected error occurred.' };
