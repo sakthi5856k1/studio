@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Calendar, User } from 'lucide-react';
 import newsData from '@/lib/news-articles.json';
+import Link from 'next/link';
 
 const newsletters = newsData.newsletters;
 
@@ -16,7 +17,7 @@ export function Newsletter() {
           <p className="text-muted-foreground mt-2">Stay up-to-date with the latest from Tamil Pasanga.</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {newsletters.map((item) => {
+          {newsletters.slice(0, 3).map((item) => {
             const image = PlaceHolderImages.find(img => img.id === item.imageId);
             return (
               <Card key={item.id} className="flex flex-col bg-card border-border/50 shadow-lg overflow-hidden hover:shadow-primary/20 transition-shadow duration-300">
@@ -46,14 +47,18 @@ export function Newsletter() {
                   </div>
                 </CardContent>
                 <CardFooter>
-                  <Button variant="link" className="text-primary p-0">Read More &rarr;</Button>
+                   <Button variant="link" className="text-primary p-0" asChild>
+                    <Link href={`/admin/news/edit/${item.id}`}>Read More &rarr;</Link>
+                  </Button>
                 </CardFooter>
               </Card>
             );
           })}
         </div>
         <div className="text-center mt-12">
-          <Button size="lg" variant="outline" className="rounded-full border-primary text-primary hover:bg-primary hover:text-primary-foreground">View All News</Button>
+            <Button size="lg" variant="outline" className="rounded-full border-primary text-primary hover:bg-primary hover:text-primary-foreground" asChild>
+                <Link href="/admin/news">View All News</Link>
+            </Button>
         </div>
       </div>
     </section>

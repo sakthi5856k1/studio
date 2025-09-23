@@ -23,6 +23,7 @@ import Link from "next/link";
 const formSchema = z.object({
   title: z.string().min(1, "Title is required"),
   author: z.string().min(1, "Author is required"),
+  imageUrl: z.string().url("Must be a valid URL"),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -37,6 +38,7 @@ export function CreateNewsForm() {
     defaultValues: {
       title: "",
       author: "",
+      imageUrl: "",
     },
   });
 
@@ -85,6 +87,19 @@ export function CreateNewsForm() {
               <FormLabel>Author</FormLabel>
               <FormControl>
                 <Input placeholder="Enter author's name" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="imageUrl"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Banner Image URL</FormLabel>
+              <FormControl>
+                <Input placeholder="https://example.com/image.png" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
