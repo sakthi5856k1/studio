@@ -51,6 +51,41 @@ export async function submitApplication(data: ApplicationData) {
             text: 'Tamil Pasanga VTC Application',
         },
     };
+    
+    const payload = {
+        embeds: [embed],
+        components: [
+          {
+            type: 1, // Action Row
+            components: [
+              {
+                type: 2, // Button
+                style: 3, // Success
+                label: 'Accept',
+                custom_id: `accept_${steamId}`,
+              },
+              {
+                type: 2, // Button
+                style: 4, // Danger
+                label: 'Reject',
+                custom_id: `reject_${steamId}`,
+              },
+              {
+                type: 2, // Button
+                style: 1, // Primary
+                label: 'Accept for Interview',
+                custom_id: `interview_${steamId}`,
+              },
+              {
+                type: 2, // Button
+                style: 2, // Secondary
+                label: 'Finished',
+                custom_id: `finished_${steamId}`,
+              },
+            ],
+          },
+        ],
+    };
 
     try {
         const response = await fetch(webhookUrl, {
@@ -58,11 +93,13 @@ export async function submitApplication(data: ApplicationData) {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ embeds: [embed] }),
+            body: JSON.stringify(payload),
         });
 
         if (!response.ok) {
             console.error(`Discord webhook failed with status: ${response.status}`);
+            const errorBody = await response.text();
+            console.error('Error body:', errorBody);
             return { success: false, message: 'Failed to submit application.' };
         }
 
