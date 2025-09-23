@@ -35,7 +35,7 @@ const heroSlides = [
 
 export function Hero() {
   return (
-    <section className="relative h-screen w-full pt-20 overflow-hidden">
+    <section className="relative h-[80vh] w-full pt-20 overflow-hidden">
       <Carousel
         className="w-full h-full"
         plugins={[Autoplay({ delay: 5000, stopOnInteraction: true })]}
