@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Blocks, FileText, Store, Truck, Gamepad2, Users } from 'lucide-react';
+import { Blocks, FileText, Store, Truck, Gamepad2, Users, ClipboardCheck, HeartHandshake, Trophy, LayoutDashboard, Award, Palette, Map, Milestone } from 'lucide-react';
 
 const features = [
   { icon: <Blocks size={32} />, title: "Division", description: "Structured divisions for various logistic operations." },
@@ -8,6 +8,15 @@ const features = [
   { icon: <Truck size={32} />, title: "Tours", description: "Participate in organized tours and special events." },
   { icon: <Gamepad2 size={32} />, title: "Garage HQ", description: "Manage your fleet from your personal headquarters." },
   { icon: <Users size={32} />, title: "Community", description: "Join a thriving community of drivers and enthusiasts." },
+  { icon: <ClipboardCheck size={32} />, title: "Examination System", description: "Test and improve your driving skills with comprehensive examinations and practical assessments." },
+  { icon: <HeartHandshake size={32} />, title: "Dedicated Staff", description: "Receive outstanding support and guidance from our experienced and friendly team." },
+  { icon: <Trophy size={32} />, title: "Ranking System", description: "Rise through the leaderboards and earn recognition in our competitive ranking system." },
+  { icon: <LayoutDashboard size={32} />, title: "Drivershub", description: "Access all essential tools, resources, and updates in one seamless, centralized hub." },
+  { icon: <Award size={32} />, title: "Ranks", description: "Achieve prestigious ranks and badges by demonstrating dedication and exceptional performance." },
+  { icon: <Palette size={32} />, title: "Custom UI, Cargo & Skins", description: "Express yourself by personalizing your interface, cargo, and vehicle skins with endless options." },
+  { icon: <Map size={32} />, title: "Live Map", description: "Track your location and progress in real time with our interactive live map feature." },
+  { icon: <Users size={32} />, title: "Discord Community", description: "Connect with fellow drivers, share experiences, and participate in events within our thriving Discord community." },
+  { icon: <Milestone size={32} />, title: "Celestial Milestone Tracker", description: "Our drivers and pilots have journeyed incredible distances, pushing boundaries and breaking limits." },
 ];
 
 export function Features() {
