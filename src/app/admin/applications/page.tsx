@@ -86,9 +86,9 @@ export default async function ApplicationsAdminPage() {
                                                         </Button>
                                                     </DropdownMenuTrigger>
                                                     <DropdownMenuContent align="end">
-                                                        <UpdateApplicationStatus applicationId={app.id} status="Accepted" />
-                                                        <UpdateApplicationStatus applicationId={app.id} status="Rejected" />
-                                                        <UpdateApplicationStatus applicationId={app.id} status="Interview" />
+                                                        <UpdateApplicationStatus applicationId={app.id} status="Accepted" currentStatus={app.status} />
+                                                        <UpdateApplicationStatus applicationId={app.id} status="Rejected" currentStatus={app.status} />
+                                                        <UpdateApplicationStatus applicationId={app.id} status="Interview" currentStatus={app.status} />
                                                     </DropdownMenuContent>
                                                 </DropdownMenu>
                                             </TableCell>
