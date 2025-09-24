@@ -12,6 +12,9 @@ export type { StaffMember };
 const formSchema = z.object({
   name: z.string().min(1, 'Name is required'),
   role: z.string().min(1, 'Role is required'),
+  imageUrl: z.string().url('Must be a valid URL').optional().or(z.literal('')),
+  steamUrl: z.string().url('Must be a valid URL').optional().or(z.literal('')),
+  truckersmpUrl: z.string().url('Must be a valid URL').optional().or(z.literal('')),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -58,6 +61,9 @@ export async function updateStaffMember(id: string, values: FormValues) {
         ...staffData.staffMembers[memberIndex],
         name: validation.data.name,
         role: validation.data.role,
+        imageUrl: validation.data.imageUrl,
+        steamUrl: validation.data.steamUrl,
+        truckersmpUrl: validation.data.truckersmpUrl,
     };
 
     await writeJsonFile(staffFilePath, staffData);

@@ -4,6 +4,9 @@ export type StaffMember = {
   name: string;
   role: string;
   imageId: string;
+  imageUrl?: string;
+  steamUrl?: string;
+  truckersmpUrl?: string;
 };
 
 export type StaffData = {

@@ -10,6 +10,9 @@ import type { StaffData, StaffMember } from '@/lib/staff-members';
 const formSchema = z.object({
   name: z.string().min(1, 'Name is required'),
   role: z.string().min(1, 'Role is required'),
+  imageUrl: z.string().url('Must be a valid URL').optional().or(z.literal('')),
+  steamUrl: z.string().url('Must be a valid URL').optional().or(z.literal('')),
+  truckersmpUrl: z.string().url('Must be a valid URL').optional().or(z.literal('')),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -46,6 +49,9 @@ export async function createStaffMember(values: FormValues) {
       name: validation.data.name,
       role: validation.data.role,
       imageId: 'testimonial-avatar', // Default image
+      imageUrl: validation.data.imageUrl,
+      steamUrl: validation.data.steamUrl,
+      truckersmpUrl: validation.data.truckersmpUrl,
     };
     
     staffData.staffMembers.push(newMember);

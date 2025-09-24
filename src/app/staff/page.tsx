@@ -38,6 +38,8 @@ const roleOrder = [
 const bannerImageUrl = "https://cdn.discordapp.com/attachments/1281551151418048677/1414862372199202927/ets2_20250907_201945_00.PNG?ex=68d43a84&is=68d2e904&hm=c6a185bd254316fdb29cdd8e8f8255b85a60a3760da66ed8f10813dc2d90e01b&";
 
 export default function StaffPage() {
+  const defaultImage = PlaceHolderImages.find(img => img.id === 'testimonial-avatar');
+
   return (
     <div className="flex flex-col min-h-screen bg-background">
       <Header />
@@ -66,18 +68,17 @@ export default function StaffPage() {
                 <h2 className="text-2xl font-headline text-primary mb-6 animate-fade-in-scroll">{role}</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                   {membersInRole.map((member) => {
-                    const image = PlaceHolderImages.find(img => img.id === member.imageId);
+                    const imageSrc = member.imageUrl || defaultImage?.imageUrl;
                     return (
                       <Card key={member.id} className="text-center bg-card border-border/50 shadow-sm hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 hover:scale-105 group">
                         <CardHeader>
-                            {image && (
+                            {imageSrc && (
                                 <Image
-                                    src={image.imageUrl}
+                                    src={imageSrc}
                                     alt={`Photo of ${member.name}`}
                                     width={80}
                                     height={80}
                                     className="rounded-full mx-auto border-4 border-primary/50"
-                                    data-ai-hint={image.imageHint}
                                 />
                             )}
                         </CardHeader>

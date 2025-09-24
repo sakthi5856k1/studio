@@ -5,361 +5,541 @@
       "id": "staff-1",
       "name": "POWERFUL GAMING",
       "role": "Managing Director",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-2",
       "name": "Kishorkishor GI",
       "role": "Marketing Executive",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-3",
       "name": "GAMING WITH HRIVAL (HR)",
       "role": "Human Resource Staff",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-4",
       "name": "SAARTHI GAMER YT",
       "role": "Human Resource Staff",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-5",
       "name": "SCONT NUT",
       "role": "Trainer",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-6",
       "name": "Spartan Gaming YT Tamil",
       "role": "Event Staff",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-7",
       "name": "venkatesh(TP-EMTMT)",
       "role": "Event Staff",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-8",
       "name": "Ajith M",
       "role": "Event Organizer",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-9",
       "name": "KISHORE GAMING",
       "role": "Media Staff",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-10",
       "name": "ganeshPrasanna",
       "role": "Media Editor",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-11",
       "name": "chian6666",
       "role": "Senior Driver",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-12",
       "name": "PCBGAMING",
       "role": "Senior Driver",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-13",
       "name": "King of My Queen",
       "role": "Senior Driver",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-14",
       "name": "ramzypranad",
       "role": "Senior Driver",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-15",
       "name": "SHAMEER_KIRIS",
       "role": "Senior Driver",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-16",
       "name": "sinshas",
       "role": "Senior Driver",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-17",
       "name": "E-Quaran",
       "role": "Senior Driver",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-18",
       "name": "Ajo-02003",
       "role": "Driver",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-19",
       "name": "Amrish0018",
       "role": "Driver",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-20",
       "name": "ATLA_S",
       "role": "Driver",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-21",
       "name": "Dineshkumars",
       "role": "Driver",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-22",
       "name": "ToMMy2xd",
       "role": "Driver",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-23",
       "name": "Franklin_01",
       "role": "Driver",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-24",
       "name": "HarryGaming",
       "role": "Driver",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-25",
       "name": "I_am_Devil",
       "role": "Driver",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-26",
       "name": "Krsna",
       "role": "Driver",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-27",
       "name": "its me siva",
       "role": "Driver",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-28",
       "name": "JACK RALDY YT",
       "role": "Driver",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-29",
       "name": "newoneofficialyt",
       "role": "Driver",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-30",
       "name": "karthi007",
       "role": "Driver",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-31",
       "name": "king Rocky",
       "role": "Driver",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-32",
       "name": "Mogash",
       "role": "Driver",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-33",
       "name": "MragullOP",
       "role": "Driver",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-34",
       "name": "ravibuhin",
       "role": "Driver",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-35",
       "name": "nevillebajan",
       "role": "Driver",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-36",
       "name": "Nothing_278H",
       "role": "Driver",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-37",
       "name": "NOCENT S.A.M",
       "role": "Driver",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-38",
       "name": "ROCKYBALBOA121",
       "role": "Driver",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-39",
       "name": "ramsu_shere",
       "role": "Driver",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-40",
       "name": "Xian Dande [TP-HR]",
       "role": "Driver",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-41",
       "name": "uzumavle",
       "role": "Driver",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-42",
       "name": "SHARUNRAVI",
       "role": "Driver",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-43",
       "name": "chicken Gaming yt",
       "role": "Driver",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-44",
       "name": "riNavI",
       "role": "Driver",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-45",
       "name": "STARKMWM",
       "role": "Driver",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-46",
       "name": "steban gaming YT",
       "role": "Driver",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-47",
       "name": "rithwi",
       "role": "Driver",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-48",
       "name": "Sivasurya00",
       "role": "Driver",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-49",
       "name": "subin00",
       "role": "Driver",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-50",
       "name": "rangithevan",
       "role": "Driver",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-51",
       "name": "Tamil Pasanga VTC",
       "role": "Driver",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-52",
       "name": "TheBlakrown",
       "role": "Driver",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-53",
       "name": "Hari SK [TP HR]",
       "role": "Driver",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-54",
       "name": "Vishalraja017",
       "role": "Driver",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-55",
       "name": "Vivank_001",
       "role": "Driver",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-56",
       "name": "vshark.gayu",
       "role": "Driver",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-57",
       "name": "G V GAMING",
       "role": "Trainee",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-58",
       "name": "Pasindu05X",
       "role": "Trainee",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-59",
       "name": "Premkumar",
       "role": "Trainee",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     },
     {
       "id": "staff-60",
       "name": "sure yadav",
       "role": "Trainee",
-      "imageId": "testimonial-avatar"
+      "imageId": "testimonial-avatar",
+      "imageUrl": "",
+      "steamUrl": "",
+      "truckersmpUrl": ""
     }
   ]
 }

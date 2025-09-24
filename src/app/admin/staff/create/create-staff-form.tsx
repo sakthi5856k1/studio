@@ -31,6 +31,9 @@ import {
 const formSchema = z.object({
   name: z.string().min(1, "Name is required"),
   role: z.string().min(1, "Role is required"),
+  imageUrl: z.string().url('Must be a valid URL').optional().or(z.literal('')),
+  steamUrl: z.string().url('Must be a valid URL').optional().or(z.literal('')),
+  truckersmpUrl: z.string().url('Must be a valid URL').optional().or(z.literal('')),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -51,6 +54,9 @@ export function CreateStaffForm() {
     defaultValues: {
       name: "",
       role: "",
+      imageUrl: "",
+      steamUrl: "",
+      truckersmpUrl: "",
     },
   });
 
@@ -109,6 +115,45 @@ export function CreateStaffForm() {
                   ))}
                 </SelectContent>
               </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="imageUrl"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Image URL (Optional)</FormLabel>
+              <FormControl>
+                <Input placeholder="https://example.com/avatar.png" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="steamUrl"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Steam URL (Optional)</FormLabel>
+              <FormControl>
+                <Input placeholder="https://steamcommunity.com/id/..." {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="truckersmpUrl"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>TruckersMP URL (Optional)</FormLabel>
+              <FormControl>
+                <Input placeholder="https://truckersmp.com/user/..." {...field} />
+              </FormControl>
               <FormMessage />
             </FormItem>
           )}
