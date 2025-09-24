@@ -90,8 +90,10 @@ export function About() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {values.map((value, index) => (
               <Card key={index} className="bg-transparent border-0 text-center p-6 flex flex-col items-center gap-4">
-                  <div className="shrink-0 w-24 h-24 rounded-full border-2 border-primary/50 flex items-center justify-center bg-background/50 mb-4">
-                      {value.icon}
+                  <div className="animated-border shrink-0 w-24 h-24 rounded-full flex items-center justify-center bg-background/50 mb-4 p-[2px]">
+                    <div className="bg-card w-full h-full rounded-full flex items-center justify-center">
+                       {value.icon}
+                    </div>
                   </div>
                   <div className="space-y-1">
                       <h3 className="font-semibold text-xl">{value.title}</h3>
