@@ -8,7 +8,7 @@ export default function CreateNewsPage() {
     const bannerImage = PlaceHolderImages.find(img => img.id === 'create-news-banner');
 
     return (
-        <div className="flex flex-col min-h-screen">
+        <div className="flex flex-col min-h-screen bg-background">
             <main className="flex-grow">
                 <div className="relative h-64 w-full">
                     {bannerImage && (
