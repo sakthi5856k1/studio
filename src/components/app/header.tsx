@@ -16,11 +16,9 @@ const navLinks = [
   { href: '/', label: 'Home' },
   { href: '/about', label: 'About' },
   { href: '/features', label: 'Features' },
-  // Application is now a dropdown
-  { href: '/admin', label: 'Admin' },
-  { href: '/gallery', label: 'Gallery' },
-  { href: '/staff', label: 'Staff' },
   { href: '/maintenance', label: 'Events' },
+  { href: '/staff', label: 'Staff' },
+  { href: '/gallery', label: 'Gallery' },
 ];
 
 export function Header() {
@@ -32,15 +30,12 @@ export function Header() {
           <span className="text-xl font-headline text-white">Tamil Pasanga</span>
         </Link>
         <nav className="hidden md:flex items-center gap-6 text-sm text-white">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href + link.label}
-              href={link.href}
+          <Link
+              href="/"
               className="hover:text-primary transition-colors"
             >
-              {link.label}
+              Home
             </Link>
-          ))}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button
@@ -58,6 +53,15 @@ export function Header() {
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
+          {navLinks.slice(1).map((link) => (
+            <Link
+              key={link.href + link.label}
+              href={link.href}
+              className="hover:text-primary transition-colors"
+            >
+              {link.label}
+            </Link>
+          ))}
         </nav>
         <div className="md:hidden">
           <Sheet>
@@ -73,15 +77,12 @@ export function Header() {
                   <span className="text-xl font-headline">Tamil Pasanga</span>
                 </Link>
                 <nav className="flex flex-col gap-4 text-lg">
-                  {navLinks.map((link) => (
-                    <Link
-                      key={link.href + link.label}
-                      href={link.href}
+                   <Link
+                      href="/"
                       className="hover:text-primary transition-colors"
                     >
-                      {link.label}
+                      Home
                     </Link>
-                  ))}
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <Button
@@ -99,6 +100,15 @@ export function Header() {
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
+                  {navLinks.slice(1).map((link) => (
+                    <Link
+                      key={link.href + link.label}
+                      href={link.href}
+                      className="hover:text-primary transition-colors"
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
                 </nav>
               </div>
             </SheetContent>
