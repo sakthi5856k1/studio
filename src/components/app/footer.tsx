@@ -20,9 +20,10 @@ export function Footer() {
             <h4 className="font-semibold text-white mb-4">Links</h4>
             <ul className="space-y-2 text-sm">
               <li><Link href="/about" className="hover:text-primary transition-colors">About</Link></li>
-              <li><Link href="/maintenance" className="hover:text-primary transition-colors">Operations</Link></li>
+              <li><Link href="/features" className="hover:text-primary transition-colors">Features</Link></li>
+              <li><Link href="/gallery" className="hover:text-primary transition-colors">Gallery</Link></li>
+              <li><Link href="/staff" className="hover:text-primary transition-colors">Staff</Link></li>
               <li><Link href="/maintenance" className="hover:text-primary transition-colors">Events</Link></li>
-              <li><Link href="/news" className="hover:text-primary transition-colors">News</Link></li>
               <li><Link href="/admin" className="hover:text-primary transition-colors">Admin</Link></li>
             </ul>
           </div>
