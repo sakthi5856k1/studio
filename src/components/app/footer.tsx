@@ -11,7 +11,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div className="md:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-4">
-              <Logo size={48} />
+              <Logo size={64} />
               <span className="text-lg font-headline animate-rgb-text bg-gradient-to-r from-red-500 via-green-500 to-blue-500 bg-clip-text text-transparent [background-size:200%_auto]">Tamil Pasanga</span>
             </Link>
             <p className="text-sm">Gateway to New Horizons.</p>
@@ -31,13 +31,9 @@ export function Footer() {
             <ul className="space-y-2 text-sm">
               <li><Link href="https://discord.com/invite/paRCYhJphH" target="_blank" className="hover:text-primary transition-colors">Discord</Link></li>
               <li><Link href="https://truckersmp.com/vtc/73933" target="_blank" className="hover:text-primary transition-colors">TruckersMP</Link></li>
-              <li><Link href="#" className="hover:text-primary transition-colors">Steam</Link></li>
             </ul>
           </div>
           <div className="md:col-span-1 space-y-4">
-            <Button className="w-full rounded-full" asChild>
-              <Link href="/maintenance">Shop</Link>
-            </Button>
             <Button variant="outline" className="w-full rounded-full border-primary text-primary hover:bg-primary hover:text-primary-foreground" asChild>
               <Link href="/maintenance">Drivers Hub</Link>
             </Button>
