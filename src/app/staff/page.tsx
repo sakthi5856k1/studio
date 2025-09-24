@@ -210,7 +210,7 @@ export default function StaffPage() {
                     const imageSrc = member.imageUrl || defaultImage?.imageUrl;
                     return (
                       <Card key={member.id} className="text-center bg-card border-border/50 shadow-sm hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 hover:scale-105 group">
-                        <CardHeader>
+                        <CardHeader className="flex flex-col items-center">
                             {imageSrc && (
                                 <Image
                                     src={imageSrc}
