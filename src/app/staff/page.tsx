@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import staffData from '@/lib/staff-members.json';
 import type { StaffMember } from '@/lib/staff-members';
-import { Truck, Shield } from 'lucide-react';
+import { Truck, Shield, Star } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 
 const staffMembers: StaffMember[] = staffData.staffMembers;
@@ -85,6 +85,8 @@ export default function StaffPage() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                   {membersInRole.map((member) => {
                     const imageSrc = member.imageUrl || defaultImage?.imageUrl;
+                    const isSeniorDriver = member.role === 'Senior Driver';
+
                     return (
                       <Card key={member.id} className="text-center bg-card border-border/50 shadow-sm hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 hover:scale-105 group">
                         <CardHeader>
@@ -100,8 +102,17 @@ export default function StaffPage() {
                         </CardHeader>
                         <CardContent>
                             <CardTitle className="text-lg font-semibold">{member.name}</CardTitle>
-                            <Badge variant="outline" className="mt-2 border-blue-500/50 bg-blue-950/50 text-blue-400">
-                                <Shield className="mr-1 h-3 w-3 text-blue-400" />
+                             <Badge 
+                                variant="outline" 
+                                className={`mt-2 ${isSeniorDriver 
+                                    ? 'border-yellow-500/50 bg-yellow-950/50 text-yellow-400' 
+                                    : 'border-blue-500/50 bg-blue-950/50 text-blue-400'}`
+                                }
+                            >
+                                {isSeniorDriver ? 
+                                    <Star className="mr-1 h-3 w-3 text-yellow-400" /> : 
+                                    <Shield className="mr-1 h-3 w-3 text-blue-400" />
+                                }
                                 {member.role}
                             </Badge>
                             <div className="flex justify-center gap-4 mt-4">
