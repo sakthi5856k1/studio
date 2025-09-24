@@ -19,9 +19,9 @@ export function Footer() {
           <div className="md:col-span-1">
             <h4 className="font-semibold text-white mb-4">Links</h4>
             <ul className="space-y-2 text-sm">
-              <li><Link href="#" className="hover:text-primary transition-colors">About</Link></li>
-              <li><Link href="#" className="hover:text-primary transition-colors">Operations</Link></li>
-              <li><Link href="#" className="hover:text-primary transition-colors">Events</Link></li>
+              <li><Link href="/about" className="hover:text-primary transition-colors">About</Link></li>
+              <li><Link href="/maintenance" className="hover:text-primary transition-colors">Operations</Link></li>
+              <li><Link href="/maintenance" className="hover:text-primary transition-colors">Events</Link></li>
               <li><Link href="/news" className="hover:text-primary transition-colors">News</Link></li>
               <li><Link href="/admin" className="hover:text-primary transition-colors">Admin</Link></li>
             </ul>
@@ -30,16 +30,16 @@ export function Footer() {
             <h4 className="font-semibold text-white mb-4">Community</h4>
             <ul className="space-y-2 text-sm">
               <li><Link href="https://discord.com/invite/paRCYhJphH" target="_blank" className="hover:text-primary transition-colors">Discord</Link></li>
-              <li><Link href="#" className="hover:text-primary transition-colors">TruckersMP</Link></li>
+              <li><Link href="https://truckersmp.com/vtc/60831" target="_blank" className="hover:text-primary transition-colors">TruckersMP</Link></li>
               <li><Link href="#" className="hover:text-primary transition-colors">Steam</Link></li>
             </ul>
           </div>
           <div className="md:col-span-1 space-y-4">
             <Button className="w-full rounded-full" asChild>
-              <Link href="#">Shop</Link>
+              <Link href="/maintenance">Shop</Link>
             </Button>
             <Button variant="outline" className="w-full rounded-full border-primary text-primary hover:bg-primary hover:text-primary-foreground" asChild>
-              <Link href="#">Drivers Hub</Link>
+              <Link href="/maintenance">Drivers Hub</Link>
             </Button>
           </div>
         </div>
