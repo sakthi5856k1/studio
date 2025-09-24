@@ -47,6 +47,12 @@
       "description": "Banner for create news page.",
       "imageUrl": "https://images.unsplash.com/photo-1725352566305-7b8ca9346771?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxhYnN0cmFjdCUyMHdyaXRlcnxlbnwwfHx8fDE3NTg2NzEzODJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "abstract writer"
+    },
+    {
+      "id": "about-truck",
+      "description": "A white Scania truck on a bridge.",
+      "imageUrl": "https://cdn.discordapp.com/attachments/1116720480544636999/1420601957262164008/ets2_20250927_112028_00.png?ex=68d5f307&is=68d4a187&hm=5539d09e51c62f2700e3188599426f3922f37c3e5362c3e2157d605151528657&",
+      "imageHint": "truck bridge"
     }
   ]
 }
