@@ -2,12 +2,23 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { PenSquare, Bot, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const steps = [
   { icon: <PenSquare size={32} />, title: "Step 1: Apply", description: "Fill out our straightforward application form.", buttonText: "Start Application", href: "#", "data-apply-btn": true },
   { icon: <Bot size={32} />, title: "Step 2: Join Discord", description: "Become a part of our community on Discord.", buttonText: "Join Discord", href: "https://discord.com/invite/paRCYhJphH" },
   { icon: <Users size={32} />, title: "Step 3: Interview", description: "Have a chat with our friendly recruitment team." },
 ];
+
+const ChristmasCap = () => (
+  <Image
+    src="https://www.pngall.com/wp-content/uploads/5/Santa-Hat-PNG-Image-File.png"
+    alt="Christmas Cap"
+    width={60}
+    height={60}
+    className="absolute -top-6 -right-5 z-10 transform rotate-[15deg]"
+  />
+);
 
 export function ApplicationSteps() {
   return (
@@ -21,7 +32,8 @@ export function ApplicationSteps() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {steps.map((step, index) => (
-            <Card key={index} className="flex flex-col text-center p-6 shadow-lg border-border/50 hover:shadow-primary/20 transition-shadow duration-300">
+            <Card key={index} className="relative overflow-visible flex flex-col text-center p-6 shadow-lg border-border/50 hover:shadow-primary/20 transition-shadow duration-300">
+              <ChristmasCap />
               <CardHeader className="items-center">
                 <div className="p-4 bg-primary/10 rounded-full text-primary mb-4">
                   {step.icon}

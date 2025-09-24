@@ -18,6 +18,16 @@ type NewsletterProps = {
   })[];
 };
 
+const ChristmasCap = () => (
+  <Image
+    src="https://www.pngall.com/wp-content/uploads/5/Santa-Hat-PNG-Image-File.png"
+    alt="Christmas Cap"
+    width={60}
+    height={60}
+    className="absolute -top-6 -right-5 z-10 transform rotate-[15deg]"
+  />
+);
+
 export function Newsletter({ articles }: NewsletterProps) {
   const [expandedArticles, setExpandedArticles] = useState<Record<string, boolean>>({});
 
@@ -39,7 +49,8 @@ export function Newsletter({ articles }: NewsletterProps) {
           {articles.map((item) => {
             const isExpanded = expandedArticles[item.id];
             return (
-              <Card key={item.id} className="flex flex-col bg-card border-border/50 shadow-lg overflow-hidden hover:shadow-primary/20 transition-shadow duration-300">
+              <Card key={item.id} className="relative overflow-visible flex flex-col bg-card border-border/50 shadow-lg hover:shadow-primary/20 transition-shadow duration-300">
+                <ChristmasCap />
                 {item.imageUrl && (
                   <div className="relative h-48 w-full">
                     <Image

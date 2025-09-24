@@ -14,6 +14,17 @@ import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 
 const bannerImageUrl = "https://cdn.discordapp.com/attachments/1281551151418048677/1414862372199202927/ets2_20250907_201945_00.PNG?ex=68d43a84&is=68d2e904&hm=c6a185bd254316fdb29cdd8e8f8255b85a60a3760da66ed8f10813dc2d90e01b&";
 
+const ChristmasCap = () => (
+    <Image
+      src="https://www.pngall.com/wp-content/uploads/5/Santa-Hat-PNG-Image-File.png"
+      alt="Christmas Cap"
+      width={60}
+      height={60}
+      className="absolute -top-6 -right-5 z-10 transform rotate-[15deg]"
+    />
+  );
+  
+
 export default function GalleryPage() {
     const images: GalleryImage[] = galleryData.galleryImages;
     const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
@@ -76,15 +87,16 @@ export default function GalleryPage() {
                     </div>
                 </div>
                 <div className="container mx-auto px-4 py-16">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
                         {images.map((image, index) => (
-                            <Card key={image.id} className="overflow-hidden group transition-all duration-300 hover:shadow-lg hover:shadow-primary/40">
+                            <Card key={image.id} className="relative overflow-visible group transition-all duration-300 hover:shadow-lg hover:shadow-primary/40">
+                                <ChristmasCap />
                                 <div className="relative aspect-video cursor-pointer" onClick={() => openLightbox(index)}>
                                     <Image
                                         src={image.imageUrl}
                                         alt={image.id}
                                         fill
-                                        className="object-cover transition-transform duration-300 group-hover:scale-105"
+                                        className="object-cover transition-transform duration-300 group-hover:scale-105 rounded-lg"
                                     />
                                 </div>
                             </Card>

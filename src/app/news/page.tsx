@@ -10,6 +10,16 @@ import Link from 'next/link';
 
 const newsletters = newsData.newsletters;
 
+const ChristmasCap = () => (
+  <Image
+    src="https://www.pngall.com/wp-content/uploads/5/Santa-Hat-PNG-Image-File.png"
+    alt="Christmas Cap"
+    width={60}
+    height={60}
+    className="absolute -top-6 -right-5 z-10 transform rotate-[15deg]"
+  />
+);
+
 export default function AllNewsPage() {
   const bannerImage = PlaceHolderImages.find(img => img.id === 'create-news-banner');
 
@@ -36,7 +46,8 @@ export default function AllNewsPage() {
             {newsletters.map((item) => {
                 const image = PlaceHolderImages.find(img => img.id === item.imageId);
                 return (
-                <Card key={item.id} className="flex flex-col bg-card border-border/50 shadow-lg overflow-hidden hover:shadow-primary/20 transition-shadow duration-300">
+                <Card key={item.id} className="relative overflow-visible flex flex-col bg-card border-border/50 shadow-lg hover:shadow-primary/20 transition-shadow duration-300">
+                    <ChristmasCap />
                     {image && (
                     <div className="relative h-48 w-full">
                         <Image
