@@ -15,7 +15,7 @@ export function ApplicationSteps() {
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-headline">
-            How to Apply
+            Join The Convoy
           </h2>
           <p className="text-muted-foreground mt-2">A simple three-step process to join our team.</p>
         </div>

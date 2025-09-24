@@ -39,8 +39,6 @@ const heroSlides = [
     id: 'hero-2',
     title: 'Our Mission',
     subtitle: 'Delivering excellence in logistics and teamwork.',
-    buttonText: 'Learn More',
-    buttonLink: '#',
     imageId: 'hero-truck-2',
   },
   {
@@ -94,12 +92,14 @@ export function Hero() {
                   <p className="mt-2 text-lg md:text-xl text-muted-foreground drop-shadow-md">
                     {slide.subtitle}
                   </p>
-                  <Button asChild size="lg" className="mt-8 rounded-full" {...buttonProps}>
-                    <Link href={slide.buttonLink}>
-                      {slide.icon}
-                      {slide.buttonText}
-                    </Link>
-                  </Button>
+                  {slide.buttonText && slide.buttonLink && (
+                    <Button asChild size="lg" className="mt-8 rounded-full" {...buttonProps}>
+                        <Link href={slide.buttonLink}>
+                        {slide.icon}
+                        {slide.buttonText}
+                        </Link>
+                    </Button>
+                  )}
                 </div>
               </section>
             </CarouselItem>
