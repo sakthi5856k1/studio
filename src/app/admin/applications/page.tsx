@@ -74,8 +74,8 @@ export default async function ApplicationsAdminPage() {
                                 </TableHeader>
                                 <TableBody>
                                     {applications.map((app) => (
-                                        <Collapsible asChild key={app.id} tag="tbody">
-                                             <>
+                                        <Collapsible key={app.id} asChild>
+                                            <React.Fragment>
                                                 <TableRow>
                                                     <TableCell>
                                                         <CollapsibleTrigger asChild>
@@ -107,7 +107,7 @@ export default async function ApplicationsAdminPage() {
                                                     </TableCell>
                                                 </TableRow>
                                                 <CollapsibleContent asChild>
-                                                    <tr className="bg-muted/50">
+                                                    <TableRow className="bg-muted/50">
                                                         <TableCell colSpan={7} className="p-4">
                                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                                                                 <div><strong>Email:</strong> {app.email}</div>
@@ -123,9 +123,9 @@ export default async function ApplicationsAdminPage() {
                                                                 </div>
                                                             </div>
                                                         </TableCell>
-                                                    </tr>
+                                                    </TableRow>
                                                 </CollapsibleContent>
-                                            </>
+                                            </React.Fragment>
                                         </Collapsible>
                                     ))}
                                 </TableBody>
