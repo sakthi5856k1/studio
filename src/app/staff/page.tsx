@@ -79,9 +79,14 @@ export default function StaffPage() {
 
             return (
               <div key={role} className="mb-12">
-                <h2 className="text-2xl font-headline text-primary mb-6 animate-fade-in-scroll">
-                  {role} ({membersInRole.length})
-                </h2>
+                <div className="flex items-center gap-4 mb-6">
+                    <h2 className="text-2xl font-headline text-primary animate-fade-in-scroll">
+                        {role}
+                    </h2>
+                    <div className="bg-red-600 text-white text-sm font-semibold rounded-full px-3 py-1 animate-fade-in-scroll">
+                        {membersInRole.length} {membersInRole.length === 1 ? 'member' : 'members'}
+                    </div>
+                </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                   {membersInRole.map((member) => {
                     const imageSrc = member.imageUrl || defaultImage?.imageUrl;
