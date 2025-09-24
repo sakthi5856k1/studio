@@ -32,16 +32,7 @@ const values = [
 
 export function CoreValues() {
   return (
-    <section id="core-values" className="relative py-16 md:py-24">
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="https://cdn.discordapp.com/attachments/1281551151418048677/1417739857123475538/1758085736934.jpg?ex=68d37da2&is=68d22c22&hm=8704f60b91d953c3e9b83e28d406e362c20affcf91876b7d903227bb10d8bb9d&=&format=webp&width=1389&height=684"
-          alt="Tamil Pasanga Truck"
-          fill
-          className="object-cover opacity-20"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-background/50" />
-      </div>
+    <section id="core-values" className="relative py-16 md:py-24 bg-card">
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
             {values.slice(0, 3).map((value, index) => (
