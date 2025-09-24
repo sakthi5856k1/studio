@@ -1,3 +1,4 @@
+
 import Link from 'next/link';
 import { Logo } from '@/components/app/logo';
 import { Button } from '@/components/ui/button';
@@ -17,7 +18,7 @@ const navLinks = [
   { href: '/features', label: 'Features' },
   // Application is now a dropdown
   { href: '/admin', label: 'Admin' },
-  { href: '/maintenance', label: 'Gallery' },
+  { href: '/gallery', label: 'Gallery' },
   { href: '/maintenance', label: 'Events' },
 ];
 
