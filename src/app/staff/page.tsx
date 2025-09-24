@@ -86,6 +86,27 @@ export default function StaffPage() {
                   {membersInRole.map((member) => {
                     const imageSrc = member.imageUrl || defaultImage?.imageUrl;
                     const isSeniorDriver = member.role === 'Senior Driver';
+                    const isDriver = member.role === 'Driver';
+
+                    const getRoleStyle = () => {
+                        if (isSeniorDriver) {
+                            return 'border-yellow-500/50 bg-yellow-950/50 text-yellow-400';
+                        }
+                        if (isDriver) {
+                            return 'border-green-500/50 bg-green-950/50 text-green-400';
+                        }
+                        return 'border-blue-500/50 bg-blue-950/50 text-blue-400';
+                    };
+
+                    const getRoleIcon = () => {
+                        if (isSeniorDriver) {
+                            return <Star className="mr-1 h-3 w-3 text-yellow-400" />;
+                        }
+                        if (isDriver) {
+                            return <Truck className="mr-1 h-3 w-3 text-green-400" />;
+                        }
+                        return <Shield className="mr-1 h-3 w-3 text-blue-400" />;
+                    };
 
                     return (
                       <Card key={member.id} className="text-center bg-card border-border/50 shadow-sm hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 hover:scale-105 group">
@@ -104,15 +125,9 @@ export default function StaffPage() {
                             <CardTitle className="text-lg font-semibold">{member.name}</CardTitle>
                              <Badge 
                                 variant="outline" 
-                                className={`mt-2 ${isSeniorDriver 
-                                    ? 'border-yellow-500/50 bg-yellow-950/50 text-yellow-400' 
-                                    : 'border-blue-500/50 bg-blue-950/50 text-blue-400'}`
-                                }
+                                className={`mt-2 ${getRoleStyle()}`}
                             >
-                                {isSeniorDriver ? 
-                                    <Star className="mr-1 h-3 w-3 text-yellow-400" /> : 
-                                    <Shield className="mr-1 h-3 w-3 text-blue-400" />
-                                }
+                                {getRoleIcon()}
                                 {member.role}
                             </Badge>
                             <div className="flex justify-center gap-4 mt-4">
