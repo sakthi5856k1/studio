@@ -4,7 +4,7 @@
 import { revalidatePath } from 'next/cache';
 import fs from 'fs/promises';
 import path from 'path';
-import type { ApplicationStatus, ApplicationsData } from '@/lib/applications';
+import type { ApplicationStatus, ApplicationsData, Application } from '@/lib/applications';
 import type { StaffData, StaffMember } from '@/lib/staff-members';
 
 const applicationsFilePath = path.join(process.cwd(), 'src', 'lib', 'applications.json');
@@ -29,6 +29,12 @@ async function readJsonFile<T>(filePath: string): Promise<T> {
 
 async function writeJsonFile<T>(filePath: string, data: T): Promise<void> {
     await fs.writeFile(filePath, JSON.stringify(data, null, 2));
+}
+
+export async function getApplications(): Promise<Application[]> {
+    const data = await readJsonFile<ApplicationsData>(applicationsFilePath);
+    // Sort by submission date, newest first
+    return data.applications.sort((a, b) => new Date(b.submittedAt).getTime() - new Date(a.submittedAt).getTime());
 }
 
 export async function updateApplicationStatus(

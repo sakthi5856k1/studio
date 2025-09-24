@@ -1,7 +1,7 @@
 
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Footer } from "@/components/app/footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -13,32 +13,8 @@ import { Badge } from "@/components/ui/badge";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { format } from 'date-fns';
 import { UpdateApplicationStatus } from "./actions";
-import fs from 'fs';
-import path from 'path';
-
-// This is now a client component to manage state, but we'll fetch data on the server side
-// within a useEffect hook or pass it as props if this were a child component.
-// For simplicity in this fix, we'll read the data directly here, which is not ideal
-// for production but will resolve the immediate rendering error.
-// A better pattern would be to fetch this data in a server component parent and pass it down.
-
-// Helper function to get applications - emulating the original server-side fetch
-async function getApplications(): Promise<Application[]> {
-    const filePath = path.join(process.cwd(), 'src', 'lib', 'applications.json');
-    try {
-        const data = await fs.promises.readFile(filePath, 'utf-8');
-        const jsonData = JSON.parse(data);
-        // Sort by submission date, newest first
-        return jsonData.applications.sort((a: Application, b: Application) => new Date(b.submittedAt).getTime() - new Date(a.submittedAt).getTime());
-    } catch (error) {
-        if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
-            return [];
-        }
-        console.error("Failed to read applications:", error);
-        return [];
-    }
-}
-
+import { getApplications } from './server-actions';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const statusInfo = {
     Accepted: { icon: <CheckCircle className="h-4 w-4 text-green-500" />, badge: <Badge variant="default" className="bg-green-500">Accepted</Badge> },
@@ -47,7 +23,6 @@ const statusInfo = {
     Interview: { icon: <AlertCircle className="h-4 w-4 text-blue-500" />, badge: <Badge className="bg-blue-500">Interview</Badge> },
 };
 
-// We create a new component for the row to manage its own state
 function ApplicationRow({ app }: { app: Application }) {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -106,19 +81,23 @@ function ApplicationRow({ app }: { app: Application }) {
 
 
 export default function ApplicationsAdminPage() {
-    // This is not ideal for a client component, but for the sake of fixing the bug,
-    // we are reading the file synchronously on the server and passing it down.
-    // In a real app, this data would be fetched via an API or passed from a Server Component parent.
-    const applicationsFilePath = path.join(process.cwd(), 'src', 'lib', 'applications.json');
-    let applications: Application[] = [];
-    try {
-        const data = fs.readFileSync(applicationsFilePath, 'utf-8');
-        const jsonData = JSON.parse(data);
-        applications = jsonData.applications.sort((a: Application, b: Application) => new Date(b.submittedAt).getTime() - new Date(a.submittedAt).getTime());
-    } catch (error) {
-         console.error("Failed to read applications:", error);
-    }
+    const [applications, setApplications] = useState<Application[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
 
+    useEffect(() => {
+        async function loadApplications() {
+            setIsLoading(true);
+            try {
+                const fetchedApplications = await getApplications();
+                setApplications(fetchedApplications);
+            } catch (error) {
+                console.error("Failed to load applications:", error);
+            } finally {
+                setIsLoading(false);
+            }
+        }
+        loadApplications();
+    }, []);
 
     return (
         <div className="flex flex-col min-h-screen bg-background">
@@ -135,7 +114,7 @@ export default function ApplicationsAdminPage() {
                         <CardHeader>
                             <CardTitle>All Applications</CardTitle>
                             <CardDescription>
-                                {applications.length} application(s) found.
+                                {isLoading ? 'Loading applications...' : `${applications.length} application(s) found.`}
                             </CardDescription>
                         </CardHeader>
                         <CardContent>
@@ -152,9 +131,19 @@ export default function ApplicationsAdminPage() {
                                     </TableRow>
                                 </TableHeader>
                                 <TableBody>
-                                    {applications.map((app) => (
-                                        <ApplicationRow key={app.id} app={app} />
-                                    ))}
+                                    {isLoading ? (
+                                        Array.from({ length: 5 }).map((_, index) => (
+                                            <TableRow key={index}>
+                                                <TableCell colSpan={7}>
+                                                    <Skeleton className="h-8 w-full" />
+                                                </TableCell>
+                                            </TableRow>
+                                        ))
+                                    ) : (
+                                        applications.map((app) => (
+                                            <ApplicationRow key={app.id} app={app} />
+                                        ))
+                                    )}
                                 </TableBody>
                             </Table>
                         </CardContent>
