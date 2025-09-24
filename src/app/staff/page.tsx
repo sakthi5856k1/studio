@@ -163,7 +163,7 @@ export default function StaffPage() {
                                 />
                             )}
                         </CardHeader>
-                        <CardContent>
+                        <CardContent className="flex flex-col items-center">
                             <CardTitle className="text-lg font-semibold">{member.name}</CardTitle>
                              <Badge 
                                 variant="outline" 
