@@ -84,7 +84,7 @@ export default function StaffPage() {
                         </CardHeader>
                         <CardContent>
                             <CardTitle className="text-lg font-semibold">{member.name}</CardTitle>
-                            <p className="text-sm text-muted-foreground">{member.role}</p>
+                            <p className="text-sm text-pink-400">{member.role}</p>
                         </CardContent>
                       </Card>
                     );
