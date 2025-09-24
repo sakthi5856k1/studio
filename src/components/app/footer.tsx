@@ -30,7 +30,7 @@ export function Footer() {
             <h4 className="font-semibold text-white mb-4">Community</h4>
             <ul className="space-y-2 text-sm">
               <li><Link href="https://discord.com/invite/paRCYhJphH" target="_blank" className="hover:text-primary transition-colors">Discord</Link></li>
-              <li><Link href="https://truckersmp.com/vtc/60831" target="_blank" className="hover:text-primary transition-colors">TruckersMP</Link></li>
+              <li><Link href="https://truckersmp.com/vtc/73933" target="_blank" className="hover:text-primary transition-colors">TruckersMP</Link></li>
               <li><Link href="#" className="hover:text-primary transition-colors">Steam</Link></li>
             </ul>
           </div>

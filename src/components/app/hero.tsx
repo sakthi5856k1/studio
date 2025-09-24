@@ -12,6 +12,7 @@ import {
 } from '@/components/ui/carousel';
 import Autoplay from 'embla-carousel-autoplay';
 import * as React from 'react';
+import { Truck } from 'lucide-react';
 
 const DiscordIcon = () => (
   <svg
@@ -39,7 +40,10 @@ const heroSlides = [
     id: 'hero-2',
     title: 'Our Mission',
     subtitle: 'Delivering excellence in logistics and teamwork.',
+    buttonText: 'TruckersMP',
+    buttonLink: 'https://truckersmp.com/vtc/73933',
     imageId: 'hero-truck-2',
+    icon: <Truck />,
   },
   {
     id: 'hero-3',
