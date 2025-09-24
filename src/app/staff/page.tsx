@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import staffData from '@/lib/staff-members.json';
 import type { StaffMember } from '@/lib/staff-members';
+import { Steam, Truck } from 'lucide-react';
 
 const staffMembers: StaffMember[] = staffData.staffMembers;
 
@@ -85,6 +86,18 @@ export default function StaffPage() {
                         <CardContent>
                             <CardTitle className="text-lg font-semibold">{member.name}</CardTitle>
                             <p className="text-sm text-pink-400">{member.role}</p>
+                            <div className="flex justify-center gap-4 mt-4">
+                                {member.steamUrl && (
+                                    <Link href={member.steamUrl} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                                        <Steam size={20} />
+                                    </Link>
+                                )}
+                                {member.truckersmpUrl && (
+                                    <Link href={member.truckersmpUrl} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                                        <Truck size={20} />
+                                    </Link>
+                                )}
+                            </div>
                         </CardContent>
                       </Card>
                     );
