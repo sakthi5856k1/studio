@@ -2,7 +2,7 @@
 import { Header } from '@/components/app/header';
 import { Footer } from '@/components/app/footer';
 import Image from 'next/image';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
@@ -64,26 +64,26 @@ export default function StaffPage() {
             return (
               <div key={role} className="mb-12">
                 <h2 className="text-2xl font-headline text-primary mb-6">{role}</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                   {membersInRole.map((member) => {
                     const image = PlaceHolderImages.find(img => img.id === member.imageId);
                     return (
-                      <Card key={member.id} className="text-center bg-card border-border/50 shadow-lg hover:shadow-primary/20 transition-shadow duration-300">
-                        <CardHeader className="items-center pt-6">
+                      <Card key={member.id} className="bg-card border-border/50 shadow-sm hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300">
+                        <CardContent className="p-4 flex items-center gap-4">
                           {image && (
                             <Image
                               src={image.imageUrl}
                               alt={`Photo of ${member.name}`}
-                              width={80}
-                              height={80}
-                              className="rounded-full border-4 border-primary"
+                              width={48}
+                              height={48}
+                              className="rounded-full border-2 border-primary/50 shrink-0"
                               data-ai-hint={image.imageHint}
                             />
                           )}
-                        </CardHeader>
-                        <CardContent className="pb-6">
-                          <CardTitle className="font-headline text-lg mt-4">{member.name}</CardTitle>
-                          <p className="text-muted-foreground">{member.role}</p>
+                          <div className="min-w-0">
+                            <p className="font-semibold truncate">{member.name}</p>
+                            <p className="text-sm text-muted-foreground truncate">{member.role}</p>
+                          </div>
                         </CardContent>
                       </Card>
                     );
