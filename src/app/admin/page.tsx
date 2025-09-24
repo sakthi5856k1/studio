@@ -1,7 +1,7 @@
 import { Footer } from '@/components/app/footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Newspaper, Shield } from 'lucide-react';
+import { Newspaper, Shield, Image as ImageIcon } from 'lucide-react';
 import Link from 'next/link';
 
 export default function AdminPage() {
@@ -29,6 +29,20 @@ export default function AdminPage() {
                 <p className="text-muted-foreground mb-4">Create, edit, and delete news articles for the homepage.</p>
                 <Button asChild>
                   <Link href="/admin/news">Go to News</Link>
+                </Button>
+              </CardContent>
+            </Card>
+            <Card className="bg-card hover:shadow-primary/20 transition-shadow">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <ImageIcon size={20} />
+                  <span>Manage Gallery</span>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground mb-4">Add, edit, and delete images in the website gallery.</p>
+                <Button asChild>
+                  <Link href="/admin/gallery">Go to Gallery</Link>
                 </Button>
               </CardContent>
             </Card>
