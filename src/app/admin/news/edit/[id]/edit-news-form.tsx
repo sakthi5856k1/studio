@@ -13,22 +13,22 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { updateNewsArticle } from "./actions";
+import { updateNewsArticle, type NewsArticleWithImage } from "./actions";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
-import type { NewsArticle } from '@/lib/news-articles';
 
 const formSchema = z.object({
   title: z.string().min(1, "Title is required"),
   author: z.string().min(1, "Author is required"),
+  imageUrl: z.string().url("Must be a valid URL"),
 });
 
 type FormValues = z.infer<typeof formSchema>;
 
-export function EditNewsForm({ article }: { article: NewsArticle }) {
+export function EditNewsForm({ article }: { article: NewsArticleWithImage }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
   const router = useRouter();
@@ -38,6 +38,7 @@ export function EditNewsForm({ article }: { article: NewsArticle }) {
     defaultValues: {
       title: article.title,
       author: article.author,
+      imageUrl: article.imageUrl,
     },
   });
 
@@ -86,6 +87,19 @@ export function EditNewsForm({ article }: { article: NewsArticle }) {
               <FormLabel>Author</FormLabel>
               <FormControl>
                 <Input placeholder="Enter author's name" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="imageUrl"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Banner Image URL</FormLabel>
+              <FormControl>
+                <Input placeholder="https://example.com/image.png" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

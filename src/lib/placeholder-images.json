@@ -37,12 +37,6 @@
       "imageHint": "logistics abstract"
     },
     {
-      "id": "newsletter-2",
-      "description": "Image for the second newsletter issue.",
-      "imageUrl": "https://images.unsplash.com/photo-1592838064575-70ed626d3a0e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHx0cnVjayUyMHJvYWR8ZW58MHx8fHwxNzU4NjI0NDU4fDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "truck road"
-    },
-    {
       "id": "newsletter-3",
       "description": "Image for the third newsletter issue.",
       "imageUrl": "https://images.unsplash.com/photo-1636715080304-541bdb358f3a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHx3YXJlaG91c2UlMjBpbnRlcmlvcnxlbnwwfHx8fDE3NTg1ODY1MjV8MA&ixlib=rb-4.1.0&q=80&w=1080",
