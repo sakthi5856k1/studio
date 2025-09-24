@@ -44,7 +44,7 @@ export function Footer() {
           </div>
         </div>
         <div className="border-t border-border/50 pt-8 text-center text-sm">
-          <p>&copy; <CurrentYear /> Tamil Pasanga Hub. All Rights Reserved.</p>
+          <p>&copy; <CurrentYear /> Tamil Pasanga. All Rights Reserved.</p>
         </div>
       </div>
     </footer>

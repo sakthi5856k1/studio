@@ -6,7 +6,7 @@ import './snow.css';
 import { ApplicationDialog } from '@/components/app/application-dialog';
 
 export const metadata: Metadata = {
-  title: 'Tamil Pasanga Hub',
+  title: 'Tamil Pasanga',
   description: 'Great Experience, We Believe In Quality Not Quantity',
 };
 
