@@ -72,10 +72,10 @@ export default async function ApplicationsAdminPage() {
                                         <TableHead className="text-right">Actions</TableHead>
                                     </TableRow>
                                 </TableHeader>
-                                <TableBody>
-                                    {applications.map((app) => (
-                                        <Collapsible asChild key={app.id} tag="tbody">
-                                             <>
+                                {applications.map((app) => (
+                                    <TableBody key={app.id} className="border-b">
+                                        <Collapsible asChild>
+                                            <>
                                                 <TableRow>
                                                     <TableCell>
                                                         <CollapsibleTrigger asChild>
@@ -127,8 +127,8 @@ export default async function ApplicationsAdminPage() {
                                                 </CollapsibleContent>
                                             </>
                                         </Collapsible>
-                                    ))}
-                                </TableBody>
+                                    </TableBody>
+                                ))}
                             </Table>
                         </CardContent>
                     </Card>
