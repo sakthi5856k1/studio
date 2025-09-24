@@ -6,6 +6,7 @@ import { Achievements } from '@/components/app/achievements';
 import { Testimonial } from '@/components/app/testimonial';
 import { Newsletter } from '@/components/app/newsletter';
 import { Footer } from '@/components/app/footer';
+import { CoreValues } from '@/components/app/core-values';
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <main className="flex-grow">
         <Hero />
         <About />
+        <CoreValues />
         <ApplicationSteps />
         <Achievements />
         <Testimonial />
