@@ -103,3 +103,36 @@
     animation-range-end: entry 40%;
   }
 }
+
+@layer utilities {
+  @keyframes rotate {
+    100% {
+      transform: rotate(1turn);
+    }
+  }
+
+  .animated-border {
+    @apply relative z-0 overflow-hidden;
+  }
+
+  .animated-border::before {
+    content: '';
+    @apply absolute -left-1/2 -top-1/2 z-[-2] h-[200%] w-[200%];
+    background-color: #1a1a1a;
+    background-repeat: no-repeat;
+    background-size: 50% 50%;
+    background-position: 0 0, 100% 0, 100% 100%, 0 100%;
+    background-image: conic-gradient(hsl(var(--primary)), hsl(var(--accent)), hsl(var(--primary)));
+    animation: rotate 4s linear infinite;
+  }
+
+  .animated-border::after {
+    content: '';
+    @apply absolute z-[-1] rounded-lg;
+    left: 2px;
+    top: 2px;
+    width: calc(100% - 4px);
+    height: calc(100% - 4px);
+    background: hsl(var(--card));
+  }
+}

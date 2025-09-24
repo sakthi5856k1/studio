@@ -151,8 +151,8 @@ export default function StaffPage() {
                 {leadership.map((member) => {
                   const imageSrc = member.imageUrl || defaultImage?.imageUrl;
                   return (
-                    <Card key={member.id} className="text-center bg-card border-border/50 shadow-lg hover:shadow-primary/20 transition-all duration-300 w-full max-w-sm">
-                      <CardContent className="flex flex-col items-center pt-6">
+                    <Card key={member.id} className="animated-border text-center bg-transparent shadow-lg transition-all duration-300 w-full max-w-sm p-[2px]">
+                      <CardContent className="flex flex-col items-center justify-center pt-6">
                           {imageSrc && (
                               <Image
                                   src={imageSrc}
@@ -209,7 +209,7 @@ export default function StaffPage() {
                   {membersInRole.map((member) => {
                     const imageSrc = member.imageUrl || defaultImage?.imageUrl;
                     return (
-                      <Card key={member.id} className="text-center bg-card border-border/50 shadow-sm hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 hover:scale-105 group">
+                      <Card key={member.id} className="animated-border text-center bg-transparent shadow-sm transition-all duration-300 hover:scale-105 group p-[2px]">
                         <CardHeader className="flex flex-col items-center">
                             {imageSrc && (
                                 <Image
@@ -221,7 +221,7 @@ export default function StaffPage() {
                                 />
                             )}
                         </CardHeader>
-                        <CardContent className="flex flex-col items-center">
+                        <CardContent className="flex flex-col items-center justify-center">
                             <CardTitle className="text-lg font-semibold">{member.name}</CardTitle>
                              <Badge 
                                 variant="outline" 
