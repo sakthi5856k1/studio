@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import staffData from '@/lib/staff-members.json';
 import type { StaffMember } from '@/lib/staff-members';
-import { Truck, Shield, Star, School, Film, Calendar, BookOpen, Users, Briefcase, Trophy } from 'lucide-react';
+import { Truck, Shield, Star, School, Film, Calendar, BookOpen, Users, Briefcase, Trophy, Crown } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 
 const staffMembers: StaffMember[] = staffData.staffMembers;
@@ -56,6 +56,19 @@ export default function StaffPage() {
 
   const teamMembersCount = staffMembers.length;
   const rolesCount = roleOrder.length;
+  
+  const leadership = staffMembers.filter(m => m.role === 'Managing Director');
+  const otherStaff = staffMembers.filter(m => m.role !== 'Managing Director');
+
+  // Re-calculate staff by role for non-leadership roles
+  const staffByRoleFiltered = otherStaff.reduce((acc, member) => {
+    if (!acc[member.role]) {
+      acc[member.role] = [];
+    }
+    acc[member.role].push(member);
+    return acc;
+  }, {} as Record<string, StaffMember[]>);
+
 
   const stats = [
     { icon: <Users size={24} className="text-yellow-400" />, value: teamMembersCount, label: "Team Members" },
@@ -63,6 +76,32 @@ export default function StaffPage() {
     { icon: <Star size={24} className="text-yellow-400" />, value: "24/7", label: "Support" },
     { icon: <Truck size={24} className="text-yellow-400" />, value: "100%", label: "Professional" },
   ];
+
+  const getRoleStyle = (role: string) => {
+    if (role === 'Managing Director') return 'border-yellow-400/50 bg-yellow-950/50 text-yellow-300';
+    if (role === 'Senior Driver') return 'border-yellow-500/50 bg-yellow-950/50 text-yellow-400';
+    if (role === 'Driver') return 'border-green-500/50 bg-green-950/50 text-green-400';
+    if (role === 'Trainee') return 'border-red-500/50 bg-red-950/50 text-red-400';
+    if (role === 'Media Staff' || role === 'Media Editor') return 'border-purple-500/50 bg-purple-950/50 text-purple-400';
+    if (role === 'Event Staff' || role === 'Event Organizer') return 'border-orange-500/50 bg-orange-950/50 text-orange-400';
+    if (role === 'Trainer') return 'border-cyan-500/50 bg-cyan-950/50 text-cyan-400';
+    if (role === 'Human Resource Staff') return 'border-pink-500/50 bg-pink-950/50 text-pink-400';
+    if (role === 'Marketing Executive') return 'border-teal-500/50 bg-teal-950/50 text-teal-400';
+    return 'border-blue-500/50 bg-blue-950/50 text-blue-400';
+  };
+
+  const getRoleIcon = (role: string) => {
+    if (role === 'Managing Director') return <Crown className="mr-1 h-3 w-3 text-yellow-300" />;
+    if (role === 'Senior Driver') return <Star className="mr-1 h-3 w-3 text-yellow-400" />;
+    if (role === 'Driver') return <Truck className="mr-1 h-3 w-3 text-green-400" />;
+    if (role === 'Trainee') return <School className="mr-1 h-3 w-3 text-red-400" />;
+    if (role === 'Media Staff' || role === 'Media Editor') return <Film className="mr-1 h-3 w-3 text-purple-400" />;
+    if (role === 'Event Staff' || role === 'Event Organizer') return <Calendar className="mr-1 h-3 w-3 text-orange-400" />;
+    if (role === 'Trainer') return <BookOpen className="mr-1 h-3 w-3 text-cyan-400" />;
+    if (role === 'Human Resource Staff') return <Users className="mr-1 h-3 w-3 text-pink-400" />;
+    if (role === 'Marketing Executive') return <Briefcase className="mr-1 h-3 w-3 text-teal-400" />;
+    return <Shield className="mr-1 h-3 w-3 text-blue-400" />;
+  };
 
   return (
     <div className="flex flex-col min-h-screen bg-background">
@@ -100,8 +139,60 @@ export default function StaffPage() {
         </section>
 
         <div className="container mx-auto px-4 py-16">
+          
+        {leadership.length > 0 && (
+            <div className="mb-16">
+              <div className="flex items-center justify-center gap-4 mb-8">
+                  <h2 className="text-3xl font-headline text-primary animate-fade-in-scroll">
+                      Leadership
+                  </h2>
+              </div>
+              <div className="flex justify-center">
+                {leadership.map((member) => {
+                  const imageSrc = member.imageUrl || defaultImage?.imageUrl;
+                  return (
+                    <Card key={member.id} className="text-center bg-card border-border/50 shadow-lg hover:shadow-primary/20 transition-all duration-300 w-full max-w-sm">
+                      <CardContent className="flex flex-col items-center pt-6">
+                          {imageSrc && (
+                              <Image
+                                  src={imageSrc}
+                                  alt={`Photo of ${member.name}`}
+                                  width={120}
+                                  height={120}
+                                  className="rounded-full mx-auto border-4 border-green-500"
+                              />
+                          )}
+                          <CardTitle className="text-xl font-semibold mt-4">{member.name}</CardTitle>
+                           <Badge 
+                              variant="outline" 
+                              className={`mt-2 ${getRoleStyle(member.role)}`}
+                          >
+                              {getRoleIcon(member.role)}
+                              {member.role}
+                          </Badge>
+                          <div className="flex justify-center gap-4 mt-4">
+                              {member.steamUrl && (
+                                  <Link href={member.steamUrl} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                                      <SteamIcon className="h-5 w-5" />
+                                  </Link>
+                              )}
+                              {member.truckersmpUrl && (
+                                  <Link href={member.truckersmpUrl} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                                      <Truck size={20} />
+                                  </Link>
+                              )}
+                          </div>
+                      </CardContent>
+                    </Card>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
           {roleOrder.map((role) => {
-            const membersInRole = staffByRole[role];
+            if (role === 'Managing Director') return null; // Already rendered
+            const membersInRole = staffByRoleFiltered[role];
             if (!membersInRole || membersInRole.length === 0) return null;
 
             return (
@@ -117,39 +208,6 @@ export default function StaffPage() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                   {membersInRole.map((member) => {
                     const imageSrc = member.imageUrl || defaultImage?.imageUrl;
-                    const isSeniorDriver = member.role === 'Senior Driver';
-                    const isDriver = member.role === 'Driver';
-                    const isTrainee = member.role === 'Trainee';
-                    const isMediaStaff = member.role === 'Media Staff' || member.role === 'Media Editor';
-                    const isEventStaff = member.role === 'Event Staff' || member.role === 'Event Organizer';
-                    const isTrainer = member.role === 'Trainer';
-                    const isHrStaff = member.role === 'Human Resource Staff';
-                    const isMarketingExec = member.role === 'Marketing Executive';
-
-                    const getRoleStyle = () => {
-                        if (isSeniorDriver) return 'border-yellow-500/50 bg-yellow-950/50 text-yellow-400';
-                        if (isDriver) return 'border-green-500/50 bg-green-950/50 text-green-400';
-                        if (isTrainee) return 'border-red-500/50 bg-red-950/50 text-red-400';
-                        if (isMediaStaff) return 'border-purple-500/50 bg-purple-950/50 text-purple-400';
-                        if (isEventStaff) return 'border-orange-500/50 bg-orange-950/50 text-orange-400';
-                        if (isTrainer) return 'border-cyan-500/50 bg-cyan-950/50 text-cyan-400';
-                        if (isHrStaff) return 'border-pink-500/50 bg-pink-950/50 text-pink-400';
-                        if (isMarketingExec) return 'border-teal-500/50 bg-teal-950/50 text-teal-400';
-                        return 'border-blue-500/50 bg-blue-950/50 text-blue-400';
-                    };
-
-                    const getRoleIcon = () => {
-                        if (isSeniorDriver) return <Star className="mr-1 h-3 w-3 text-yellow-400" />;
-                        if (isDriver) return <Truck className="mr-1 h-3 w-3 text-green-400" />;
-                        if (isTrainee) return <School className="mr-1 h-3 w-3 text-red-400" />;
-                        if (isMediaStaff) return <Film className="mr-1 h-3 w-3 text-purple-400" />;
-                        if (isEventStaff) return <Calendar className="mr-1 h-3 w-3 text-orange-400" />;
-                        if (isTrainer) return <BookOpen className="mr-1 h-3 w-3 text-cyan-400" />;
-                        if (isHrStaff) return <Users className="mr-1 h-3 w-3 text-pink-400" />;
-                        if (isMarketingExec) return <Briefcase className="mr-1 h-3 w-3 text-teal-400" />;
-                        return <Shield className="mr-1 h-3 w-3 text-blue-400" />;
-                    };
-
                     return (
                       <Card key={member.id} className="text-center bg-card border-border/50 shadow-sm hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 hover:scale-105 group">
                         <CardHeader>
@@ -167,9 +225,9 @@ export default function StaffPage() {
                             <CardTitle className="text-lg font-semibold">{member.name}</CardTitle>
                              <Badge 
                                 variant="outline" 
-                                className={`mt-2 ${getRoleStyle()}`}
+                                className={`mt-2 ${getRoleStyle(member.role)}`}
                             >
-                                {getRoleIcon()}
+                                {getRoleIcon(member.role)}
                                 {member.role}
                             </Badge>
                             <div className="flex justify-center gap-4 mt-4">
