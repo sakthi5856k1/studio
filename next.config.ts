@@ -42,7 +42,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'www.pngall.com',
+        hostname: 'skit.ng',
         port: '',
         pathname: '/**',
       }

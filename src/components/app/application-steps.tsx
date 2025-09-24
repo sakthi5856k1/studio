@@ -12,7 +12,7 @@ const steps = [
 
 const ChristmasCap = () => (
   <Image
-    src="https://www.pngall.com/wp-content/uploads/5/Santa-Hat-PNG-Image-File.png"
+    src="https://skit.ng/wp-content/uploads/2023/12/Christmas-Hats-Skit-Store.webp"
     alt="Christmas Cap"
     width={60}
     height={60}
