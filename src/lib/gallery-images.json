@@ -3,20 +3,14 @@
   "galleryImages": [
     {
       "id": "gallery-1",
-      "title": "Convoy Sunset",
-      "description": "A beautiful sunset during one of our official convoys.",
       "imageUrl": "https://media.discordapp.net/attachments/1281551151418048677/1417735782223056929/IMG_20250917_102508.jpg"
     },
     {
       "id": "gallery-2",
-      "title": "Mountain Roads",
-      "description": "Navigating the winding mountain roads together.",
       "imageUrl": "https://media.discordapp.net/attachments/1281551151418048677/1417739857123475538/1758085736934.jpg"
     },
     {
       "id": "gallery-3",
-      "title": "City Night Drive",
-      "description": "A night drive through the bustling city.",
       "imageUrl": "https://media.discordapp.net/attachments/1281551151418048677/1415618464629919754/ets2_20241220_194305_00.png"
     }
   ]

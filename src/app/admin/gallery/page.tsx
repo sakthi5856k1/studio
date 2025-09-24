@@ -36,8 +36,6 @@ export default function GalleryAdminPage() {
                 <TableHeader>
                   <TableRow>
                     <TableHead>Image</TableHead>
-                    <TableHead>Title</TableHead>
-                    <TableHead>Description</TableHead>
                     <TableHead className="text-right">Actions</TableHead>
                   </TableRow>
                 </TableHeader>
@@ -47,14 +45,12 @@ export default function GalleryAdminPage() {
                       <TableCell>
                         <Image 
                             src={image.imageUrl}
-                            alt={image.title}
+                            alt={image.id}
                             width={100}
                             height={60}
                             className="rounded-md object-cover"
                         />
                       </TableCell>
-                      <TableCell className="font-medium">{image.title}</TableCell>
-                      <TableCell>{image.description}</TableCell>
                       <TableCell className="text-right">
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild>

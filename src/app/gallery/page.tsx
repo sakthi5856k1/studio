@@ -2,7 +2,7 @@
 import { Header } from '@/components/app/header';
 import { Footer } from '@/components/app/footer';
 import Image from 'next/image';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card } from '@/components/ui/card';
 import galleryData from '@/lib/gallery-images.json';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
@@ -25,17 +25,11 @@ export default function GalleryPage() {
                                 <div className="relative aspect-video">
                                     <Image
                                         src={image.imageUrl}
-                                        alt={image.title}
+                                        alt={image.id}
                                         fill
                                         className="object-cover transition-transform duration-300 group-hover:scale-105"
                                     />
                                 </div>
-                                <CardHeader>
-                                    <CardTitle className="text-lg">{image.title}</CardTitle>
-                                </CardHeader>
-                                <CardContent>
-                                    <p className="text-sm text-muted-foreground">{image.description}</p>
-                                </CardContent>
                             </Card>
                         ))}
                     </div>

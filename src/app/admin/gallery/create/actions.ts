@@ -8,8 +8,6 @@ import { revalidatePath } from 'next/cache';
 import type { GalleryData, GalleryImage } from '@/lib/gallery-images';
 
 const formSchema = z.object({
-  title: z.string().min(1, 'Title is required'),
-  description: z.string().min(1, 'Description is required'),
   imageUrl: z.string().url('Must be a valid URL'),
 });
 
@@ -44,8 +42,6 @@ export async function createGalleryImage(values: FormValues) {
 
     const newImage: GalleryImage = {
       id: `gallery-${Date.now()}`,
-      title: validation.data.title,
-      description: validation.data.description,
       imageUrl: validation.data.imageUrl,
     };
     

@@ -10,8 +10,6 @@ import type { GalleryData, GalleryImage } from '@/lib/gallery-images';
 export type { GalleryImage };
 
 const formSchema = z.object({
-  title: z.string().min(1, 'Title is required'),
-  description: z.string().min(1, 'Description is required'),
   imageUrl: z.string().url('Must be a valid URL'),
 });
 
@@ -57,8 +55,6 @@ export async function updateGalleryImage(id: string, values: FormValues) {
 
     galleryData.galleryImages[imageIndex] = {
         ...galleryData.galleryImages[imageIndex],
-        title: validation.data.title,
-        description: validation.data.description,
         imageUrl: validation.data.imageUrl,
     };
 
