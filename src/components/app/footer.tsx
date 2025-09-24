@@ -1,3 +1,4 @@
+
 import Link from 'next/link';
 import { Logo } from '@/components/app/logo';
 import { Button } from '@/components/ui/button';
@@ -10,7 +11,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div className="md:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-4">
-              <Logo size={36} />
+              <Logo size={48} />
               <span className="text-lg font-headline animate-rgb-text bg-gradient-to-r from-red-500 via-green-500 to-blue-500 bg-clip-text text-transparent [background-size:200%_auto]">Tamil Pasanga</span>
             </Link>
             <p className="text-sm">Gateway to New Horizons.</p>
@@ -29,7 +30,7 @@ export function Footer() {
             <h4 className="font-semibold text-white mb-4">Community</h4>
             <ul className="space-y-2 text-sm">
               <li><Link href="https://discord.com/invite/paRCYhJphH" target="_blank" className="hover:text-primary transition-colors">Discord</Link></li>
-              <li><Link href="#" className="hover:text-primary transition-colors">TrucksBook</Link></li>
+              <li><Link href="#" className="hover:text-primary transition-colors">TruckersMP</Link></li>
               <li><Link href="#" className="hover:text-primary transition-colors">Steam</Link></li>
             </ul>
           </div>
