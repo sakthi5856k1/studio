@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import staffData from '@/lib/staff-members.json';
 import type { StaffMember } from '@/lib/staff-members';
-import { Truck, Shield, Star, School, Film, Calendar, BookOpen, Users } from 'lucide-react';
+import { Truck, Shield, Star, School, Film, Calendar, BookOpen, Users, Briefcase } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 
 const staffMembers: StaffMember[] = staffData.staffMembers;
@@ -92,6 +92,7 @@ export default function StaffPage() {
                     const isEventStaff = member.role === 'Event Staff' || member.role === 'Event Organizer';
                     const isTrainer = member.role === 'Trainer';
                     const isHrStaff = member.role === 'Human Resource Staff';
+                    const isMarketingExec = member.role === 'Marketing Executive';
 
                     const getRoleStyle = () => {
                         if (isSeniorDriver) return 'border-yellow-500/50 bg-yellow-950/50 text-yellow-400';
@@ -101,6 +102,7 @@ export default function StaffPage() {
                         if (isEventStaff) return 'border-orange-500/50 bg-orange-950/50 text-orange-400';
                         if (isTrainer) return 'border-cyan-500/50 bg-cyan-950/50 text-cyan-400';
                         if (isHrStaff) return 'border-pink-500/50 bg-pink-950/50 text-pink-400';
+                        if (isMarketingExec) return 'border-teal-500/50 bg-teal-950/50 text-teal-400';
                         return 'border-blue-500/50 bg-blue-950/50 text-blue-400';
                     };
 
@@ -112,6 +114,7 @@ export default function StaffPage() {
                         if (isEventStaff) return <Calendar className="mr-1 h-3 w-3 text-orange-400" />;
                         if (isTrainer) return <BookOpen className="mr-1 h-3 w-3 text-cyan-400" />;
                         if (isHrStaff) return <Users className="mr-1 h-3 w-3 text-pink-400" />;
+                        if (isMarketingExec) return <Briefcase className="mr-1 h-3 w-3 text-teal-400" />;
                         return <Shield className="mr-1 h-3 w-3 text-blue-400" />;
                     };
 
