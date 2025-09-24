@@ -42,17 +42,17 @@ export default function StaffPage() {
     <div className="flex flex-col min-h-screen bg-background">
       <Header />
       <main className="flex-grow">
-        <div className="relative h-64 w-full">
+        <div className="relative h-64 w-full overflow-hidden">
             <Image
                 src={bannerImageUrl}
                 alt="Staff Banner"
                 fill
-                className="object-cover"
+                className="object-cover animate-fade-in"
             />
             <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
                 <div className="text-center">
-                    <h1 className="text-4xl font-headline text-white">Our Staff</h1>
-                    <p className="text-muted-foreground mt-2 text-white/80">The team that makes it all happen.</p>
+                    <h1 className="text-4xl font-headline text-white animate-slide-up-fade">Our Staff</h1>
+                    <p className="text-muted-foreground mt-2 text-white/80 animate-slide-up-fade [animation-delay:0.3s]">The team that makes it all happen.</p>
                 </div>
             </div>
         </div>
@@ -63,12 +63,12 @@ export default function StaffPage() {
 
             return (
               <div key={role} className="mb-12">
-                <h2 className="text-2xl font-headline text-primary mb-6">{role}</h2>
+                <h2 className="text-2xl font-headline text-primary mb-6 animate-fade-in-scroll">{role}</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                   {membersInRole.map((member) => {
                     const image = PlaceHolderImages.find(img => img.id === member.imageId);
                     return (
-                      <Card key={member.id} className="text-center bg-card border-border/50 shadow-sm hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300">
+                      <Card key={member.id} className="text-center bg-card border-border/50 shadow-sm hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 hover:scale-105 group">
                         <CardHeader>
                             {image && (
                                 <Image
@@ -93,7 +93,7 @@ export default function StaffPage() {
             );
           })}
           <div className="mt-12 text-center">
-              <Button variant="outline" asChild>
+              <Button variant="outline" asChild className="hover:shadow-lg hover:shadow-primary/40 transition-shadow">
                   <Link href="/">Back to Home</Link>
               </Button>
           </div>

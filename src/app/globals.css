@@ -97,4 +97,9 @@
   body {
     @apply bg-background text-foreground;
   }
+  .animate-fade-in-scroll {
+    animation-timeline: view();
+    animation-range-start: entry 10%;
+    animation-range-end: entry 40%;
+  }
 }
