@@ -1,4 +1,18 @@
-
 {
-  "applications": []
+  "applications": [
+    {
+      "id": "TP-2602",
+      "name": "hi",
+      "discordTag": "unknown#124",
+      "email": "test@gmail.com",
+      "steamUrl": "https://steamcommunity.com/sakthi5856k",
+      "experience": "fresher",
+      "howYouFound": "truckersmp",
+      "friendsMention": "",
+      "othersMention": "",
+      "terms": true,
+      "status": "Pending",
+      "submittedAt": "2025-09-24T07:58:50.811Z"
+    }
+  ]
 }
