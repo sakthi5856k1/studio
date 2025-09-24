@@ -85,7 +85,7 @@ export function Hero() {
                 )}
                 <div className="absolute inset-0 bg-black/60" />
                 <div className="relative z-10 text-center p-4">
-                  <h1 className="text-5xl md:text-7xl font-headline font-bold drop-shadow-lg text-primary">
+                  <h1 className="text-5xl md:text-7xl font-headline font-bold drop-shadow-lg animate-rgb-text bg-gradient-to-r from-primary via-blue-500 to-red-500 bg-clip-text text-transparent [background-size:200%_auto]">
                     TAMIL PASANGA
                   </h1>
                   <p className="mt-4 text-2xl md:text-4xl font-semibold drop-shadow-md">
