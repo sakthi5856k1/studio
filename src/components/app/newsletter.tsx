@@ -1,3 +1,7 @@
+
+'use client';
+
+import { useState } from 'react';
 import Image from 'next/image';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -5,10 +9,20 @@ import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Calendar, User } from 'lucide-react';
 import newsData from '@/lib/news-articles.json';
 import Link from 'next/link';
+import { cn } from '@/lib/utils';
 
 const newsletters = newsData.newsletters;
 
 export function Newsletter() {
+  const [expandedArticles, setExpandedArticles] = useState<Record<string, boolean>>({});
+
+  const toggleReadMore = (articleId: string) => {
+    setExpandedArticles(prev => ({
+      ...prev,
+      [articleId]: !prev[articleId],
+    }));
+  };
+
   return (
     <section id="news" className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-4">
@@ -19,6 +33,7 @@ export function Newsletter() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {newsletters.slice(0, 3).map((item) => {
             const image = PlaceHolderImages.find(img => img.id === item.imageId);
+            const isExpanded = expandedArticles[item.id];
             return (
               <Card key={item.id} className="flex flex-col bg-card border-border/50 shadow-lg overflow-hidden hover:shadow-primary/20 transition-shadow duration-300">
                 {image && (
@@ -37,7 +52,7 @@ export function Newsletter() {
                   <CardTitle className="font-headline text-xl">{item.title}</CardTitle>
                 </CardHeader>
                 <CardContent className="flex-grow space-y-2 text-sm text-muted-foreground">
-                  <p className="mb-4 line-clamp-3">{item.description}</p>
+                  <p className={cn("mb-4", !isExpanded && "line-clamp-3")}>{item.description}</p>
                   <div className="flex items-center gap-2">
                     <Calendar className="h-4 w-4" />
                     <span>{item.date}</span>
@@ -48,9 +63,9 @@ export function Newsletter() {
                   </div>
                 </CardContent>
                 <CardFooter>
-                   <Button variant="link" className="text-primary p-0" asChild>
-                    <Link href={`/admin/news/edit/${item.id}`}>Read More &rarr;</Link>
-                  </Button>
+                   <Button variant="link" className="text-primary p-0" onClick={() => toggleReadMore(item.id)}>
+                      {isExpanded ? 'Read Less' : 'Read More'} &rarr;
+                   </Button>
                 </CardFooter>
               </Card>
             );
