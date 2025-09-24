@@ -4,20 +4,8 @@
 import { revalidatePath } from 'next/cache';
 import fs from 'fs/promises';
 import path from 'path';
-import type { ApplicationStatus, ApplicationsData, Application } from '@/lib/applications';
+import type { ApplicationStatus, ApplicationsData } from '@/lib/applications';
 import type { StaffData, StaffMember } from '@/lib/staff-members';
-import {
-  APIEmbed,
-  APIInteraction,
-  InteractionResponseType,
-  MessageFlags,
-  ButtonStyle,
-  InteractionType,
-  APIApplicationCommandInteraction,
-  APIMessageComponentInteraction,
-  APIInteractionResponse,
-} from 'discord-api-types/v10';
-import { verify } from 'tweetnacl';
 
 const applicationsFilePath = path.join(process.cwd(), 'src', 'lib', 'applications.json');
 const staffFilePath = path.join(process.cwd(), 'src', 'lib', 'staff-members.json');
@@ -75,7 +63,7 @@ export async function updateApplicationStatus(
                     imageId: 'testimonial-avatar',
                     imageUrl: "https://media.discordapp.net/attachments/1116720480544636999/1274425873201631304/TP_NEW_WB_PNGxxxhdpi.png?ex=68d4d8d5&is=68d38755&hm=b6d4e0e4ef2c3215a4de4fb2f592189a60ddd94c651f96fe04deac2e7f96ddc6&=&format=webp&quality=lossless&width=826&height=826",
                     steamUrl: application.steamUrl,
-                    truckersmpUrl: "", // This is not in the application form
+                    truckersmpUrl: application.truckersmpUrl || "",
                 };
                 staffData.staffMembers.push(newMember);
                 await writeJsonFile(staffFilePath, staffData);
