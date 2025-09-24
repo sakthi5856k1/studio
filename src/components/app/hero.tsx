@@ -85,10 +85,13 @@ export function Hero() {
                 )}
                 <div className="absolute inset-0 bg-black/60" />
                 <div className="relative z-10 text-center p-4">
-                  <h1 className="text-5xl md:text-7xl font-headline font-bold drop-shadow-lg">
-                    {slide.title}
+                  <h1 className="text-5xl md:text-7xl font-headline font-bold drop-shadow-lg text-primary">
+                    TAMIL PASANGA
                   </h1>
-                  <p className="mt-4 text-lg md:text-xl text-muted-foreground drop-shadow-md">
+                  <p className="mt-4 text-2xl md:text-4xl font-semibold drop-shadow-md">
+                    {slide.title}
+                  </p>
+                  <p className="mt-2 text-lg md:text-xl text-muted-foreground drop-shadow-md">
                     {slide.subtitle}
                   </p>
                   <Button asChild size="lg" className="mt-8 rounded-full" {...buttonProps}>
