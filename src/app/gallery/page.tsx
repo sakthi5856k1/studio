@@ -33,7 +33,7 @@ export default function GalleryPage() {
                 <div className="container mx-auto px-4 py-16">
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                         {images.map((image) => (
-                            <Card key={image.id} className="overflow-hidden group">
+                            <Card key={image.id} className="overflow-hidden group transition-all duration-300 hover:shadow-lg hover:shadow-primary/40">
                                 <div className="relative aspect-video">
                                     <Image
                                         src={image.imageUrl}
