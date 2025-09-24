@@ -38,6 +38,9 @@ export function Footer() {
             <Button variant="outline" className="w-full rounded-full border-primary text-primary hover:bg-primary hover:text-primary-foreground" asChild>
               <Link href="/maintenance">Drivers Hub</Link>
             </Button>
+            <Button className="w-full rounded-full" data-apply-btn>
+                Apply Now
+            </Button>
           </div>
         </div>
         <div className="border-t border-border/50 pt-8 text-center text-sm">
