@@ -13,6 +13,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@/compon
 import { format } from 'date-fns';
 import { UpdateApplicationStatus } from "./actions";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import React from "react";
 
 async function getApplications(): Promise<Application[]> {
     const filePath = path.join(process.cwd(), 'src', 'lib', 'applications.json');
@@ -73,8 +74,8 @@ export default async function ApplicationsAdminPage() {
                                 </TableHeader>
                                 <TableBody>
                                     {applications.map((app) => (
-                                        <Collapsible asChild key={app.id}>
-                                            <>
+                                        <Collapsible asChild key={app.id} tag="tbody">
+                                             <>
                                                 <TableRow>
                                                     <TableCell>
                                                         <CollapsibleTrigger asChild>
