@@ -1,6 +1,5 @@
 import { Header } from '@/components/app/header';
 import { Hero } from '@/components/app/hero';
-import { About } from '@/components/app/about';
 import { ApplicationSteps } from '@/components/app/application-steps';
 import { Testimonial } from '@/components/app/testimonial';
 import { Newsletter } from '@/components/app/newsletter';
@@ -20,7 +19,6 @@ export default function Home() {
       <Header />
       <main className="flex-grow">
         <Hero />
-        <About />
         <CoreValues />
         <ApplicationSteps />
         <Testimonial />
