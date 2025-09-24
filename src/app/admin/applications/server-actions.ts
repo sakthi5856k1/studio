@@ -31,6 +31,69 @@ async function writeJsonFile<T>(filePath: string, data: T): Promise<void> {
     await fs.writeFile(filePath, JSON.stringify(data, null, 2));
 }
 
+async function sendWebhookNotification(application: Application) {
+    const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
+    if (!webhookUrl) {
+        console.error('DISCORD_WEBHOOK_URL is not set.');
+        return;
+    }
+
+    let title = '';
+    let color = 0;
+    let description = '';
+
+    switch (application.status) {
+        case 'Accepted':
+            title = `Application Accepted: ${application.id}`;
+            color = 5763719; // Green
+            description = `Congratulations to **${application.name}**! Their application has been accepted.`;
+            break;
+        case 'Rejected':
+            title = `Application Rejected: ${application.id}`;
+            color = 15548997; // Red
+            description = `Application for **${application.name}** has been rejected.`;
+            break;
+        case 'Interview':
+            title = `Application Moved to Interview: ${application.id}`;
+            color = 3447003; // Blue
+            description = `**${application.name}** has been moved to the interview stage.`;
+            break;
+        default:
+            return; // Don't send for 'Pending' or other statuses
+    }
+
+    const embed = {
+        title: title,
+        description: description,
+        color: color,
+        timestamp: new Date().toISOString(),
+        fields: [
+            { name: 'Applicant Name', value: application.name, inline: true },
+            { name: 'Discord Tag', value: application.discordTag, inline: true },
+        ],
+        footer: {
+            text: 'Tamil Pasanga VTC | Application Status Update',
+        },
+    };
+
+    const payload = { embeds: [embed] };
+
+    try {
+        const response = await fetch(webhookUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+        });
+
+        if (!response.ok) {
+            console.error(`Discord webhook failed with status: ${response.status}`);
+        }
+    } catch (error) {
+        console.error('Error sending Discord webhook notification:', error);
+    }
+}
+
+
 export async function getApplications(): Promise<Application[]> {
     const data = await readJsonFile<ApplicationsData>(applicationsFilePath);
     // Sort by submission date, newest first
@@ -78,6 +141,9 @@ export async function updateApplicationStatus(
 
         revalidatePath('/admin/applications');
         revalidatePath('/staff');
+        
+        // Send Discord notification
+        await sendWebhookNotification(application);
 
         return { success: true, message: 'Application status updated successfully.' };
     } catch (error) {
