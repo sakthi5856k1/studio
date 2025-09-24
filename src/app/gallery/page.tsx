@@ -14,17 +14,6 @@ import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 
 const bannerImageUrl = "https://cdn.discordapp.com/attachments/1281551151418048677/1414862372199202927/ets2_20250907_201945_00.PNG?ex=68d43a84&is=68d2e904&hm=c6a185bd254316fdb29cdd8e8f8255b85a60a3760da66ed8f10813dc2d90e01b&";
 
-const ChristmasCap = () => (
-    <Image
-      src="https://media.discordapp.net/attachments/812969396540145694/1420341772294295552/OIP-removebg-preview.png?ex=68d50bdb&is=68d3ba5b&hm=f1b91feca930b674e2c82c05e917e104af0ae61f936334bebfbefa9dce0154fb&=&format=webp&quality=lossless"
-      alt="Christmas Cap"
-      width={80}
-      height={80}
-      className="absolute -top-10 -right-6 z-10 transform rotate-[15deg]"
-    />
-  );
-  
-
 export default function GalleryPage() {
     const images: GalleryImage[] = galleryData.galleryImages;
     const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
@@ -89,8 +78,7 @@ export default function GalleryPage() {
                 <div className="container mx-auto px-4 py-16">
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
                         {images.map((image, index) => (
-                            <Card key={image.id} className="relative overflow-visible group transition-all duration-300 hover:shadow-lg hover:shadow-primary/40">
-                                <ChristmasCap />
+                            <Card key={image.id} className="overflow-hidden group transition-all duration-300 hover:shadow-lg hover:shadow-primary/40">
                                 <div className="relative aspect-video cursor-pointer" onClick={() => openLightbox(index)}>
                                     <Image
                                         src={image.imageUrl}

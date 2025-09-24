@@ -50,17 +50,6 @@ const SteamIcon = (props: React.SVGProps<SVGSVGElement>) => (
     </svg>
 );
 
-const ChristmasCap = () => (
-  <Image
-    src="https://media.discordapp.net/attachments/812969396540145694/1420341772294295552/OIP-removebg-preview.png?ex=68d50bdb&is=68d3ba5b&hm=f1b91feca930b674e2c82c05e917e104af0ae61f936334bebfbefa9dce0154fb&=&format=webp&quality=lossless"
-    alt="Christmas Cap"
-    width={80}
-    height={80}
-    className="absolute -top-10 -right-6 z-10 transform rotate-[15deg]"
-  />
-);
-
-
 export default function StaffPage() {
   const defaultImage = PlaceHolderImages.find(img => img.id === 'testimonial-avatar');
 
@@ -136,8 +125,7 @@ export default function StaffPage() {
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {stats.map((stat, index) => (
-                <Card key={index} className="relative overflow-visible bg-card/80 backdrop-blur-sm border border-white/10 rounded-lg p-6 text-center shadow-lg transition-all hover:border-primary/50 hover:shadow-primary/20">
-                  <ChristmasCap />
+                <Card key={index} className="bg-card/80 backdrop-blur-sm border border-white/10 rounded-lg p-6 text-center shadow-lg transition-all hover:border-primary/50 hover:shadow-primary/20">
                   <div className="flex justify-center mb-4">
                     {stat.icon}
                   </div>
@@ -162,8 +150,7 @@ export default function StaffPage() {
                 {leadership.map((member) => {
                   const imageSrc = member.imageUrl || defaultImage?.imageUrl;
                   return (
-                    <Card key={member.id} className="relative overflow-visible animated-border text-center bg-transparent shadow-lg transition-all duration-300 w-full max-w-sm p-[2px]">
-                      <ChristmasCap />
+                    <Card key={member.id} className="animated-border text-center bg-transparent shadow-lg transition-all duration-300 w-full max-w-sm p-[2px]">
                       <CardContent className="flex flex-col items-center justify-center pt-6">
                           {imageSrc && (
                               <Image
@@ -221,8 +208,7 @@ export default function StaffPage() {
                   {membersInRole.map((member) => {
                     const imageSrc = member.imageUrl || defaultImage?.imageUrl;
                     return (
-                      <Card key={member.id} className="relative overflow-visible animated-border text-center bg-transparent shadow-sm transition-all duration-300 hover:scale-105 group p-[2px]">
-                        <ChristmasCap />
+                      <Card key={member.id} className="animated-border text-center bg-transparent shadow-sm transition-all duration-300 hover:scale-105 group p-[2px]">
                         <CardHeader className="flex flex-col items-center">
                             {imageSrc && (
                                 <Image

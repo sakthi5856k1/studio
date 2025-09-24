@@ -18,16 +18,6 @@ type NewsletterProps = {
   })[];
 };
 
-const ChristmasCap = () => (
-  <Image
-    src="https://media.discordapp.net/attachments/812969396540145694/1420341772294295552/OIP-removebg-preview.png?ex=68d50bdb&is=68d3ba5b&hm=f1b91feca930b674e2c82c05e917e104af0ae61f936334bebfbefa9dce0154fb&=&format=webp&quality=lossless"
-    alt="Christmas Cap"
-    width={80}
-    height={80}
-    className="absolute -top-10 -right-6 z-10 transform rotate-[15deg]"
-  />
-);
-
 export function Newsletter({ articles }: NewsletterProps) {
   const [expandedArticles, setExpandedArticles] = useState<Record<string, boolean>>({});
 
@@ -49,8 +39,7 @@ export function Newsletter({ articles }: NewsletterProps) {
           {articles.map((item) => {
             const isExpanded = expandedArticles[item.id];
             return (
-              <Card key={item.id} className="relative overflow-visible flex flex-col bg-card border-border/50 shadow-lg hover:shadow-primary/20 transition-shadow duration-300">
-                <ChristmasCap />
+              <Card key={item.id} className="flex flex-col bg-card border-border/50 shadow-lg hover:shadow-primary/20 transition-shadow duration-300">
                 {item.imageUrl && (
                   <div className="relative h-48 w-full">
                     <Image

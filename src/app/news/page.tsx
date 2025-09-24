@@ -10,16 +10,6 @@ import Link from 'next/link';
 
 const newsletters = newsData.newsletters;
 
-const ChristmasCap = () => (
-  <Image
-    src="https://media.discordapp.net/attachments/812969396540145694/1420341772294295552/OIP-removebg-preview.png?ex=68d50bdb&is=68d3ba5b&hm=f1b91feca930b674e2c82c05e917e104af0ae61f936334bebfbefa9dce0154fb&=&format=webp&quality=lossless"
-    alt="Christmas Cap"
-    width={80}
-    height={80}
-    className="absolute -top-10 -right-6 z-10 transform rotate-[15deg]"
-  />
-);
-
 export default function AllNewsPage() {
   const bannerImage = PlaceHolderImages.find(img => img.id === 'create-news-banner');
 
@@ -46,8 +36,7 @@ export default function AllNewsPage() {
             {newsletters.map((item) => {
                 const image = PlaceHolderImages.find(img => img.id === item.imageId);
                 return (
-                <Card key={item.id} className="relative overflow-visible flex flex-col bg-card border-border/50 shadow-lg hover:shadow-primary/20 transition-shadow duration-300">
-                    <ChristmasCap />
+                <Card key={item.id} className="flex flex-col bg-card border-border/50 shadow-lg hover:shadow-primary/20 transition-shadow duration-300">
                     {image && (
                     <div className="relative h-48 w-full">
                         <Image

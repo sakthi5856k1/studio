@@ -2,23 +2,12 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { PenSquare, Bot, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import Image from 'next/image';
 
 const steps = [
   { icon: <PenSquare size={32} />, title: "Step 1: Apply", description: "Fill out our straightforward application form.", buttonText: "Start Application", href: "#", "data-apply-btn": true },
   { icon: <Bot size={32} />, title: "Step 2: Join Discord", description: "Become a part of our community on Discord.", buttonText: "Join Discord", href: "https://discord.com/invite/paRCYhJphH" },
   { icon: <Users size={32} />, title: "Step 3: Interview", description: "Have a chat with our friendly recruitment team." },
 ];
-
-const ChristmasCap = () => (
-  <Image
-    src="https://media.discordapp.net/attachments/812969396540145694/1420341772294295552/OIP-removebg-preview.png?ex=68d50bdb&is=68d3ba5b&hm=f1b91feca930b674e2c82c05e917e104af0ae61f936334bebfbefa9dce0154fb&=&format=webp&quality=lossless"
-    alt="Christmas Cap"
-    width={80}
-    height={80}
-    className="absolute -top-10 -right-6 z-10 transform rotate-[15deg]"
-  />
-);
 
 export function ApplicationSteps() {
   return (
@@ -32,8 +21,7 @@ export function ApplicationSteps() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {steps.map((step, index) => (
-            <Card key={index} className="relative overflow-visible flex flex-col text-center p-6 shadow-lg border-border/50 hover:shadow-primary/20 transition-shadow duration-300">
-              <ChristmasCap />
+            <Card key={index} className="flex flex-col text-center p-6 shadow-lg border-border/50 hover:shadow-primary/20 transition-shadow duration-300">
               <CardHeader className="items-center">
                 <div className="p-4 bg-primary/10 rounded-full text-primary mb-4">
                   {step.icon}
