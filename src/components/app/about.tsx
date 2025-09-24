@@ -1,3 +1,4 @@
+
 import { Card, CardContent } from '@/components/ui/card';
 import { Truck, Users, ShieldCheck, Calendar } from 'lucide-react';
 import Image from 'next/image';
@@ -56,14 +57,14 @@ export function About() {
                 Safety and respect are at the forefront of our ethos, fostering a welcoming environment for all members to enjoy their virtual trucking experience.
               </p>
             </div>
-            <div className="lg:col-span-2">
+            <div className="lg:col-span-2 group rounded-lg overflow-hidden">
               {aboutImage && (
                 <Image 
                   src={aboutImage.imageUrl} 
                   alt={aboutImage.description}
                   width={600}
                   height={400}
-                  className="rounded-lg shadow-lg mx-auto"
+                  className="rounded-lg shadow-lg mx-auto transition-transform duration-300 group-hover:scale-105"
                   data-ai-hint={aboutImage.imageHint}
                 />
               )}
