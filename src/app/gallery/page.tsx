@@ -7,13 +7,15 @@ import { Footer } from '@/components/app/footer';
 import Image from 'next/image';
 import { Card } from '@/components/ui/card';
 import type { GalleryImage } from '@/lib/gallery-images';
+import galleryData from '@/lib/gallery-images.json';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 
 const bannerImageUrl = "https://cdn.discordapp.com/attachments/1281551151418048677/1414862372199202927/ets2_20250907_201945_00.PNG?ex=68d43a84&is=68d2e904&hm=c6a185bd254316fdb29cdd8e8f8255b85a60a3760da66ed8f10813dc2d90e01b&";
 
-export default function GalleryPage({ images }: { images: GalleryImage[] }) {
+export default function GalleryPage() {
+    const images: GalleryImage[] = galleryData.galleryImages;
     const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
     const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
