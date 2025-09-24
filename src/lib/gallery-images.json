@@ -1,0 +1,23 @@
+
+{
+  "galleryImages": [
+    {
+      "id": "gallery-1",
+      "title": "Convoy Sunset",
+      "description": "A beautiful sunset during one of our official convoys.",
+      "imageUrl": "https://media.discordapp.net/attachments/1281551151418048677/1417735782223056929/IMG_20250917_102508.jpg?ex=68d379d6&is=68d22856&hm=a557f1ba374f82770c80ad045ba6838cc0e0f99a01dd3079b9036c8039f67d23&=&format=webp&width=1389&height=684"
+    },
+    {
+      "id": "gallery-2",
+      "title": "Mountain Roads",
+      "description": "Navigating the winding mountain roads together.",
+      "imageUrl": "https://media.discordapp.net/attachments/1281551151418048677/1417739857123475538/1758085736934.jpg?ex=68d37da2&is=68d22c22&hm=8704f60b91d953c3e9b83e28d406e362c20affcf91876b7d903227bb10d8bb9d&=&format=webp&width=1389&height=684"
+    },
+    {
+      "id": "gallery-3",
+      "title": "City Night Drive",
+      "description": "A night drive through the bustling city.",
+      "imageUrl": "https://media.discordapp.net/attachments/1281551151418048677/1415618464629919754/ets2_20241220_194305_00.png?ex=68d3aeee&is=68d25d6e&hm=9a9e56b889bc2ada983981b4fc18083038d1a0fec476369e473a37664fd5cb8a&=&format=webp&quality=lossless&width=1284&height=722"
+    }
+  ]
+}
