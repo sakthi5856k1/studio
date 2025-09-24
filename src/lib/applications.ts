@@ -7,7 +7,6 @@ export type Application = {
   discordTag: string;
   email: string;
   steamUrl: string;
-  truckersmpUrl?: string;
   experience: 'fresher' | 'experienced';
   howYouFound: 'truckersmp' | 'friends' | 'others';
   friendsMention?: string;

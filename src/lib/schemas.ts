@@ -5,7 +5,6 @@ const applicationSchemaBase = z.object({
     discordTag: z.string().min(1, 'Discord Tag is required'),
     email: z.string().email('Invalid email address'),
     steamUrl: z.string().url('Invalid Steam profile URL. Please enter a full URL.'),
-    truckersmpUrl: z.string().url('Invalid TruckersMP profile URL.').optional().or(z.literal('')),
     experience: z.enum(['fresher', 'experienced'], {
         errorMap: () => ({ message: 'Please select your experience level' }),
     }),

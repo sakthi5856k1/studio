@@ -116,12 +116,6 @@ export default async function ApplicationsAdminPage() {
                                                                     <strong>Steam Profile:</strong>
                                                                     <Link href={app.steamUrl} target="_blank" className="text-primary hover:underline ml-2">View Profile</Link>
                                                                 </div>
-                                                                {app.truckersmpUrl && (
-                                                                     <div>
-                                                                        <strong>TruckersMP Profile:</strong>
-                                                                        <Link href={app.truckersmpUrl} target="_blank" className="text-primary hover:underline ml-2">View Profile</Link>
-                                                                    </div>
-                                                                )}
                                                                 <div className="col-span-full">
                                                                     <strong>How they found us:</strong> <span className="capitalize">{app.howYouFound}</span>
                                                                     {app.howYouFound === 'friends' && app.friendsMention && ` - ${app.friendsMention}`}

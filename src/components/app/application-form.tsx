@@ -58,7 +58,6 @@ export function ApplicationForm({ onFormSubmit }: { onFormSubmit?: () => void })
       discordTag: '',
       email: '',
       steamUrl: '',
-      truckersmpUrl: '',
       terms: false,
       friendsMention: '',
       othersMention: '',
@@ -157,19 +156,6 @@ export function ApplicationForm({ onFormSubmit }: { onFormSubmit?: () => void })
                   <FormLabel>Steam Profile URL</FormLabel>
                   <FormControl>
                     <Input placeholder="https://steamcommunity.com/id/yourprofile" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-             <FormField
-              control={form.control}
-              name="truckersmpUrl"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>TruckersMP Profile URL (Optional)</FormLabel>
-                  <FormControl>
-                    <Input placeholder="https://truckersmp.com/user/..." {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

@@ -67,7 +67,7 @@ export async function submitApplication(data: ApplicationData): Promise<SubmitRe
         return { success: false, message: 'Server error: Could not save application.' };
     }
 
-    const { name, discordTag, email, steamUrl, truckersmpUrl, experience, howYouFound, friendsMention, othersMention } = validation.data;
+    const { name, discordTag, email, steamUrl, experience, howYouFound, friendsMention, othersMention } = validation.data;
     const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
     
 
@@ -88,17 +88,9 @@ export async function submitApplication(data: ApplicationData): Promise<SubmitRe
         { name: 'Discord Tag', value: discordTag, inline: true },
         { name: 'Email', value: email, inline: true },
         { name: 'Steam Profile', value: steamUrl, inline: false },
-    ];
-
-    if (truckersmpUrl) {
-        fields.push({ name: 'TruckersMP Profile', value: truckersmpUrl, inline: false });
-    }
-
-    fields.push(
         { name: 'Experience', value: experience },
         { name: 'How they found us', value: howFoundValue }
-    );
-
+    ];
 
     const embed = {
         title: `New VTC Application - ${applicationId}`,
