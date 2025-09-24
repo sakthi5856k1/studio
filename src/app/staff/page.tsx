@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import staffData from '@/lib/staff-members.json';
 import type { StaffMember } from '@/lib/staff-members';
-import { Truck, Shield, Star } from 'lucide-react';
+import { Truck, Shield, Star, School } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 
 const staffMembers: StaffMember[] = staffData.staffMembers;
@@ -87,6 +87,7 @@ export default function StaffPage() {
                     const imageSrc = member.imageUrl || defaultImage?.imageUrl;
                     const isSeniorDriver = member.role === 'Senior Driver';
                     const isDriver = member.role === 'Driver';
+                    const isTrainee = member.role === 'Trainee';
 
                     const getRoleStyle = () => {
                         if (isSeniorDriver) {
@@ -94,6 +95,9 @@ export default function StaffPage() {
                         }
                         if (isDriver) {
                             return 'border-green-500/50 bg-green-950/50 text-green-400';
+                        }
+                        if (isTrainee) {
+                            return 'border-red-500/50 bg-red-950/50 text-red-400';
                         }
                         return 'border-blue-500/50 bg-blue-950/50 text-blue-400';
                     };
@@ -104,6 +108,9 @@ export default function StaffPage() {
                         }
                         if (isDriver) {
                             return <Truck className="mr-1 h-3 w-3 text-green-400" />;
+                        }
+                        if (isTrainee) {
+                            return <School className="mr-1 h-3 w-3 text-red-400" />;
                         }
                         return <Shield className="mr-1 h-3 w-3 text-blue-400" />;
                     };
