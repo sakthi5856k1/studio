@@ -72,61 +72,63 @@ export default async function ApplicationsAdminPage() {
                                         <TableHead className="text-right">Actions</TableHead>
                                     </TableRow>
                                 </TableHeader>
-                                {applications.map((app) => (
-                                    <Collapsible key={app.id} asChild>
-                                        <TableBody>
-                                            <TableRow>
-                                                <TableCell>
-                                                    <CollapsibleTrigger asChild>
-                                                        <Button variant="ghost" size="icon" className="group">
-                                                            <ChevronDown className="h-4 w-4 group-data-[state=open]:hidden" />
-                                                            <ChevronUp className="h-4 w-4 group-data-[state=closed]:hidden" />
-                                                        </Button>
-                                                    </CollapsibleTrigger>
-                                                </TableCell>
-                                                <TableCell className="font-medium">{app.id}</TableCell>
-                                                <TableCell>{app.name}</TableCell>
-                                                <TableCell>{app.discordTag}</TableCell>
-                                                <TableCell>{format(new Date(app.submittedAt), 'PPp')}</TableCell>
-                                                <TableCell>{statusInfo[app.status]?.badge || app.status}</TableCell>
-                                                <TableCell className="text-right">
-                                                     <DropdownMenu>
-                                                        <DropdownMenuTrigger asChild>
-                                                            <Button variant="ghost" className="h-8 w-8 p-0">
-                                                            <span className="sr-only">Open menu</span>
-                                                            <MoreHorizontal className="h-4 w-4" />
+                                <TableBody>
+                                    {applications.map((app) => (
+                                        <Collapsible asChild key={app.id} tag="tbody">
+                                             <React.Fragment>
+                                                <TableRow>
+                                                    <TableCell>
+                                                        <CollapsibleTrigger asChild>
+                                                            <Button variant="ghost" size="icon" className="group">
+                                                                <ChevronDown className="h-4 w-4 group-data-[state=open]:hidden" />
+                                                                <ChevronUp className="h-4 w-4 group-data-[state=closed]:hidden" />
                                                             </Button>
-                                                        </DropdownMenuTrigger>
-                                                        <DropdownMenuContent align="end">
-                                                            <UpdateApplicationStatus applicationId={app.id} status="Accepted" currentStatus={app.status} />
-                                                            <UpdateApplicationStatus applicationId={app.id} status="Rejected" currentStatus={app.status} />
-                                                            <UpdateApplicationStatus applicationId={app.id} status="Interview" currentStatus={app.status} />
-                                                        </DropdownMenuContent>
-                                                    </DropdownMenu>
-                                                </TableCell>
-                                            </TableRow>
-                                            <CollapsibleContent asChild>
-                                                <TableRow className="bg-muted/50">
-                                                    <TableCell colSpan={7} className="p-4">
-                                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                                                            <div><strong>Email:</strong> {app.email}</div>
-                                                            <div><strong>Experience:</strong> <span className="capitalize">{app.experience}</span></div>
-                                                            <div>
-                                                                <strong>Steam Profile:</strong>
-                                                                <Link href={app.steamUrl} target="_blank" className="text-primary hover:underline ml-2">View Profile</Link>
-                                                            </div>
-                                                            <div className="col-span-full">
-                                                                <strong>How they found us:</strong> <span className="capitalize">{app.howYouFound}</span>
-                                                                {app.howYouFound === 'friends' && app.friendsMention && ` - ${app.friendsMention}`}
-                                                                {app.howYouFound === 'others' && app.othersMention && ` - ${app.othersMention}`}
-                                                            </div>
-                                                        </div>
+                                                        </CollapsibleTrigger>
+                                                    </TableCell>
+                                                    <TableCell className="font-medium">{app.id}</TableCell>
+                                                    <TableCell>{app.name}</TableCell>
+                                                    <TableCell>{app.discordTag}</TableCell>
+                                                    <TableCell>{format(new Date(app.submittedAt), 'PPp')}</TableCell>
+                                                    <TableCell>{statusInfo[app.status]?.badge || app.status}</TableCell>
+                                                    <TableCell className="text-right">
+                                                        <DropdownMenu>
+                                                            <DropdownMenuTrigger asChild>
+                                                                <Button variant="ghost" className="h-8 w-8 p-0">
+                                                                <span className="sr-only">Open menu</span>
+                                                                <MoreHorizontal className="h-4 w-4" />
+                                                                </Button>
+                                                            </DropdownMenuTrigger>
+                                                            <DropdownMenuContent align="end">
+                                                                <UpdateApplicationStatus applicationId={app.id} status="Accepted" currentStatus={app.status} />
+                                                                <UpdateApplicationStatus applicationId={app.id} status="Rejected" currentStatus={app.status} />
+                                                                <UpdateApplicationStatus applicationId={app.id} status="Interview" currentStatus={app.status} />
+                                                            </DropdownMenuContent>
+                                                        </DropdownMenu>
                                                     </TableCell>
                                                 </TableRow>
-                                            </CollapsibleContent>
-                                        </TableBody>
-                                    </Collapsible>
-                                ))}
+                                                <CollapsibleContent asChild>
+                                                    <TableRow className="bg-muted/50">
+                                                        <TableCell colSpan={7} className="p-4">
+                                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                                                                <div><strong>Email:</strong> {app.email}</div>
+                                                                <div><strong>Experience:</strong> <span className="capitalize">{app.experience}</span></div>
+                                                                <div>
+                                                                    <strong>Steam Profile:</strong>
+                                                                    <Link href={app.steamUrl} target="_blank" className="text-primary hover:underline ml-2">View Profile</Link>
+                                                                </div>
+                                                                <div className="col-span-full">
+                                                                    <strong>How they found us:</strong> <span className="capitalize">{app.howYouFound}</span>
+                                                                    {app.howYouFound === 'friends' && app.friendsMention && ` - ${app.friendsMention}`}
+                                                                    {app.howYouFound === 'others' && app.othersMention && ` - ${app.othersMention}`}
+                                                                </div>
+                                                            </div>
+                                                        </TableCell>
+                                                    </TableRow>
+                                                </CollapsibleContent>
+                                            </React.Fragment>
+                                        </Collapsible>
+                                    ))}
+                                </TableBody>
                             </Table>
                         </CardContent>
                     </Card>
