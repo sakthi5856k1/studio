@@ -7,21 +7,114 @@ import { PlaceHolderImages } from '@/lib/placeholder-images';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 
-const staffMembers = [
+const staffByCategory = [
     {
-        name: 'Powerful Gaming',
-        role: 'Founder',
-        imageId: 'testimonial-avatar',
-    },
-    {
-        name: 'Sakthi',
-        role: 'Managing Director',
-        imageId: 'testimonial-avatar',
-    },
-    {
-        name: 'GHOST',
-        role: 'Human Resources',
-        imageId: 'testimonial-avatar',
+        category: 'Our Team',
+        teams: [
+            {
+                teamName: 'Managing Director',
+                members: [{ name: 'POWERFUL GAMING', role: 'Managing Director', imageId: 'testimonial-avatar' }],
+            },
+            {
+                teamName: 'Marketing Executive',
+                members: [{ name: 'Kishorkishor GI', role: 'Marketing Executive', imageId: 'testimonial-avatar' }],
+            },
+            {
+                teamName: 'Human Resource Staff',
+                members: [
+                    { name: 'GAMING WITH HRIVAL (HR)', role: 'Human Resource Staff', imageId: 'testimonial-avatar' },
+                    { name: 'SAARTHI GAMER YT', role: 'Human Resource Staff', imageId: 'testimonial-avatar' },
+                ],
+            },
+            {
+                teamName: 'Trainer',
+                members: [{ name: 'SCONT NUT', role: 'Trainer', imageId: 'testimonial-avatar' }],
+            },
+            {
+                teamName: 'Event Staff',
+                members: [
+                    { name: 'Spartan Gaming YT Tamil', role: 'Event Staff', imageId: 'testimonial-avatar' },
+                    { name: 'venkatesh(TP-EMTMT)', role: 'Event Staff', imageId: 'testimonial-avatar' },
+                ],
+            },
+            {
+                teamName: 'Event Organizer',
+                members: [{ name: 'Ajith M', role: 'Event Organizer', imageId: 'testimonial-avatar' }],
+            },
+            {
+                teamName: 'Media Staff',
+                members: [{ name: 'KISHORE GAMING', role: 'Media Staff', imageId: 'testimonial-avatar' }],
+            },
+            {
+                teamName: 'Media Editor',
+                members: [{ name: 'ganeshPrasanna', role: 'Media Editor', imageId: 'testimonial-avatar' }],
+            },
+            {
+                teamName: 'Senior Driver',
+                members: [
+                    { name: 'chian6666', role: 'Senior Driver', imageId: 'testimonial-avatar' },
+                    { name: 'PCBGAMING', role: 'Senior Driver', imageId: 'testimonial-avatar' },
+                    { name: 'King of My Queen', role: 'Senior Driver', imageId: 'testimonial-avatar' },
+                    { name: 'ramzypranad', role: 'Senior Driver', imageId: 'testimonial-avatar' },
+                    { name: 'SHAMEER_KIRIS', role: 'Senior Driver', imageId: 'testimonial-avatar' },
+                    { name: 'sinshas', role: 'Senior Driver', imageId: 'testimonial-avatar' },
+                    { name: 'E-Quaran', role: 'Senior Driver', imageId: 'testimonial-avatar' },
+                ],
+            },
+            {
+                teamName: 'Driver',
+                members: [
+                    { name: 'Ajo-02003', role: 'Driver', imageId: 'testimonial-avatar' },
+                    { name: 'Amrish0018', role: 'Driver', imageId: 'testimonial-avatar' },
+                    { name: 'ATLA_S', role: 'Driver', imageId: 'testimonial-avatar' },
+                    { name: 'Dineshkumars', role: 'Driver', imageId: 'testimonial-avatar' },
+                    { name: 'ToMMy2xd', role: 'Driver', imageId: 'testimonial-avatar' },
+                    { name: 'Franklin_01', role: 'Driver', imageId: 'testimonial-avatar' },
+                    { name: 'HarryGaming', role: 'Driver', imageId: 'testimonial-avatar' },
+                    { name: 'I_am_Devil', role: 'Driver', imageId: 'testimonial-avatar' },
+                    { name: 'Krsna', role: 'Driver', imageId: 'testimonial-avatar' },
+                    { name: 'its me siva', role: 'Driver', imageId: 'testimonial-avatar' },
+                    { name: 'JACK RALDY YT', role: 'Driver', imageId: 'testimonial-avatar' },
+                    { name: 'newoneofficialyt', role: 'Driver', imageId: 'testimonial-avatar' },
+                    { name: 'karthi007', role: 'Driver', imageId: 'testimonial-avatar' },
+                    { name: 'king Rocky', role: 'Driver', imageId: 'testimonial-avatar' },
+                    { name: 'Mogash', role: 'Driver', imageId: 'testimonial-avatar' },
+                    { name: 'MragullOP', role: 'Driver', imageId: 'testimonial-avatar' },
+                    { name: 'ravibuhin', role: 'Driver', imageId: 'testimonial-avatar' },
+                    { name: 'nevillebajan', role: 'Driver', imageId: 'testimonial-avatar' },
+                    { name: 'Nothing_278H', role: 'Driver', imageId: 'testimonial-avatar' },
+                    { name: 'NOCENT S.A.M', role: 'Driver', imageId: 'testimonial-avatar' },
+                    { name: 'ROCKYBALBOA121', role: 'Driver', imageId: 'testimonial-avatar' },
+                    { name: 'ramsu_shere', role: 'Driver', imageId: 'testimonial-avatar' },
+                    { name: 'Xian Dande [TP-HR]', role: 'Driver', imageId: 'testimonial-avatar' },
+                    { name: 'uzumavle', role: 'Driver', imageId: 'testimonial-avatar' },
+                    { name: 'SHARUNRAVI', role: 'Driver', imageId: 'testimonial-avatar' },
+                    { name: 'chicken Gaming yt', role: 'Driver', imageId: 'testimonial-avatar' },
+                    { name: 'riNavI', role: 'Driver', imageId: 'testimonial-avatar' },
+                    { name: 'STARKMWM', role: 'Driver', imageId: 'testimonial-avatar' },
+                    { name: 'steban gaming YT', role: 'Driver', imageId: 'testimonial-avatar' },
+                    { name: 'rithwi', role: 'Driver', imageId: 'testimonial-avatar' },
+                    { name: 'Sivasurya00', role: 'Driver', imageId: 'testimonial-avatar' },
+                    { name: 'subin00', role: 'Driver', imageId: 'testimonial-avatar' },
+                    { name: 'rangithevan', role: 'Driver', imageId: 'testimonial-avatar' },
+                    { name: 'Tamil Pasanga VTC', role: 'Driver', imageId: 'testimonial-avatar' },
+                    { name: 'TheBlakrown', role: 'Driver', imageId: 'testimonial-avatar' },
+                    { name: 'Hari SK [TP HR]', role: 'Driver', imageId: 'testimonial-avatar' },
+                    { name: 'Vishalraja017', role: 'Driver', imageId: 'testimonial-avatar' },
+                    { name: 'Vivank_001', role: 'Driver', imageId: 'testimonial-avatar' },
+                    { name: 'vshark.gayu', role: 'Driver', imageId: 'testimonial-avatar' },
+                ],
+            },
+            {
+                teamName: 'Trainee',
+                members: [
+                    { name: 'G V GAMING', role: 'Trainee', imageId: 'testimonial-avatar' },
+                    { name: 'Pasindu05X', role: 'Trainee', imageId: 'testimonial-avatar' },
+                    { name: 'Premkumar', role: 'Trainee', imageId: 'testimonial-avatar' },
+                    { name: 'sure yadav', role: 'Trainee', imageId: 'testimonial-avatar' },
+                ],
+            },
+        ],
     },
 ];
 
@@ -47,31 +140,40 @@ export default function StaffPage() {
             </div>
         </div>
         <div className="container mx-auto px-4 py-16">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-            {staffMembers.map((member) => {
-                 const image = PlaceHolderImages.find(img => img.id === member.imageId);
-                 return (
-                    <Card key={member.name} className="text-center bg-card border-border/50 shadow-lg hover:shadow-primary/20 transition-shadow duration-300">
-                        <CardHeader className="items-center">
+          {staffByCategory.map((category) => (
+            <div key={category.category}>
+              {category.teams.map((team) => (
+                <div key={team.teamName} className="mb-12">
+                  <h2 className="text-2xl font-headline text-primary mb-6">{team.teamName}</h2>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                    {team.members.map((member) => {
+                      const image = PlaceHolderImages.find(img => img.id === member.imageId);
+                      return (
+                        <Card key={member.name} className="text-center bg-card border-border/50 shadow-lg hover:shadow-primary/20 transition-shadow duration-300">
+                          <CardHeader className="items-center pt-6">
                             {image && (
-                                <Image
-                                    src={image.imageUrl}
-                                    alt={`Photo of ${member.name}`}
-                                    width={120}
-                                    height={120}
-                                    className="rounded-full border-4 border-primary"
-                                    data-ai-hint={image.imageHint}
-                                />
+                              <Image
+                                src={image.imageUrl}
+                                alt={`Photo of ${member.name}`}
+                                width={80}
+                                height={80}
+                                className="rounded-full border-4 border-primary"
+                                data-ai-hint={image.imageHint}
+                              />
                             )}
-                        </CardHeader>
-                        <CardContent>
-                            <CardTitle className="font-headline text-xl">{member.name}</CardTitle>
-                            <p className="text-primary">{member.role}</p>
-                        </CardContent>
-                    </Card>
-                 )
-            })}
-          </div>
+                          </CardHeader>
+                          <CardContent className="pb-6">
+                            <CardTitle className="font-headline text-lg mt-4">{member.name}</CardTitle>
+                            <p className="text-muted-foreground">{member.role}</p>
+                          </CardContent>
+                        </Card>
+                      )
+                    })}
+                  </div>
+                </div>
+              ))}
+            </div>
+          ))}
           <div className="mt-12 text-center">
               <Button variant="outline" asChild>
                   <Link href="/">Back to Home</Link>
