@@ -1,7 +1,8 @@
+
 import { Footer } from '@/components/app/footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Newspaper, Shield, Image as ImageIcon } from 'lucide-react';
+import { Newspaper, Shield, Image as ImageIcon, Users } from 'lucide-react';
 import Link from 'next/link';
 
 export default function AdminPage() {
@@ -43,6 +44,20 @@ export default function AdminPage() {
                 <p className="text-muted-foreground mb-4">Add, edit, and delete images in the website gallery.</p>
                 <Button asChild>
                   <Link href="/admin/gallery">Go to Gallery</Link>
+                </Button>
+              </CardContent>
+            </Card>
+            <Card className="bg-card hover:shadow-primary/20 transition-shadow">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Users size={20} />
+                  <span>Manage Staff</span>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground mb-4">Add, edit, and delete staff members from your team list.</p>
+                <Button asChild>
+                  <Link href="/admin/staff">Go to Staff</Link>
                 </Button>
               </CardContent>
             </Card>
