@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import staffData from '@/lib/staff-members.json';
 import type { StaffMember } from '@/lib/staff-members';
-import { Truck, Shield, Star, School, Film, Calendar, BookOpen, Users, Briefcase } from 'lucide-react';
+import { Truck, Shield, Star, School, Film, Calendar, BookOpen, Users, Briefcase, Trophy } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 
 const staffMembers: StaffMember[] = staffData.staffMembers;
@@ -54,6 +54,16 @@ const SteamIcon = (props: React.SVGProps<SVGSVGElement>) => (
 export default function StaffPage() {
   const defaultImage = PlaceHolderImages.find(img => img.id === 'testimonial-avatar');
 
+  const teamMembersCount = staffMembers.length;
+  const rolesCount = roleOrder.length;
+
+  const stats = [
+    { icon: <Users size={24} className="text-yellow-400" />, value: teamMembersCount, label: "Team Members" },
+    { icon: <Trophy size={24} className="text-yellow-400" />, value: rolesCount, label: "Roles" },
+    { icon: <Star size={24} className="text-yellow-400" />, value: "24/7", label: "Support" },
+    { icon: <Truck size={24} className="text-yellow-400" />, value: "100%", label: "Professional" },
+  ];
+
   return (
     <div className="flex flex-col min-h-screen bg-background">
       <Header />
@@ -72,6 +82,23 @@ export default function StaffPage() {
                 </div>
             </div>
         </div>
+
+        <section className="py-16 bg-background">
+          <div className="container mx-auto px-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {stats.map((stat, index) => (
+                <Card key={index} className="bg-card/80 backdrop-blur-sm border border-white/10 rounded-lg p-6 text-center shadow-lg transition-all hover:border-primary/50 hover:shadow-primary/20">
+                  <div className="flex justify-center mb-4">
+                    {stat.icon}
+                  </div>
+                  <p className="text-4xl font-bold text-white mb-2">{stat.value}</p>
+                  <p className="text-muted-foreground">{stat.label}</p>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
         <div className="container mx-auto px-4 py-16">
           {roleOrder.map((role) => {
             const membersInRole = staffByRole[role];
