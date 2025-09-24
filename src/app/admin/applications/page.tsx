@@ -75,7 +75,7 @@ export default async function ApplicationsAdminPage() {
                                 <TableBody>
                                     {applications.map((app) => (
                                         <Collapsible asChild key={app.id} tag="tbody">
-                                             <React.Fragment>
+                                             <>
                                                 <TableRow>
                                                     <TableCell>
                                                         <CollapsibleTrigger asChild>
@@ -125,7 +125,7 @@ export default async function ApplicationsAdminPage() {
                                                         </TableCell>
                                                     </TableRow>
                                                 </CollapsibleContent>
-                                            </React.Fragment>
+                                            </>
                                         </Collapsible>
                                     ))}
                                 </TableBody>
