@@ -1,11 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { PlusCircle, MoreHorizontal, FilePenLine, Trash2 } from "lucide-react";
+import { PlusCircle, MoreHorizontal, FilePenLine } from "lucide-react";
 import newsData from "@/lib/news-articles.json";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
 import { Footer } from "@/components/app/footer";
+import { DeleteArticleDialog } from "./delete-article-dialog";
 
 const articles = newsData.newsletters;
 
@@ -59,10 +60,7 @@ export default function NewsAdminPage() {
                                 Edit
                               </Link>
                             </DropdownMenuItem>
-                            <DropdownMenuItem className="text-red-500">
-                              <Trash2 className="mr-2 h-4 w-4" />
-                              Delete
-                            </DropdownMenuItem>
+                            <DeleteArticleDialog articleId={article.id} />
                           </DropdownMenuContent>
                         </DropdownMenu>
                       </TableCell>
