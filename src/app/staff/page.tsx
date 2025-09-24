@@ -8,7 +8,8 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import staffData from '@/lib/staff-members.json';
 import type { StaffMember } from '@/lib/staff-members';
-import { Truck } from 'lucide-react';
+import { Truck, Shield } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
 
 const staffMembers: StaffMember[] = staffData.staffMembers;
 
@@ -99,7 +100,10 @@ export default function StaffPage() {
                         </CardHeader>
                         <CardContent>
                             <CardTitle className="text-lg font-semibold">{member.name}</CardTitle>
-                            <p className="text-sm text-pink-400">{member.role}</p>
+                            <Badge variant="outline" className="mt-2 border-blue-500/50 bg-blue-950/50 text-blue-400">
+                                <Shield className="mr-1 h-3 w-3 text-blue-400" />
+                                {member.role}
+                            </Badge>
                             <div className="flex justify-center gap-4 mt-4">
                                 {member.steamUrl && (
                                     <Link href={member.steamUrl} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
