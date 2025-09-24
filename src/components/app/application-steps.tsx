@@ -5,8 +5,8 @@ import Link from 'next/link';
 
 const steps = [
   { icon: <PenSquare size={32} />, title: "Step 1: Apply", description: "Fill out our straightforward application form.", buttonText: "Start Application", href: "#", "data-apply-btn": true },
-  { icon: <Bot size={32} />, title: "Step 2: Join Discord", description: "Become a part of our community on Discord.", buttonText: "Join Discord", href: "#" },
-  { icon: <Users size={32} />, title: "Step 3: Interview", description: "Have a chat with our friendly recruitment team.", buttonText: "Learn More", href: "#" },
+  { icon: <Bot size={32} />, title: "Step 2: Join Discord", description: "Become a part of our community on Discord.", buttonText: "Join Discord", href: "https://discord.com/invite/paRCYhJphH" },
+  { icon: <Users size={32} />, title: "Step 3: Interview", description: "Have a chat with our friendly recruitment team." },
 ];
 
 export function ApplicationSteps() {
@@ -31,11 +31,13 @@ export function ApplicationSteps() {
               <CardContent className="flex-grow">
                 <p className="text-muted-foreground">{step.description}</p>
               </CardContent>
-              <div className="mt-4">
-                <Button asChild className="rounded-full w-full" {...(step['data-apply-btn'] ? { 'data-apply-btn': true } : {})}>
-                  <Link href={step.href}>{step.buttonText}</Link>
-                </Button>
-              </div>
+              {step.buttonText && step.href && (
+                <div className="mt-4">
+                    <Button asChild className="rounded-full w-full" {...(step['data-apply-btn'] ? { 'data-apply-btn': true } : {})}>
+                    <Link href={step.href} target={step.href.startsWith('http') ? '_blank' : '_self'}>{step.buttonText}</Link>
+                    </Button>
+                </div>
+              )}
             </Card>
           ))}
         </div>

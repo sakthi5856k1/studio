@@ -46,7 +46,7 @@ const heroSlides = [
     title: 'Join Us',
     subtitle: 'Be part of something bigger.',
     buttonText: 'Discord',
-    buttonLink: '#',
+    buttonLink: 'https://discord.com/invite/paRCYhJphH',
     imageId: 'hero-truck-3',
     icon: <DiscordIcon />,
   }
@@ -94,7 +94,7 @@ export function Hero() {
                   </p>
                   {slide.buttonText && slide.buttonLink && (
                     <Button asChild size="lg" className="mt-8 rounded-full" {...buttonProps}>
-                        <Link href={slide.buttonLink}>
+                        <Link href={slide.buttonLink} target={slide.buttonLink.startsWith('http') ? '_blank' : '_self'}>
                         {slide.icon}
                         {slide.buttonText}
                         </Link>
