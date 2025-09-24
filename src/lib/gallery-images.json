@@ -1,17 +1,20 @@
-
 {
   "galleryImages": [
     {
+      "id": "gallery-1758675872911",
+      "imageUrl": "https://cdn.discordapp.com/attachments/1281551151418048677/1414862372199202927/ets2_20250907_201945_00.PNG?ex=68d43a84&is=68d2e904&hm=c6a185bd254316fdb29cdd8e8f8255b85a60a3760da66ed8f10813dc2d90e01b&"
+    },
+    {
       "id": "gallery-1",
-      "imageUrl": "https://media.discordapp.net/attachments/1281551151418048677/1417735782223056929/IMG_20250917_102508.jpg"
+      "imageUrl": "https://cdn.discordapp.com/attachments/1281551151418048677/1414862372727816213/ets2_20250907_202115_00.PNG?ex=68d43a84&is=68d2e904&hm=db42a68145e40856f795dd281d018044af06a7a083465a7645f8f07db7212608&"
     },
     {
       "id": "gallery-2",
-      "imageUrl": "https://media.discordapp.net/attachments/1281551151418048677/1417739857123475538/1758085736934.jpg"
+      "imageUrl": "https://cdn.discordapp.com/attachments/1281551151418048677/1418938706231955456/ets2_20250919_180622_00.PNG?ex=68d48e66&is=68d33ce6&hm=444f28ec334214056ad1321f5a4ac756ef58b3acb1bf0633399c384690c810cc&"
     },
     {
       "id": "gallery-3",
-      "imageUrl": "https://media.discordapp.net/attachments/1281551151418048677/1415618464629919754/ets2_20241220_194305_00.png"
+      "imageUrl": "https://cdn.discordapp.com/attachments/1281551151418048677/1418938707372671100/ets2_20250919_190609_00.PNG?ex=68d48e66&is=68d33ce6&hm=9a87d0f370f9a993d93f5bf9d891da4b486dc2cd92e1780cb2f0987ee70e90dc&"
     }
   ]
 }
