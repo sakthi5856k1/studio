@@ -1,7 +1,7 @@
 
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Header } from '@/components/app/header';
 import { Footer } from '@/components/app/footer';
 import Image from 'next/image';
@@ -28,15 +28,30 @@ export default function GalleryPage() {
 
     const goToNext = () => {
         if (selectedImageIndex !== null) {
-            setSelectedImageIndex((selectedImageIndex + 1) % images.length);
+            setSelectedImageIndex((prevIndex) => (prevIndex! + 1) % images.length);
         }
     };
 
     const goToPrev = () => {
         if (selectedImageIndex !== null) {
-            setSelectedImageIndex((selectedImageIndex - 1 + images.length) % images.length);
+            setSelectedImageIndex((prevIndex) => (prevIndex! - 1 + images.length) % images.length);
         }
     };
+
+    useEffect(() => {
+        let interval: NodeJS.Timeout;
+        if (selectedImageIndex !== null) {
+            interval = setInterval(() => {
+                goToNext();
+            }, 3000); // Autoplay every 3 seconds
+        }
+
+        return () => {
+            if (interval) {
+                clearInterval(interval);
+            }
+        };
+    }, [selectedImageIndex]);
     
     return (
         <div className="flex flex-col min-h-screen bg-background">
@@ -99,7 +114,7 @@ export default function GalleryPage() {
                         <button onClick={goToPrev} className="absolute left-4 top-1/2 -translate-y-1/2 text-white bg-black/50 rounded-full p-2 hover:bg-black/80 transition-colors">
                             <ChevronLeft size={32} />
                         </button>
-                        <button onClick={goToNext} className="absolute right-4 top-1/2 -translate-y-1/2 text-white bg-black/50 rounded-full p-2 hover:bg-black/80 transition-colors">
+                        <button onClick={goToNext} className="absolute right-4 top-1 /2 -translate-y-1/2 text-white bg-black/50 rounded-full p-2 hover:bg-black/80 transition-colors">
                             <ChevronRight size={32} />
                         </button>
                     </div>
