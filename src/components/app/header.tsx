@@ -19,6 +19,7 @@ const navLinks = [
   // Application is now a dropdown
   { href: '/admin', label: 'Admin' },
   { href: '/gallery', label: 'Gallery' },
+  { href: '/staff', label: 'Staff' },
   { href: '/maintenance', label: 'Events' },
 ];
 
