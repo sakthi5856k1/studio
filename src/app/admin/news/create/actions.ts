@@ -11,6 +11,7 @@ const formSchema = z.object({
   title: z.string().min(1, 'Title is required'),
   author: z.string().min(1, 'Author is required'),
   imageUrl: z.string().url('Must be a valid URL'),
+  description: z.string().min(1, 'Description is required'),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -50,6 +51,7 @@ export async function createNewsArticle(values: FormValues) {
     const newArticle = {
       id: articleId,
       title: validation.data.title,
+      description: validation.data.description,
       date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
       author: validation.data.author,
       imageId: articleId,

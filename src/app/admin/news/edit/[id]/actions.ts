@@ -11,6 +11,7 @@ const formSchema = z.object({
   title: z.string().min(1, 'Title is required'),
   author: z.string().min(1, 'Author is required'),
   imageUrl: z.string().url('Must be a valid URL'),
+  description: z.string().min(1, 'Description is required'),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -65,6 +66,7 @@ export async function updateNewsArticle(id: string, values: FormValues) {
         ...newsData.newsletters[articleIndex],
         title: validation.data.title,
         author: validation.data.author,
+        description: validation.data.description,
     };
 
     // Update image details

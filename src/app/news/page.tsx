@@ -53,6 +53,7 @@ export default function AllNewsPage() {
                     <CardTitle className="font-headline text-xl">{item.title}</CardTitle>
                     </CardHeader>
                     <CardContent className="flex-grow space-y-2 text-sm text-muted-foreground">
+                    <p className="mb-4">{item.description}</p>
                     <div className="flex items-center gap-2">
                         <Calendar className="h-4 w-4" />
                         <span>{item.date}</span>

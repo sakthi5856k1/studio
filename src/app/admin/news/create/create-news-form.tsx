@@ -19,11 +19,13 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
+import { Textarea } from "@/components/ui/textarea";
 
 const formSchema = z.object({
   title: z.string().min(1, "Title is required"),
   author: z.string().min(1, "Author is required"),
   imageUrl: z.string().url("Must be a valid URL"),
+  description: z.string().min(1, "Description is required"),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -39,6 +41,7 @@ export function CreateNewsForm() {
       title: "",
       author: "",
       imageUrl: "",
+      description: "",
     },
   });
 
@@ -87,6 +90,22 @@ export function CreateNewsForm() {
               <FormLabel>Author</FormLabel>
               <FormControl>
                 <Input placeholder="Enter author's name" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="description"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Description</FormLabel>
+              <FormControl>
+                <Textarea
+                  placeholder="Enter a short description for the article"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>

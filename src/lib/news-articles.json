@@ -3,6 +3,7 @@
     {
       "id": "newsletter-1758671620485",
       "title": "Test",
+      "description": "This is a test article.",
       "date": "September 23, 2025",
       "author": "Sakthi",
       "imageId": "newsletter-1758671620485"
@@ -10,6 +11,7 @@
     {
       "id": "newsletter-1",
       "title": "Q2 2024 Logistics Report",
+      "description": "An overview of our logistics performance in the second quarter of 2024.",
       "date": "June 15, 2024",
       "author": "Jane Doe",
       "imageId": "newsletter-1"
@@ -17,6 +19,7 @@
     {
       "id": "newsletter-3",
       "title": "Community Spotlight: April",
+      "description": "Highlighting the amazing contributions from our community members in April.",
       "date": "April 30, 2024",
       "author": "Admin",
       "imageId": "newsletter-3"
