@@ -1,22 +1,21 @@
 
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Header } from '@/components/app/header';
 import { Footer } from '@/components/app/footer';
 import Image from 'next/image';
 import { Card } from '@/components/ui/card';
-import galleryData from '@/lib/gallery-images.json';
+import type { GalleryImage } from '@/lib/gallery-images';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
-import { cn } from '@/lib/utils';
 
-const images = galleryData.galleryImages;
 const bannerImageUrl = "https://cdn.discordapp.com/attachments/1281551151418048677/1414862372199202927/ets2_20250907_201945_00.PNG?ex=68d43a84&is=68d2e904&hm=c6a185bd254316fdb29cdd8e8f8255b85a60a3760da66ed8f10813dc2d90e01b&";
 
-export default function GalleryPage() {
+export default function GalleryPage({ images }: { images: GalleryImage[] }) {
     const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
+    const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
     const openLightbox = (index: number) => {
         setSelectedImageIndex(index);
@@ -39,19 +38,22 @@ export default function GalleryPage() {
     };
 
     useEffect(() => {
-        let interval: NodeJS.Timeout;
+        if (intervalRef.current) {
+            clearInterval(intervalRef.current);
+        }
+
         if (selectedImageIndex !== null) {
-            interval = setInterval(() => {
+            intervalRef.current = setInterval(() => {
                 goToNext();
             }, 3000); // Autoplay every 3 seconds
         }
 
         return () => {
-            if (interval) {
-                clearInterval(interval);
+            if (intervalRef.current) {
+                clearInterval(intervalRef.current);
             }
         };
-    }, [selectedImageIndex]);
+    }, [selectedImageIndex, images.length]);
     
     return (
         <div className="flex flex-col min-h-screen bg-background">
@@ -98,13 +100,16 @@ export default function GalleryPage() {
             {selectedImageIndex !== null && (
                 <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center" onClick={closeLightbox}>
                     <div className="relative w-full h-full max-w-4xl max-h-4/5" onClick={(e) => e.stopPropagation()}>
-                        <Image
-                            src={images[selectedImageIndex].imageUrl}
-                            alt={images[selectedImageIndex].id}
-                            layout="fill"
-                            objectFit="contain"
-                            className="rounded-lg"
-                        />
+                         {images[selectedImageIndex] && (
+                            <Image
+                                key={images[selectedImageIndex].id}
+                                src={images[selectedImageIndex].imageUrl}
+                                alt={images[selectedImageIndex].id}
+                                layout="fill"
+                                objectFit="contain"
+                                className="rounded-lg"
+                            />
+                        )}
                         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/70 text-white text-sm px-3 py-1 rounded-full">
                             {selectedImageIndex + 1} / {images.length}
                         </div>
@@ -114,7 +119,7 @@ export default function GalleryPage() {
                         <button onClick={goToPrev} className="absolute left-4 top-1/2 -translate-y-1/2 text-white bg-black/50 rounded-full p-2 hover:bg-black/80 transition-colors">
                             <ChevronLeft size={32} />
                         </button>
-                        <button onClick={goToNext} className="absolute right-4 top-1 /2 -translate-y-1/2 text-white bg-black/50 rounded-full p-2 hover:bg-black/80 transition-colors">
+                        <button onClick={goToNext} className="absolute right-4 top-1/2 -translate-y-1/2 text-white bg-black/50 rounded-full p-2 hover:bg-black/80 transition-colors">
                             <ChevronRight size={32} />
                         </button>
                     </div>

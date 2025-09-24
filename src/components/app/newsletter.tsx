@@ -5,15 +5,20 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Calendar, User } from 'lucide-react';
-import newsData from '@/lib/news-articles.json';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
+import type { NewsArticle } from '@/lib/news-articles';
 
-const newsletters = newsData.newsletters;
+type NewsletterProps = {
+  articles: (NewsArticle & {
+    imageUrl?: string;
+    imageDescription?: string;
+    imageHint?: string;
+  })[];
+};
 
-export function Newsletter() {
+export function Newsletter({ articles }: NewsletterProps) {
   const [expandedArticles, setExpandedArticles] = useState<Record<string, boolean>>({});
 
   const toggleReadMore = (articleId: string) => {
@@ -31,19 +36,18 @@ export function Newsletter() {
           <p className="text-muted-foreground mt-2">Stay up-to-date with the latest from Tamil Pasanga.</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {newsletters.slice(0, 3).map((item) => {
-            const image = PlaceHolderImages.find(img => img.id === item.imageId);
+          {articles.map((item) => {
             const isExpanded = expandedArticles[item.id];
             return (
               <Card key={item.id} className="flex flex-col bg-card border-border/50 shadow-lg overflow-hidden hover:shadow-primary/20 transition-shadow duration-300">
-                {image && (
+                {item.imageUrl && (
                   <div className="relative h-48 w-full">
                     <Image
-                      src={image.imageUrl}
-                      alt={image.description}
+                      src={item.imageUrl}
+                      alt={item.imageDescription || ''}
                       fill
                       className="object-cover"
-                      data-ai-hint={image.imageHint}
+                      data-ai-hint={item.imageHint}
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                   </div>
