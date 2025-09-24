@@ -2,7 +2,7 @@
 import { Footer } from '@/components/app/footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Newspaper, Shield, Image as ImageIcon, Users } from 'lucide-react';
+import { Newspaper, Shield, Image as ImageIcon, Users, FileText } from 'lucide-react';
 import Link from 'next/link';
 
 export default function AdminPage() {
@@ -19,6 +19,20 @@ export default function AdminPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-left">
+            <Card className="bg-card hover:shadow-primary/20 transition-shadow">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <FileText size={20} />
+                  <span>Manage Applications</span>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground mb-4">View and process new driver applications.</p>
+                <Button asChild>
+                  <Link href="/admin/applications">Go to Applications</Link>
+                </Button>
+              </CardContent>
+            </Card>
             <Card className="bg-card hover:shadow-primary/20 transition-shadow">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
