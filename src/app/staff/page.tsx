@@ -52,11 +52,11 @@ const SteamIcon = (props: React.SVGProps<SVGSVGElement>) => (
 
 const ChristmasCap = () => (
   <Image
-    src="https://media.discordapp.net/attachments/1116720480544636999/1274425873201631304/TP_NEW_WB_PNGxxxhdpi.png?ex=68d4d8d5&is=68d38755&hm=b6d4e0e4ef2c3215a4de4fb2f592189a60ddd94c651f96fe04deac2e7f96ddc6&=&format=webp&quality=lossless&width=826&height=826"
+    src="https://media.discordapp.net/attachments/812969396540145694/1420341772294295552/OIP-removebg-preview.png?ex=68d50bdb&is=68d3ba5b&hm=f1b91feca930b674e2c82c05e917e104af0ae61f936334bebfbefa9dce0154fb&=&format=webp&quality=lossless"
     alt="Christmas Cap"
-    width={60}
-    height={60}
-    className="absolute -top-6 -right-5 z-10 transform rotate-[15deg]"
+    width={80}
+    height={80}
+    className="absolute -top-10 -right-6 z-10 transform rotate-[15deg]"
   />
 );
 
