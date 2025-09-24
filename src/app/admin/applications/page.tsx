@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Application, ApplicationsData } from "@/lib/applications";
-import { CheckCircle, Clock, FileText, MoreHorizontal, XCircle, AlertCircle } from "lucide-react";
+import { CheckCircle, Clock, FileText, MoreHorizontal, XCircle, AlertCircle, ChevronDown, ChevronUp } from "lucide-react";
 import Link from "next/link";
 import fs from 'fs/promises';
 import path from 'path';
@@ -12,6 +12,7 @@ import { Badge } from "@/components/ui/badge";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { format } from 'date-fns';
 import { UpdateApplicationStatus } from "./actions";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 
 async function getApplications(): Promise<Application[]> {
     const filePath = path.join(process.cwd(), 'src', 'lib', 'applications.json');
@@ -61,6 +62,7 @@ export default async function ApplicationsAdminPage() {
                             <Table>
                                 <TableHeader>
                                     <TableRow>
+                                        <TableHead className="w-12"></TableHead>
                                         <TableHead>ID</TableHead>
                                         <TableHead>Name</TableHead>
                                         <TableHead>Discord Tag</TableHead>
@@ -71,28 +73,65 @@ export default async function ApplicationsAdminPage() {
                                 </TableHeader>
                                 <TableBody>
                                     {applications.map((app) => (
-                                        <TableRow key={app.id}>
-                                            <TableCell className="font-medium">{app.id}</TableCell>
-                                            <TableCell>{app.name}</TableCell>
-                                            <TableCell>{app.discordTag}</TableCell>
-                                            <TableCell>{format(new Date(app.submittedAt), 'PPp')}</TableCell>
-                                            <TableCell>{statusInfo[app.status]?.badge || app.status}</TableCell>
-                                            <TableCell className="text-right">
-                                                 <DropdownMenu>
-                                                    <DropdownMenuTrigger asChild>
-                                                        <Button variant="ghost" className="h-8 w-8 p-0">
-                                                        <span className="sr-only">Open menu</span>
-                                                        <MoreHorizontal className="h-4 w-4" />
-                                                        </Button>
-                                                    </DropdownMenuTrigger>
-                                                    <DropdownMenuContent align="end">
-                                                        <UpdateApplicationStatus applicationId={app.id} status="Accepted" currentStatus={app.status} />
-                                                        <UpdateApplicationStatus applicationId={app.id} status="Rejected" currentStatus={app.status} />
-                                                        <UpdateApplicationStatus applicationId={app.id} status="Interview" currentStatus={app.status} />
-                                                    </DropdownMenuContent>
-                                                </DropdownMenu>
-                                            </TableCell>
-                                        </TableRow>
+                                        <Collapsible asChild key={app.id}>
+                                            <>
+                                                <TableRow>
+                                                    <TableCell>
+                                                        <CollapsibleTrigger asChild>
+                                                            <Button variant="ghost" size="icon" className="group">
+                                                                <ChevronDown className="h-4 w-4 group-data-[state=open]:hidden" />
+                                                                <ChevronUp className="h-4 w-4 group-data-[state=closed]:hidden" />
+                                                            </Button>
+                                                        </CollapsibleTrigger>
+                                                    </TableCell>
+                                                    <TableCell className="font-medium">{app.id}</TableCell>
+                                                    <TableCell>{app.name}</TableCell>
+                                                    <TableCell>{app.discordTag}</TableCell>
+                                                    <TableCell>{format(new Date(app.submittedAt), 'PPp')}</TableCell>
+                                                    <TableCell>{statusInfo[app.status]?.badge || app.status}</TableCell>
+                                                    <TableCell className="text-right">
+                                                         <DropdownMenu>
+                                                            <DropdownMenuTrigger asChild>
+                                                                <Button variant="ghost" className="h-8 w-8 p-0">
+                                                                <span className="sr-only">Open menu</span>
+                                                                <MoreHorizontal className="h-4 w-4" />
+                                                                </Button>
+                                                            </DropdownMenuTrigger>
+                                                            <DropdownMenuContent align="end">
+                                                                <UpdateApplicationStatus applicationId={app.id} status="Accepted" currentStatus={app.status} />
+                                                                <UpdateApplicationStatus applicationId={app.id} status="Rejected" currentStatus={app.status} />
+                                                                <UpdateApplicationStatus applicationId={app.id} status="Interview" currentStatus={app.status} />
+                                                            </DropdownMenuContent>
+                                                        </DropdownMenu>
+                                                    </TableCell>
+                                                </TableRow>
+                                                <CollapsibleContent asChild>
+                                                    <tr className="bg-muted/50">
+                                                        <TableCell colSpan={7} className="p-4">
+                                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                                                                <div><strong>Email:</strong> {app.email}</div>
+                                                                <div><strong>Experience:</strong> <span className="capitalize">{app.experience}</span></div>
+                                                                <div>
+                                                                    <strong>Steam Profile:</strong>
+                                                                    <Link href={app.steamUrl} target="_blank" className="text-primary hover:underline ml-2">View Profile</Link>
+                                                                </div>
+                                                                {app.truckersmpUrl && (
+                                                                     <div>
+                                                                        <strong>TruckersMP Profile:</strong>
+                                                                        <Link href={app.truckersmpUrl} target="_blank" className="text-primary hover:underline ml-2">View Profile</Link>
+                                                                    </div>
+                                                                )}
+                                                                <div className="col-span-full">
+                                                                    <strong>How they found us:</strong> <span className="capitalize">{app.howYouFound}</span>
+                                                                    {app.howYouFound === 'friends' && app.friendsMention && ` - ${app.friendsMention}`}
+                                                                    {app.howYouFound === 'others' && app.othersMention && ` - ${app.othersMention}`}
+                                                                </div>
+                                                            </div>
+                                                        </TableCell>
+                                                    </tr>
+                                                </CollapsibleContent>
+                                            </>
+                                        </Collapsible>
                                     ))}
                                 </TableBody>
                             </Table>
