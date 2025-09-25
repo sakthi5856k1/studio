@@ -63,8 +63,8 @@ export function EventDetailClient({ event }: { event: EventWithImage }) {
                 <div className="absolute bottom-0 left-0 container mx-auto px-4 py-8">
                     <h1 className="text-5xl font-headline font-bold mb-4">{event.title}</h1>
                     <div className="flex items-center gap-4 text-lg">
-                        <span className="flex items-center gap-2 bg-red-500/80 text-white px-4 py-2 rounded-full text-xl font-bold"> <Clock size={20}/> UPCOMING</span>
-                        <span className="flex items-center gap-2 bg-green-500/80 text-white px-4 py-2 rounded-full text-xl font-bold"><Users size={20}/> {confirmedAttendees} attending</span>
+                        <span className="flex items-center gap-2 bg-red-500/80 text-white px-4 py-2 rounded-full text-xl font-bold transition-transform duration-300 hover:scale-110"> <Clock size={20}/> UPCOMING</span>
+                        <span className="flex items-center gap-2 bg-green-500/80 text-white px-4 py-2 rounded-full text-xl font-bold transition-transform duration-300 hover:scale-110"><Users size={20}/> {confirmedAttendees} attending</span>
                         <span className="flex items-center gap-1 text-2xl"><MapPin size={24}/> {event.departure} <ChevronRight size={24} /> {event.arrival}</span>
                     </div>
                 </div>
