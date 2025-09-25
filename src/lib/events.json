@@ -1,0 +1,77 @@
+
+{
+  "events": [
+    {
+      "id": "event-1",
+      "title": "Tamil Pasanga October Convoy #61",
+      "date": "04.10.2025 | 13:00 UTC",
+      "imageId": "event-october",
+      "url": "https://truckersmp.com/events/23013-tamil-pasanga-vtc-october-private-convoy",
+      "type": "internal"
+    },
+    {
+      "id": "event-2",
+      "title": "Tamil Pasanga November Convoy #64",
+      "date": "22.11.2025 | 13:00 UTC",
+      "imageId": "event-november",
+      "url": "https://truckersmp.com/events/23013-tamil-pasanga-vtc-october-private-convoy",
+      "type": "internal"
+    },
+    {
+      "id": "event-3",
+      "title": "Tamil Pasanga December Convoy #66",
+      "date": "06.12.2025 | 13:00 UTC",
+      "imageId": "event-december",
+      "url": "https://truckersmp.com/events/23013-tamil-pasanga-vtc-october-private-convoy",
+      "type": "internal"
+    },
+    {
+      "id": "event-4",
+      "title": "Tamil Pasanga January Convoy #67",
+      "date": "11.01.2026 | 13:00 UTC",
+      "imageId": "event-january",
+      "url": "https://truckersmp.com/events/23013-tamil-pasanga-vtc-october-private-convoy",
+      "type": "internal"
+    },
+    {
+      "id": "event-5",
+      "title": "Tamil Pasanga February Convoy #70",
+      "date": "21.02.2026 | 13:00 UTC",
+      "imageId": "event-february",
+      "url": "https://truckersmp.com/events/23013-tamil-pasanga-vtc-october-private-convoy",
+      "type": "internal"
+    },
+    {
+      "id": "event-6",
+      "title": "Tamil Pasanga March Convoy #71",
+      "date": "07.03.2026 | 13:00 UTC",
+      "imageId": "event-march",
+      "url": "https://truckersmp.com/events/23013-tamil-pasanga-vtc-october-private-convoy",
+      "type": "internal"
+    },
+    {
+      "id": "event-7",
+      "title": "INDIAN CARRIERS SEPTEMBER PUBLIC CONVOY",
+      "date": "26.09.2025 | 15:00 UTC",
+      "imageId": "event-indian-carriers",
+      "url": "https://truckersmp.com/events/23013-tamil-pasanga-vtc-october-private-convoy",
+      "type": "partner"
+    },
+    {
+      "id": "event-8",
+      "title": "Tamil Pasanga | September ETS2 Private...",
+      "date": "27.09.2025 | 13:00 UTC",
+      "imageId": "event-september-private",
+      "url": "https://truckersmp.com/events/23013-tamil-pasanga-vtc-october-private-convoy",
+      "type": "partner"
+    },
+    {
+      "id": "event-9",
+      "title": "Uniting the TMP Community: Driving To...",
+      "date": "27.09.2025 | 17:00 UTC",
+      "imageId": "event-uniting-tmp",
+      "url": "https://truckersmp.com/events/23013-tamil-pasanga-vtc-october-private-convoy",
+      "type": "partner"
+    }
+  ]
+}

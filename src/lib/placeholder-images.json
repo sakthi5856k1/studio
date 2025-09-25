@@ -53,6 +53,66 @@
       "description": "A white Scania truck on a bridge.",
       "imageUrl": "https://media.discordapp.net/attachments/1281551151418048677/1417735782223056929/IMG_20250917_102508.jpg?ex=68d4cb56&is=68d379d6&hm=c808005f4fff904d245a508d3ddbac637cf5c88f5e6416d5b35777e8b40bec04&=&format=webp&width=1194&height=722",
       "imageHint": "truck highway"
+    },
+    {
+      "id": "events-banner",
+      "description": "Banner for the events page.",
+      "imageUrl": "https://cdn.discordapp.com/attachments/1281551151418048677/1414862372199202927/ets2_20250907_201945_00.PNG?ex=68d43a84&is=68d2e904&hm=c6a185bd254316fdb29cdd8e8f8255b85a60a3760da66ed8f10813dc2d90e01b&",
+      "imageHint": "trucks convoy"
+    },
+    {
+      "id": "event-october",
+      "description": "October Convoy",
+      "imageUrl": "https://cdn.discordapp.com/attachments/1420626334460739614/1420626432439156746/October.png?ex=68d5a86d&is=68d456ed&hm=81e3d65b75051b75cb4b7123992b952e46be958310f545ba2ca96b026cc3d41e&",
+      "imageHint": "truck convoy"
+    },
+    {
+      "id": "event-november",
+      "description": "November Convoy",
+      "imageUrl": "https://cdn.discordapp.com/attachments/1420626334460739614/1420626432732774430/November.png?ex=68d5a86d&is=68d456ed&hm=70a92d05775f0a0d4c514757c301662453416554523e0c034b22c7dd3ca72a81&",
+      "imageHint": "truck night"
+    },
+    {
+      "id": "event-december",
+      "description": "December Convoy",
+      "imageUrl": "https://cdn.discordapp.com/attachments/1420626334460739614/1420626432132939816/December.png?ex=68d5a86d&is=68d456ed&hm=00a169b1945b6348682a2080a9d18e906593a1c62b800d17d59b207502c3df4f&",
+      "imageHint": "truck snow"
+    },
+    {
+      "id": "event-january",
+      "description": "January Convoy",
+      "imageUrl": "https://cdn.discordapp.com/attachments/1420626334460739614/1420626431835013141/January.png?ex=68d5a86d&is=68d456ed&hm=2af1e0b577a76fdf7c31d10e521d98a0d1a49a2a7f5c765f048d086e3f0559a2&",
+      "imageHint": "truck convoy"
+    },
+    {
+      "id": "event-february",
+      "description": "February Convoy",
+      "imageUrl": "https://cdn.discordapp.com/attachments/1420626334460739614/1420626405364146206/February.png?ex=68d5a867&is=68d456e7&hm=5a60032e67f2e153381665a36371a355601a4e61a6b0bd726915b22b64016147&",
+      "imageHint": "truck sunset"
+    },
+    {
+      "id": "event-march",
+      "description": "March Convoy",
+      "imageUrl": "https://cdn.discordapp.com/attachments/1420626334460739614/1420626405670273064/March.png?ex=68d5a867&is=68d456e7&hm=6a4be75267b27521c7501a3597c5e533bca2d3a39e80a062779e2a4457e5b871&",
+      "imageHint": "truck road"
+    },
+    {
+      "id": "event-indian-carriers",
+      "description": "Indian Carriers September Public Convoy",
+      "imageUrl": "https://cdn.discordapp.com/attachments/1420626334460739614/1420626405988778004/September_Public.png?ex=68d5a867&is=68d456e7&hm=62f8373b9e4a3c1032cf05e45c48b7f8339d42fe544339e083c27183e89a5843&",
+      "imageHint": "truck logo"
+    },
+    {
+      "id": "event-september-private",
+      "description": "Nexon Logistics | September ETS2 Privat...",
+      "imageUrl": "https://cdn.discordapp.com/attachments/1420626334460739614/1420626406249250836/September_Private.png?ex=68d5a867&is=68d456e7&hm=2fc9eb33e4b77d612e6aa0f24f469904ab723edb2d718ca16e0ff634f191b7d8&",
+      "imageHint": "trucks lined up"
+    },
+    {
+      "id": "event-uniting-tmp",
+      "description": "Uniting the TMP Community: Driving To...",
+      "imageUrl": "https://cdn.discordapp.com/attachments/1420626334460739614/1420626404987158579/TMP_Community.png?ex=68d5a867&is=68d456e7&hm=d7870df59c4033325c6a32d1ae2c98d63309a473da7fd2e22c0733d7790b34d7&",
+      "imageHint": "trucks convoy night"
     }
   ]
 }
