@@ -61,11 +61,11 @@ export function EventDetailClient({ event }: { event: EventWithImage }) {
                 )}
                 <div className="absolute inset-0 bg-black/60" />
                 <div className="absolute bottom-0 left-0 container mx-auto px-4 py-8">
-                    <h1 className="text-4xl font-headline font-bold mb-2">{event.title}</h1>
-                    <div className="flex items-center gap-4 text-sm">
-                        <span className="flex items-center gap-1 bg-red-500/80 text-white px-3 py-1 rounded-full text-xs font-bold"> <Clock size={12}/> UPCOMING</span>
-                        <span className="flex items-center gap-1 bg-green-500/80 text-white px-3 py-1 rounded-full text-xs font-bold"><Users size={12}/> {confirmedAttendees} attending</span>
-                        <span className="flex items-center gap-1"><MapPin size={14}/> {event.departure} <ChevronRight size={14} /> {event.arrival}</span>
+                    <h1 className="text-5xl font-headline font-bold mb-4">{event.title}</h1>
+                    <div className="flex items-center gap-4 text-base">
+                        <span className="flex items-center gap-2 bg-red-500/80 text-white px-4 py-2 rounded-full text-sm font-bold"> <Clock size={14}/> UPCOMING</span>
+                        <span className="flex items-center gap-2 bg-green-500/80 text-white px-4 py-2 rounded-full text-sm font-bold"><Users size={14}/> {confirmedAttendees} attending</span>
+                        <span className="flex items-center gap-1 text-lg"><MapPin size={16}/> {event.departure} <ChevronRight size={16} /> {event.arrival}</span>
                     </div>
                 </div>
             </div>
