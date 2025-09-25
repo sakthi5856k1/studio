@@ -21,6 +21,7 @@ export type Event = {
     date: string;
     imageId: string;
     url: string;
+    routeMapUrl?: string;
     type: 'internal' | 'partner';
     attendees: number;
     vtcs: number;

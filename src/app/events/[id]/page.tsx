@@ -134,7 +134,9 @@ export default function EventDetailPage({ params }: { params: { id: string } }) 
                                 </CardHeader>
                                 <CardContent className="space-y-2">
                                     <Button asChild className="w-full" variant="outline"><Link href={event.url} target="_blank"><Globe/> Visit Event Website</Link></Button>
-                                    <Button asChild className="w-full" variant="outline"><Link href="#" target="_blank"><Map/> View Route Map</Link></Button>
+                                    {event.routeMapUrl && (
+                                        <Button asChild className="w-full" variant="outline"><Link href={event.routeMapUrl} target="_blank"><Map/> View Route Map</Link></Button>
+                                    )}
                                 </CardContent>
                             </Card>
 

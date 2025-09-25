@@ -40,6 +40,7 @@ const formSchema = z.object({
   eventDate: z.date({ required_error: "An event date is required." }),
   imageUrl: z.string().url('Must be a valid URL'),
   url: z.string().url('Must be a valid URL'),
+  routeMapUrl: z.string().url('Must be a valid URL').optional().or(z.literal('')),
   type: z.enum(['internal', 'partner']),
   departure: z.string().min(1, 'Departure location is required'),
   arrival: z.string().min(1, 'Arrival location is required'),

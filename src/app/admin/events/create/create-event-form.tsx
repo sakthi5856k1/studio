@@ -64,6 +64,7 @@ const formSchema = z.object({
   eventDate: z.date({ required_error: "An event date is required." }),
   imageUrl: z.string().url('Must be a valid URL'),
   url: z.string().url('Must be a valid URL'),
+  routeMapUrl: z.string().url('Must be a valid URL').optional().or(z.literal('')),
   type: z.enum(['internal', 'partner']),
   departure: z.string().min(1, 'Departure location is required'),
   arrival: z.string().min(1, 'Arrival location is required'),
@@ -88,6 +89,7 @@ export function CreateEventForm() {
       title: "",
       imageUrl: "",
       url: "",
+      routeMapUrl: "",
       type: "internal",
       departure: "",
       arrival: "",
@@ -175,6 +177,7 @@ export function CreateEventForm() {
             <FormField control={form.control} name="imageUrl" render={({ field }) => ( <FormItem> <FormLabel>Event Image URL</FormLabel> <FormControl><Input placeholder="https://example.com/image.png" {...field} /></FormControl> <FormMessage /> </FormItem> )}/>
             <FormField control={form.control} name="url" render={({ field }) => ( <FormItem> <FormLabel>Event URL</FormLabel> <FormControl><Input placeholder="https://truckersmp.com/..." {...field} /></FormControl> <FormMessage /> </FormItem> )}/>
         </div>
+        <FormField control={form.control} name="routeMapUrl" render={({ field }) => ( <FormItem> <FormLabel>Route Map URL (Optional)</FormLabel> <FormControl><Input placeholder="https://example.com/route.png" {...field} /></FormControl> <FormMessage /> </FormItem> )}/>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <FormField control={form.control} name="type" render={({ field }) => ( <FormItem> <FormLabel>Event Type</FormLabel> <Select onValueChange={field.onChange} defaultValue={field.value}> <FormControl><SelectTrigger><SelectValue placeholder="Select event type" /></SelectTrigger></FormControl> <SelectContent> <SelectItem value="internal">Internal</SelectItem> <SelectItem value="partner">Partner</SelectItem> </SelectContent> </Select> <FormMessage /> </FormItem> )}/>
             <FormField control={form.control} name="server" render={({ field }) => ( <FormItem> <FormLabel>Server</FormLabel> <FormControl><Input placeholder="e.g., Event Server" {...field} /></FormControl> <FormMessage /> </FormItem> )}/>

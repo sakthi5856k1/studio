@@ -38,6 +38,7 @@ const formSchema = z.object({
   eventDate: z.date({ required_error: "An event date is required." }),
   imageUrl: z.string().url('Must be a valid URL'),
   url: z.string().url('Must be a valid URL'),
+  routeMapUrl: z.string().url('Must be a valid URL').optional().or(z.literal('')),
   type: z.enum(['internal', 'partner'], {
     errorMap: () => ({ message: 'Please select an event type' }),
   }),
