@@ -1,3 +1,4 @@
+'use client';
 
 import Link from 'next/link';
 import { Logo } from '@/components/app/logo';
@@ -11,6 +12,8 @@ import {
   DropdownMenuTrigger,
   DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu';
+import { usePathname } from 'next/navigation';
+import { cn } from '@/lib/utils';
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -22,6 +25,8 @@ const navLinks = [
 ];
 
 export function Header() {
+  const pathname = usePathname();
+
   return (
     <header className="py-4 px-4 sm:px-6 lg:px-8 w-full absolute top-0 z-20 bg-gradient-to-b from-black/70 to-transparent">
       <div className="container mx-auto flex justify-between items-center">
@@ -30,12 +35,15 @@ export function Header() {
           <span className="text-xl font-headline text-white">Tamil Pasanga</span>
         </Link>
         <nav className="hidden md:flex items-center gap-6 text-sm text-white">
-          <Link
-              href="/"
-              className="hover:text-primary transition-colors"
+          {navLinks.slice(0, 1).map((link) => (
+             <Link
+              key={link.href + link.label}
+              href={link.href}
+              className={cn("hover:text-primary transition-colors", pathname === link.href && "text-primary underline underline-offset-4")}
             >
-              Home
+              {link.label}
             </Link>
+          ))}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button
@@ -57,7 +65,7 @@ export function Header() {
             <Link
               key={link.href + link.label}
               href={link.href}
-              className="hover:text-primary transition-colors"
+              className={cn("hover:text-primary transition-colors", pathname === link.href && "text-primary underline underline-offset-4")}
             >
               {link.label}
             </Link>
@@ -77,12 +85,15 @@ export function Header() {
                   <span className="text-xl font-headline">Tamil Pasanga</span>
                 </Link>
                 <nav className="flex flex-col gap-4 text-lg">
-                   <Link
-                      href="/"
-                      className="hover:text-primary transition-colors"
+                   {navLinks.slice(0,1).map((link) => (
+                     <Link
+                      key={link.href + link.label}
+                      href={link.href}
+                      className={cn("hover:text-primary transition-colors", pathname === link.href && "text-primary underline underline-offset-4")}
                     >
-                      Home
+                      {link.label}
                     </Link>
+                   ))}
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <Button
@@ -104,7 +115,7 @@ export function Header() {
                     <Link
                       key={link.href + link.label}
                       href={link.href}
-                      className="hover:text-primary transition-colors"
+                      className={cn("hover:text-primary transition-colors", pathname === link.href && "text-primary underline underline-offset-4")}
                     >
                       {link.label}
                     </Link>
