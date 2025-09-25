@@ -20,8 +20,12 @@ const slotAreaSchema = z.object({
   id: z.string(),
   areaName: z.string().min(1, 'Area name is required'),
   imageUrl: z.string().url('Image URL must be a valid URL'),
-  totalSlots: z.coerce.number().min(1, 'Total slots must be at least 1'),
+  startSlot: z.coerce.number().min(1, 'Start slot must be at least 1'),
+  endSlot: z.coerce.number().min(1, 'End slot must be at least 1'),
   bookings: z.array(bookingSchema),
+}).refine(data => data.endSlot >= data.startSlot, {
+    message: "End slot must be greater than or equal to start slot",
+    path: ["endSlot"],
 });
 
 const formSchema = z.object({

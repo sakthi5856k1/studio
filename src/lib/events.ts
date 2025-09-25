@@ -10,7 +10,8 @@ export type SlotArea = {
     id: string;
     areaName: string;
     imageUrl: string;
-    totalSlots: number;
+    startSlot: number;
+    endSlot: number;
     bookings: Booking[];
 };
 
@@ -36,4 +37,3 @@ export type Event = {
 export type EventsData = {
     events: Event[];
 };
-
