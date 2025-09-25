@@ -2,7 +2,7 @@
 import { Footer } from '@/components/app/footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Newspaper, Shield, Image as ImageIcon, Users, FileText } from 'lucide-react';
+import { Newspaper, Shield, Image as ImageIcon, Users, FileText, Calendar } from 'lucide-react';
 import Link from 'next/link';
 
 export default function AdminPage() {
@@ -44,6 +44,20 @@ export default function AdminPage() {
                 <p className="text-muted-foreground mb-4">Create, edit, and delete news articles for the homepage.</p>
                 <Button asChild>
                   <Link href="/admin/news">Go to News</Link>
+                </Button>
+              </CardContent>
+            </Card>
+             <Card className="bg-card hover:shadow-primary/20 transition-shadow">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Calendar size={20} />
+                  <span>Manage Events</span>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground mb-4">Add, edit, and delete internal and partner events.</p>
+                <Button asChild>
+                  <Link href="/admin/events">Go to Events</Link>
                 </Button>
               </CardContent>
             </Card>
