@@ -175,7 +175,7 @@ export function CreateEventForm() {
         </Card>
 
         <div className="flex justify-end gap-4">
-            <Button variant="outline" asChild> <Link href="/admin/events">Cancel</Link> </Button>
+            <Button variant="outline" asChild><Link href="/admin/events">Cancel</Link></Button>
             <Button type="submit" disabled={isSubmitting}> {isSubmitting ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Adding...</> : "Add Event"} </Button>
         </div>
       </form>
