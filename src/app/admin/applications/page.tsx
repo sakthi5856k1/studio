@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import type { Application } from "@/lib/applications";
-import { CheckCircle, Clock, FileText, MoreHorizontal, XCircle, AlertCircle, ChevronDown, ChevronUp } from "lucide-react";
+import { CheckCircle, Clock, FileText, MoreHorizontal, XCircle, AlertCircle, ChevronDown, ChevronUp, PauseCircle } from "lucide-react";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
@@ -23,6 +23,14 @@ const statusInfo = {
     Rejected: { icon: <XCircle className="h-4 w-4 text-red-500" />, badge: <Badge variant="destructive">Rejected</Badge> },
     Interview: { icon: <AlertCircle className="h-4 w-4 text-blue-500" />, badge: <Badge className="bg-blue-500">Interview</Badge> },
 };
+
+const bookingStatusInfo = {
+    approved: { badge: <Badge className='bg-green-500'>Approved</Badge> },
+    pending: { badge: <Badge className='bg-yellow-500'>Pending</Badge> },
+    rejected: { badge: <Badge className='bg-red-500'>Rejected</Badge> },
+    hold: { badge: <Badge className='bg-orange-500'>On Hold</Badge> },
+};
+
 
 function ApplicationRow({ app }: { app: Application }) {
     const [isOpen, setIsOpen] = useState(false);
@@ -88,11 +96,11 @@ function BookingRow({ event, area, booking }: { event: Event; area: NonNullable<
         <TableCell>{booking.vtcName}</TableCell>
         <TableCell>{event.title}</TableCell>
         <TableCell>Slot #{booking.slotNumber} ({area.areaName})</TableCell>
-        <TableCell><Badge className={booking.status === 'approved' ? 'bg-green-500' : booking.status === 'rejected' ? 'bg-red-500' : 'bg-yellow-500'}>{booking.status}</Badge></TableCell>
+        <TableCell>{bookingStatusInfo[booking.status]?.badge || booking.status}</TableCell>
         <TableCell className="text-right">
              <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" className="h-8 w-8 p-0" disabled={booking.status !== 'pending'}>
+                    <Button variant="ghost" className="h-8 w-8 p-0" disabled={booking.status === 'approved' || booking.status === 'rejected'}>
                     <span className="sr-only">Open menu</span>
                     <MoreHorizontal className="h-4 w-4" />
                     </Button>
@@ -100,6 +108,7 @@ function BookingRow({ event, area, booking }: { event: Event; area: NonNullable<
                 <DropdownMenuContent align="end">
                     <UpdateBookingStatus eventId={event.id} areaId={area.id} bookingId={booking.id} newStatus="approved" />
                     <UpdateBookingStatus eventId={event.id} areaId={area.id} bookingId={booking.id} newStatus="rejected" />
+                    <UpdateBookingStatus eventId={event.id} areaId={area.id} bookingId={booking.id} newStatus="hold" />
                 </DropdownMenuContent>
             </DropdownMenu>
         </TableCell>

@@ -24,6 +24,12 @@
               "slotNumber": 11,
               "vtcName": "tp",
               "status": "approved"
+            },
+            {
+              "id": "booking-1758795170844",
+              "slotNumber": 12,
+              "vtcName": "bnngfbbfg",
+              "status": "approved"
             }
           ]
         },

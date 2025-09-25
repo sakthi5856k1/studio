@@ -16,7 +16,7 @@ import {
     Map,
     X,
 } from 'lucide-react';
-import type { Event, SlotArea } from '@/lib/events';
+import type { Event } from '@/lib/events';
 import type { ImagePlaceholder } from '@/lib/placeholder-images';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
@@ -42,7 +42,7 @@ export function EventDetailClient({ event }: { event: EventWithImage }) {
     
     const totalFreeSlots = event.slots?.reduce((total, area) => {
         const totalInArea = (area.endSlot - area.startSlot + 1);
-        const bookedInArea = area.bookings?.filter(b => b.status === 'approved').length || 0;
+        const bookedInArea = area.bookings?.filter(b => b.status === 'approved' || b.status === 'hold').length || 0;
         return total + (totalInArea - bookedInArea);
     }, 0) || 0;
 
@@ -170,11 +170,11 @@ export function EventDetailClient({ event }: { event: EventWithImage }) {
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                             {event.slots.map(area => {
                                 const totalSlots = area.endSlot - area.startSlot + 1;
-                                const approvedBookings = area.bookings?.filter(b => b.status === 'approved') || [];
-                                const availableSlotsCount = totalSlots - approvedBookings.length;
+                                const bookedOrHeldSlots = area.bookings?.filter(b => b.status === 'approved' || b.status === 'hold') || [];
+                                const availableSlotsCount = totalSlots - bookedOrHeldSlots.length;
                                 
                                 const allSlotNumbers = Array.from({ length: totalSlots }, (_, i) => area.startSlot + i);
-                                const bookedSlotNumbers = new Set(approvedBookings.map(b => b.slotNumber));
+                                const bookedSlotNumbers = new Set(bookedOrHeldSlots.map(b => b.slotNumber));
                                 const availableSlots = allSlotNumbers.filter(num => !bookedSlotNumbers.has(num));
 
                                 return (
@@ -213,7 +213,7 @@ export function EventDetailClient({ event }: { event: EventWithImage }) {
                                                     {area.bookings && area.bookings.length > 0 ? area.bookings.map(booking => (
                                                         <div key={booking.id}>
                                                             <p className="font-medium">#{booking.slotNumber}: {booking.vtcName}</p>
-                                                            <Badge variant="default" className={cn("text-xs mt-1", booking.status === 'approved' && 'bg-green-600', booking.status === 'pending' && 'bg-yellow-600', booking.status === 'rejected' && 'bg-red-600' )}>{booking.status}</Badge>
+                                                            <Badge variant="default" className={cn("text-xs mt-1", booking.status === 'approved' && 'bg-green-600', booking.status === 'pending' && 'bg-yellow-600', booking.status === 'rejected' && 'bg-red-600', booking.status === 'hold' && 'bg-orange-600' )}>{booking.status}</Badge>
                                                         </div>
                                                     )) : <p className="text-muted-foreground">No bookings yet.</p>}
                                                 </div>

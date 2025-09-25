@@ -5,7 +5,7 @@ import { useTransition, useState } from 'react';
 import { updateApplicationStatus as updateStatusAction, updateBookingStatus as updateBookingAction } from './server-actions';
 import type { ApplicationStatus } from '@/lib/applications';
 import { DropdownMenuItem, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuPortal, DropdownMenuRadioGroup, DropdownMenuRadioItem } from '@/components/ui/dropdown-menu';
-import { CheckCircle, XCircle, AlertCircle, Loader2 } from 'lucide-react';
+import { CheckCircle, XCircle, AlertCircle, Loader2, PauseCircle } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 const roleOptions = [
@@ -104,15 +104,31 @@ export function UpdateBookingStatus({
     eventId: string;
     areaId: string;
     bookingId: string;
-    newStatus: 'approved' | 'rejected';
+    newStatus: 'approved' | 'rejected' | 'hold';
 }) {
     const [isPending, startTransition] = useTransition();
     const { toast } = useToast();
     
-    const isApproval = newStatus === 'approved';
-    const icon = isApproval ? <CheckCircle className="mr-2 h-4 w-4 text-green-500" /> : <XCircle className="mr-2 h-4 w-4 text-red-500" />;
-    const label = isApproval ? 'Approve' : 'Reject';
-    const className = isApproval ? 'text-green-500' : 'text-red-500';
+    let icon, label, className;
+
+    switch (newStatus) {
+        case 'approved':
+            icon = <CheckCircle className="mr-2 h-4 w-4 text-green-500" />;
+            label = 'Approve';
+            className = 'text-green-500';
+            break;
+        case 'rejected':
+            icon = <XCircle className="mr-2 h-4 w-4 text-red-500" />;
+            label = 'Reject';
+            className = 'text-red-500';
+            break;
+        case 'hold':
+            icon = <PauseCircle className="mr-2 h-4 w-4 text-yellow-500" />;
+            label = 'Put on Hold';
+            className = 'text-yellow-500';
+            break;
+    }
+
 
     const handleUpdate = () => {
         startTransition(async () => {

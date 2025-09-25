@@ -12,7 +12,7 @@ const bookingSchema = z.object({
   id: z.string(),
   slotNumber: z.coerce.number(),
   vtcName: z.string(),
-  status: z.enum(['approved', 'pending', 'rejected']),
+  status: z.enum(['approved', 'pending', 'rejected', 'hold']),
 });
 
 const slotAreaSchema = z.object({

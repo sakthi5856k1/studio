@@ -1,9 +1,11 @@
 
+export type BookingStatus = 'approved' | 'pending' | 'rejected' | 'hold';
+
 export type Booking = {
     id: string;
     slotNumber: number;
     vtcName: string;
-    status: 'approved' | 'pending' | 'rejected';
+    status: BookingStatus;
 };
 
 export type SlotArea = {

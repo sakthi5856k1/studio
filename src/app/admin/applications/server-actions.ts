@@ -6,7 +6,7 @@ import fs from 'fs/promises';
 import path from 'path';
 import type { ApplicationStatus, ApplicationsData, Application } from '@/lib/applications';
 import type { StaffData, StaffMember } from '@/lib/staff-members';
-import type { EventsData, Event, Booking } from '@/lib/events';
+import type { EventsData, Event, Booking, BookingStatus } from '@/lib/events';
 
 const applicationsFilePath = path.join(process.cwd(), 'src', 'lib', 'applications.json');
 const staffFilePath = path.join(process.cwd(), 'src', 'lib', 'staff-members.json');
@@ -164,7 +164,7 @@ export async function getEventsWithBookings(): Promise<Event[]> {
     return data.events.filter(event => event.slots && event.slots.some(slot => slot.bookings && slot.bookings.length > 0));
 }
 
-async function sendBookingWebhookNotification(booking: Booking, event: Event, newStatus: 'approved' | 'rejected', areaId: string) {
+async function sendBookingWebhookNotification(booking: Booking, event: Event, newStatus: BookingStatus, areaId: string) {
     const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
     if (!webhookUrl) {
         console.error('DISCORD_WEBHOOK_URL is not set.');
@@ -175,22 +175,32 @@ async function sendBookingWebhookNotification(booking: Booking, event: Event, ne
     let color = 0;
     let description = '';
     let imageUrl = '';
+    
+    const area = event.slots?.find(a => a.id === areaId);
 
-    if (newStatus === 'approved') {
-        title = `Booking Approved: ${booking.vtcName}`;
-        color = 5763719; // Green
-        description = `The booking for **${booking.vtcName}** for slot **#${booking.slotNumber}** at event **${event.title}** has been approved.`;
-        
-        const area = event.slots?.find(a => a.id === areaId);
-        if (area) {
-            imageUrl = area.imageUrl;
-        }
-
-    } else {
-        title = `Booking Rejected: ${booking.vtcName}`;
-        color = 15548997; // Red
-        description = `The booking for **${booking.vtcName}** for slot **#${booking.slotNumber}** at event **${event.title}** has been rejected.`;
+    switch (newStatus) {
+        case 'approved':
+            title = `Booking Approved: ${booking.vtcName}`;
+            color = 5763719; // Green
+            description = `The booking for **${booking.vtcName}** for slot **#${booking.slotNumber}** at event **${event.title}** has been approved.`;
+             if (area) {
+                imageUrl = area.imageUrl;
+            }
+            break;
+        case 'rejected':
+             title = `Booking Rejected: ${booking.vtcName}`;
+            color = 15548997; // Red
+            description = `The booking for **${booking.vtcName}** for slot **#${booking.slotNumber}** at event **${event.title}** has been rejected.`;
+            break;
+        case 'hold':
+            title = `Booking On Hold: ${booking.vtcName}`;
+            color = 16753920; // Orange
+            description = `The booking for **${booking.vtcName}** for slot **#${booking.slotNumber}** at event **${event.title}** has been put on hold.`;
+            break;
+        default:
+            return;
     }
+
 
     const embed: any = {
         title: title,
@@ -220,7 +230,7 @@ export async function updateBookingStatus(
     eventId: string,
     areaId: string,
     bookingId: string,
-    newStatus: 'approved' | 'rejected'
+    newStatus: BookingStatus
 ): Promise<{ success: boolean; message: string }> {
     try {
         const eventsData = await readJsonFile<EventsData>(eventsFilePath);
