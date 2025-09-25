@@ -42,15 +42,22 @@ const formSchema = z.object({
   type: z.enum(['internal', 'partner'], {
     errorMap: () => ({ message: 'Please select an event type' }),
   }),
-  departure: z.string().min(1, 'Departure location is required'),
-  arrival: z.string().min(1, 'Arrival location is required'),
-  server: z.string().min(1, 'Server is required'),
+  departure: z.string().optional(),
+  arrival: z.string().optional(),
+  server: z.string().optional(),
   meetupTime: timeSchema,
   departureTime: timeSchema,
   description: z.string().min(1, 'Description is required'),
   rules: z.string().min(1, 'Rules are required'),
   slots: z.array(slotAreaSchema).optional(),
+}).superRefine((data, ctx) => {
+    if (data.type === 'internal') {
+        if (!data.departure) ctx.addIssue({ code: 'custom', message: 'Departure is required', path: ['departure'] });
+        if (!data.arrival) ctx.addIssue({ code: 'custom', message: 'Arrival is required', path: ['arrival'] });
+        if (!data.server) ctx.addIssue({ code: 'custom', message: 'Server is required', path: ['server'] });
+    }
 });
+
 
 type FormValues = z.infer<typeof formSchema>;
 
@@ -109,13 +116,21 @@ export async function createEvent(values: FormValues) {
     const newEvent: Event = {
       id: imageId,
       imageId: imageId,
-      ...restOfData,
+      title: restOfData.title,
+      url: restOfData.url,
+      type: restOfData.type,
+      description: restOfData.description,
+      rules: restOfData.rules,
       attendees: 0,
       vtcs: 0,
       date: formatDateTime(eventDate, meetupTime),
       meetupTime: formatDateTime(eventDate, meetupTime),
       departureTime: formatDateTime(eventDate, departureTime),
-      slots: validation.data.slots || [],
+      slots: restOfData.slots || [],
+      departure: restOfData.departure || '',
+      arrival: restOfData.arrival || '',
+      server: restOfData.server || '',
+      routeMapUrl: restOfData.routeMapUrl || '',
     };
     
     eventsData.events.unshift(newEvent);
