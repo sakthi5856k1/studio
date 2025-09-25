@@ -14,6 +14,8 @@ const bannerImage = PlaceHolderImages.find(p => p.id === 'events-banner');
 
 const EventCard = ({ event }: { event: Event }) => {
     const image = PlaceHolderImages.find(p => p.id === event.imageId);
+    const linkHref = event.type === 'partner' ? event.url : `/events/${event.id}`;
+    
     return (
         <Card className="bg-card border-border/50 shadow-lg hover:shadow-primary/20 transition-shadow duration-300 flex flex-col">
             {image && (
@@ -34,7 +36,7 @@ const EventCard = ({ event }: { event: Event }) => {
                     <span>{event.date}</span>
                 </div>
                 <Button asChild className="w-full">
-                    <Link href={`/events/${event.id}`}>
+                    <Link href={linkHref} target={event.type === 'partner' ? '_blank' : '_self'}>
                         {event.type === 'internal' ? 'Slot Booking' : 'View Event'}
                     </Link>
                 </Button>
@@ -91,4 +93,5 @@ export default function EventsPage() {
         </div>
     );
 }
+
 
