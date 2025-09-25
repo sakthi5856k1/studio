@@ -1,6 +1,40 @@
-
 {
   "events": [
+    {
+      "id": "event-1758794026763",
+      "imageId": "event-1758794026763",
+      "title": "test 1",
+      "url": "https://truckersmp.com/events/26299",
+      "type": "internal",
+      "departure": "Svalöv",
+      "arrival": "Oslo",
+      "server": "ProMods",
+      "description": "ggtyjjhrttr teertreevt",
+      "rules": "Follow all TruckersMP rules. No reckless driving. Keep a safe distance.",
+      "slots": [
+        {
+          "id": "slot-area-1758793910833",
+          "areaName": "Parking",
+          "imageUrl": "https://images-ext-1.discordapp.net/external/8DesROHeCmTE8zVf_WnuqYm5N3ZIqK91Vt9UZ53mmME/https/www.djo2.it/Public/Libreria/punti_partenza/04_Slot_Parching_12-13.png?format=webp&quality=lossless&width=1284&height=722",
+          "startSlot": 11,
+          "endSlot": 12,
+          "bookings": []
+        },
+        {
+          "id": "slot-area-1758793945818",
+          "areaName": "parking 2",
+          "imageUrl": "https://images-ext-1.discordapp.net/external/8DesROHeCmTE8zVf_WnuqYm5N3ZIqK91Vt9UZ53mmME/https/www.djo2.it/Public/Libreria/punti_partenza/04_Slot_Parching_12-13.png?format=webp&quality=lossless&width=1284&height=722",
+          "startSlot": 13,
+          "endSlot": 14,
+          "bookings": []
+        }
+      ],
+      "attendees": 0,
+      "vtcs": 0,
+      "date": "24.09.2025 | 13:00 IST",
+      "meetupTime": "24.09.2025 | 13:00 IST",
+      "departureTime": "24.09.2025 | 13:30 IST"
+    },
     {
       "id": "event-1758792559379",
       "title": "test",
@@ -16,60 +50,6 @@
       "meetupTime": "12:30 UTC",
       "departureTime": "13:00 UTC",
       "description": "jhgjgj",
-      "rules": "Follow all TruckersMP rules. No reckless driving. Keep a safe distance.",
-      "routeMapUrl": ""
-    },
-    {
-      "id": "event-1",
-      "title": "Tamil Pasanga October Convoy #61",
-      "date": "04.10.2025 | 13:00 UTC",
-      "imageId": "event-october",
-      "url": "https://truckersmp.com/events/23013-tamil-pasanga-vtc-october-private-convoy",
-      "type": "internal",
-      "attendees": 0,
-      "vtcs": 0,
-      "departure": "Bremen",
-      "arrival": "Prague",
-      "server": "Event Server",
-      "meetupTime": "10-Oct-2025 20:30",
-      "departureTime": "10-Oct-2025 21:30",
-      "description": "Join us for our monthly convoy! A fun and relaxing drive with the community.",
-      "rules": "Follow all TruckersMP rules. No reckless driving. Keep a safe distance.",
-      "routeMapUrl": ""
-    },
-    {
-      "id": "event-2",
-      "title": "Tamil Pasanga November Convoy #64",
-      "date": "22.11.2025 | 13:00 UTC",
-      "imageId": "event-november",
-      "url": "https://truckersmp.com/events/23013-tamil-pasanga-vtc-october-private-convoy",
-      "type": "internal",
-      "attendees": 0,
-      "vtcs": 0,
-      "departure": "Paris",
-      "arrival": "Berlin",
-      "server": "Event Server",
-      "meetupTime": "22-Nov-2025 12:30",
-      "departureTime": "22-Nov-2025 13:00",
-      "description": "Our November convoy is here! Let's hit the road together.",
-      "rules": "Follow all TruckersMP rules. No reckless driving. Keep a safe distance.",
-      "routeMapUrl": ""
-    },
-    {
-      "id": "event-3",
-      "title": "Tamil Pasanga December Convoy #66",
-      "date": "06.12.2025 | 13:00 UTC",
-      "imageId": "event-december",
-      "url": "https://truckersmp.com/events/23013-tamil-pasanga-vtc-october-private-convoy",
-      "type": "internal",
-      "attendees": 0,
-      "vtcs": 0,
-      "departure": "Amsterdam",
-      "arrival": "Gdańsk",
-      "server": "Event Server",
-      "meetupTime": "06-Dec-2025 12:30",
-      "departureTime": "06-Dec-2025 13:00",
-      "description": "A festive drive to celebrate the holiday season!",
       "rules": "Follow all TruckersMP rules. No reckless driving. Keep a safe distance.",
       "routeMapUrl": ""
     },

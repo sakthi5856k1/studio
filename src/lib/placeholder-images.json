@@ -1,6 +1,12 @@
 {
   "placeholderImages": [
     {
+      "id": "event-1758794026763",
+      "description": "Image for test 1",
+      "imageUrl": "https://media.discordapp.net/attachments/1281551151418048677/1418938708576571412/ets2_20250919_190640_00.PNG?ex=68d5dfe6&is=68d48e66&hm=b030d6e0948f890decddf0f8bede93ab878f2acf1dffa32fa472c810acb40b07&=&format=webp&quality=lossless&width=1283&height=722",
+      "imageHint": "custom event"
+    },
+    {
       "id": "newsletter-1758671620485",
       "description": "Image for Test",
       "imageUrl": "https://cdn.discordapp.com/attachments/1281551151418048677/1418938706231955456/ets2_20250919_180622_00.PNG?ex=68d3e5a6&is=68d29426&hm=63fec816b7c08dc69bd79c7b85b97f97ac0c8a55e441a9ddedfe224480ba57bb&",
