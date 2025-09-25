@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useForm, useFieldArray } from "react-hook-form";
+import { useForm, useFieldArray, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
@@ -18,7 +18,7 @@ import { updateEvent, type EventWithImageUrl } from "./actions";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { CalendarIcon, Loader2, PlusCircle, Trash2 } from "lucide-react";
+import { CalendarIcon, Eye, Loader2, PlusCircle, Trash2 } from "lucide-react";
 import Link from "next/link";
 import {
   Select,
@@ -128,6 +128,11 @@ export function EditEventForm({ event }: { event: EventWithImageUrl }) {
       slots: event.slots?.map(s => ({...s, bookings: s.bookings || []})) || [],
     },
   });
+  
+  const imageUrlValue = useWatch({
+    control: form.control,
+    name: "imageUrl",
+  });
 
   const { fields, append, remove } = useFieldArray({
     control: form.control,
@@ -201,7 +206,7 @@ export function EditEventForm({ event }: { event: EventWithImageUrl }) {
             />
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <FormField control={form.control} name="imageUrl" render={({ field }) => ( <FormItem> <FormLabel>Event Image URL</FormLabel> <FormControl><Input placeholder="https://example.com/image.png" {...field} /></FormControl> <FormMessage /> </FormItem> )}/>
+            <FormField control={form.control} name="imageUrl" render={({ field }) => ( <FormItem> <div className="flex justify-between items-center"> <FormLabel>Event Image URL</FormLabel> {imageUrlValue && ( <Link href={imageUrlValue} target="_blank" className="text-sm text-primary hover:underline flex items-center gap-1"><Eye size={16}/>View</Link> )} </div> <FormControl><Input placeholder="https://example.com/image.png" {...field} /></FormControl> <FormMessage /> </FormItem> )}/>
             <FormField control={form.control} name="url" render={({ field }) => ( <FormItem> <FormLabel>Event URL</FormLabel> <FormControl><Input placeholder="https://truckersmp.com/..." {...field} /></FormControl> <FormMessage /> </FormItem> )}/>
         </div>
          <FormField control={form.control} name="routeMapUrl" render={({ field }) => ( <FormItem> <FormLabel>Route Map URL (Optional)</FormLabel> <FormControl><Input placeholder="https://example.com/route.png" {...field} /></FormControl> <FormMessage /> </FormItem> )}/>
@@ -277,3 +282,5 @@ export function EditEventForm({ event }: { event: EventWithImageUrl }) {
     </Form>
   );
 }
+
+    

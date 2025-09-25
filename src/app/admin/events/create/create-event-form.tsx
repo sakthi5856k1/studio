@@ -18,7 +18,7 @@ import { createEvent } from "./actions";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { CalendarIcon, Loader2, PlusCircle, Trash2 } from "lucide-react";
+import { CalendarIcon, Eye, Loader2, PlusCircle, Trash2 } from "lucide-react";
 import Link from "next/link";
 import {
   Select,
@@ -122,6 +122,11 @@ export function CreateEventForm() {
     control: form.control,
     name: "type",
   });
+  
+  const imageUrlValue = useWatch({
+    control: form.control,
+    name: "imageUrl",
+  });
 
   async function onSubmit(values: FormValues) {
     setIsSubmitting(true);
@@ -192,7 +197,7 @@ export function CreateEventForm() {
             />
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <FormField control={form.control} name="imageUrl" render={({ field }) => ( <FormItem> <FormLabel>Event Image URL</FormLabel> <FormControl><Input placeholder="https://example.com/image.png" {...field} /></FormControl> <FormMessage /> </FormItem> )}/>
+            <FormField control={form.control} name="imageUrl" render={({ field }) => ( <FormItem> <div className="flex justify-between items-center"> <FormLabel>Event Image URL</FormLabel> {imageUrlValue && ( <Link href={imageUrlValue} target="_blank" className="text-sm text-primary hover:underline flex items-center gap-1"><Eye size={16}/>View</Link> )} </div> <FormControl><Input placeholder="https://example.com/image.png" {...field} /></FormControl> <FormMessage /> </FormItem> )}/>
             <FormField control={form.control} name="url" render={({ field }) => ( <FormItem> <FormLabel>Event URL</FormLabel> <FormControl><Input placeholder="https://truckersmp.com/..." {...field} /></FormControl> <FormMessage /> </FormItem> )}/>
         </div>
         
@@ -279,3 +284,5 @@ export function CreateEventForm() {
     </Form>
   );
 }
+
+    
