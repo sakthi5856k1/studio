@@ -164,7 +164,7 @@ export async function getEventsWithBookings(): Promise<Event[]> {
     return data.events.filter(event => event.slots && event.slots.some(slot => slot.bookings && slot.bookings.length > 0));
 }
 
-async function sendBookingWebhookNotification(booking: Booking, event: Event, newStatus: 'approved' | 'rejected') {
+async function sendBookingWebhookNotification(booking: Booking, event: Event, newStatus: 'approved' | 'rejected', areaId: string) {
     const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
     if (!webhookUrl) {
         console.error('DISCORD_WEBHOOK_URL is not set.');
@@ -174,24 +174,35 @@ async function sendBookingWebhookNotification(booking: Booking, event: Event, ne
     let title = '';
     let color = 0;
     let description = '';
+    let imageUrl = '';
 
     if (newStatus === 'approved') {
         title = `Booking Approved: ${booking.vtcName}`;
         color = 5763719; // Green
         description = `The booking for **${booking.vtcName}** for slot **#${booking.slotNumber}** at event **${event.title}** has been approved.`;
+        
+        const area = event.slots?.find(a => a.id === areaId);
+        if (area) {
+            imageUrl = area.imageUrl;
+        }
+
     } else {
         title = `Booking Rejected: ${booking.vtcName}`;
         color = 15548997; // Red
         description = `The booking for **${booking.vtcName}** for slot **#${booking.slotNumber}** at event **${event.title}** has been rejected.`;
     }
 
-    const embed = {
+    const embed: any = {
         title: title,
         description: description,
         color: color,
         timestamp: new Date().toISOString(),
         footer: { text: 'Tamil Pasanga VTC | Slot Booking Update' },
     };
+
+    if (newStatus === 'approved' && imageUrl) {
+        embed.image = { url: imageUrl };
+    }
 
     try {
         await fetch(webhookUrl, {
@@ -226,7 +237,7 @@ export async function updateBookingStatus(
         
         await writeJsonFile(eventsFilePath, eventsData);
         
-        await sendBookingWebhookNotification(booking, event, newStatus);
+        await sendBookingWebhookNotification(booking, event, newStatus, areaId);
         
         revalidatePath('/admin/applications');
         revalidatePath(`/events/${eventId}`);
