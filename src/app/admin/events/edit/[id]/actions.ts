@@ -15,6 +15,15 @@ const formSchema = z.object({
   imageId: z.string().min(1, 'Image ID is required'),
   url: z.string().url('Must be a valid URL'),
   type: z.enum(['internal', 'partner']),
+  attendees: z.coerce.number().min(0, 'Attendees must be a positive number'),
+  vtcs: z.coerce.number().min(0, 'VTCs must be a positive number'),
+  departure: z.string().min(1, 'Departure location is required'),
+  arrival: z.string().min(1, 'Arrival location is required'),
+  server: z.string().min(1, 'Server is required'),
+  meetupTime: z.string().min(1, 'Meetup time is required'),
+  departureTime: z.string().min(1, 'Departure time is required'),
+  description: z.string().min(1, 'Description is required'),
+  rules: z.string().min(1, 'Rules are required'),
 });
 
 type FormValues = z.infer<typeof formSchema>;

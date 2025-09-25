@@ -15,6 +15,15 @@ const formSchema = z.object({
   type: z.enum(['internal', 'partner'], {
     errorMap: () => ({ message: 'Please select an event type' }),
   }),
+  attendees: z.coerce.number().min(0, 'Attendees must be a positive number'),
+  vtcs: z.coerce.number().min(0, 'VTCs must be a positive number'),
+  departure: z.string().min(1, 'Departure location is required'),
+  arrival: z.string().min(1, 'Arrival location is required'),
+  server: z.string().min(1, 'Server is required'),
+  meetupTime: z.string().min(1, 'Meetup time is required'),
+  departureTime: z.string().min(1, 'Departure time is required'),
+  description: z.string().min(1, 'Description is required'),
+  rules: z.string().min(1, 'Rules are required'),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -40,6 +49,7 @@ async function writeJsonFile(filePath: string, data: any): Promise<void> {
 export async function createEvent(values: FormValues) {
   const validation = formSchema.safeParse(values);
   if (!validation.success) {
+    console.error(validation.error.flatten().fieldErrors);
     return { success: false, message: 'Invalid data provided.' };
   }
 
