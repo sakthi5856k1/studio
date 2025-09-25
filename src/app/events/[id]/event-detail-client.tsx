@@ -75,40 +75,44 @@ export function EventDetailClient({ event }: { event: EventWithImage }) {
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     {/* Left Column */}
                     <div className="lg:col-span-2 space-y-8">
-                         <Card>
-                            <CardHeader>
-                                <CardTitle className="flex items-center gap-2"><Calendar size={20}/> Event Schedule</CardTitle>
-                            </CardHeader>
-                            <CardContent className="grid grid-cols-2 gap-4">
-                                <div>
-                                    <p className="font-semibold">Meetup Time</p>
-                                    <p className="text-muted-foreground">{event.meetupTime}</p>
-                                </div>
-                                <div>
-                                    <p className="font-semibold">Departure Time</p>
-                                    <p className="text-muted-foreground">{event.departureTime}</p>
-                                </div>
-                            </CardContent>
+                         <Card className="animated-border bg-transparent p-[2px]">
+                            <div className="bg-card rounded-lg h-full">
+                                <CardHeader>
+                                    <CardTitle className="flex items-center gap-2"><Calendar size={20}/> Event Schedule</CardTitle>
+                                </CardHeader>
+                                <CardContent className="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <p className="font-semibold">Meetup Time</p>
+                                        <p className="text-muted-foreground">{event.meetupTime}</p>
+                                    </div>
+                                    <div>
+                                        <p className="font-semibold">Departure Time</p>
+                                        <p className="text-muted-foreground">{event.departureTime}</p>
+                                    </div>
+                                </CardContent>
+                            </div>
                         </Card>
 
-                        <Card>
-                            <CardHeader>
-                                <CardTitle className="flex items-center gap-2"><MapPin size={20}/> Route Details</CardTitle>
-                            </CardHeader>
-                            <CardContent className="grid grid-cols-2 gap-4">
-                                <div>
-                                    <p className="font-semibold">Departure</p>
-                                    <p className="text-muted-foreground">{event.departure}</p>
-                                </div>
-                                <div>
-                                    <p className="font-semibold">Arrival</p>
-                                    <p className="text-muted-foreground">{event.arrival}</p>
-                                </div>
-                                 <div className="col-span-2">
-                                    <p className="font-semibold">Server</p>
-                                    <p className="text-muted-foreground">{event.server}</p>
-                                </div>
-                            </CardContent>
+                        <Card className="animated-border bg-transparent p-[2px]">
+                            <div className="bg-card rounded-lg h-full">
+                                <CardHeader>
+                                    <CardTitle className="flex items-center gap-2"><MapPin size={20}/> Route Details</CardTitle>
+                                </CardHeader>
+                                <CardContent className="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <p className="font-semibold">Departure</p>
+                                        <p className="text-muted-foreground">{event.departure}</p>
+                                    </div>
+                                    <div>
+                                        <p className="font-semibold">Arrival</p>
+                                        <p className="text-muted-foreground">{event.arrival}</p>
+                                    </div>
+                                     <div className="col-span-2">
+                                        <p className="font-semibold">Server</p>
+                                        <p className="text-muted-foreground">{event.server}</p>
+                                    </div>
+                                </CardContent>
+                            </div>
                         </Card>
                         
                         <Accordion type="single" collapsible className="w-full">
