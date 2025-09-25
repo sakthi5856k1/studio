@@ -128,7 +128,7 @@
 
   .animated-border::after {
     content: '';
-    @apply absolute z-[-1] rounded-full;
+    @apply absolute z-[-1] rounded-lg;
     left: 2px;
     top: 2px;
     width: calc(100% - 4px);

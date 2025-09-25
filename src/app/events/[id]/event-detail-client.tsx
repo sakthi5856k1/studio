@@ -178,57 +178,59 @@ export function EventDetailClient({ event }: { event: EventWithImage }) {
                                 const availableSlots = allSlotNumbers.filter(num => !bookedSlotNumbers.has(num));
 
                                 return (
-                                    <Card key={area.id} className="bg-card/80 border-border/50 shadow-lg flex flex-col">
-                                        <CardHeader className="p-0">
-                                            <div className="relative aspect-video cursor-pointer" onClick={() => setLightboxImage(area.imageUrl)}>
-                                                <Image
-                                                    src={area.imageUrl}
-                                                    alt={area.areaName}
-                                                    fill
-                                                    className="object-cover rounded-t-lg"
-                                                />
-                                            </div>
-                                        </CardHeader>
-                                        <CardContent className="p-4 flex-grow flex flex-col">
-                                            <p className="text-center text-sm text-primary mb-2">Click on the image to view</p>
-                                            <div className="flex justify-center gap-2 mb-4">
-                                                <Badge variant={availableSlotsCount > 0 ? 'default' : 'destructive'} className={cn(availableSlotsCount > 0 && 'bg-green-500')}>
-                                                    {availableSlotsCount} slots available
-                                                </Badge>
-                                                <Badge variant="secondary">{totalSlots} total slots</Badge>
-                                            </div>
-
-                                            <div className="mb-4">
-                                                <p className="font-semibold mb-2">Slot Numbers:</p>
-                                                <div className="flex flex-wrap gap-2">
-                                                    {allSlotNumbers.map(num => (
-                                                        <Badge key={num} variant="outline" className={cn("border-primary text-primary", bookedSlotNumbers.has(num) && "border-destructive text-destructive line-through")}>#{num}</Badge>
-                                                    ))}
+                                    <Card key={area.id} className="animated-border bg-transparent p-[2px] shadow-lg flex flex-col">
+                                        <div className="bg-card rounded-lg h-full flex flex-col">
+                                            <CardHeader className="p-0">
+                                                <div className="relative aspect-video cursor-pointer" onClick={() => setLightboxImage(area.imageUrl)}>
+                                                    <Image
+                                                        src={area.imageUrl}
+                                                        alt={area.areaName}
+                                                        fill
+                                                        className="object-cover rounded-t-lg"
+                                                    />
                                                 </div>
-                                            </div>
-                                            
-                                            <div className="flex-grow mb-4">
-                                                <p className="font-semibold mb-2">Bookings:</p>
-                                                <div className="space-y-2 text-sm">
-                                                    {area.bookings && area.bookings.length > 0 ? area.bookings.map(booking => (
-                                                        <div key={booking.id}>
-                                                            <p className="font-medium">#{booking.slotNumber}: {booking.vtcName}</p>
-                                                            <Badge variant="default" className={cn("text-xs mt-1", booking.status === 'approved' && 'bg-green-600', booking.status === 'pending' && 'bg-yellow-600', booking.status === 'rejected' && 'bg-red-600', booking.status === 'hold' && 'bg-orange-600' )}>{booking.status}</Badge>
-                                                        </div>
-                                                    )) : <p className="text-muted-foreground">No bookings yet.</p>}
+                                            </CardHeader>
+                                            <CardContent className="p-4 flex-grow flex flex-col">
+                                                <p className="text-center text-sm text-primary mb-2">Click on the image to view</p>
+                                                <div className="flex justify-center gap-2 mb-4">
+                                                    <Badge variant={availableSlotsCount > 0 ? 'default' : 'destructive'} className={cn(availableSlotsCount > 0 && 'bg-green-500')}>
+                                                        {availableSlotsCount} slots available
+                                                    </Badge>
+                                                    <Badge variant="secondary">{totalSlots} total slots</Badge>
                                                 </div>
-                                            </div>
 
-                                            <EventBookingDialog 
-                                                eventId={event.id} 
-                                                area={area} 
-                                                availableSlots={availableSlots}
-                                            >
-                                                <Button className="w-full mt-auto" disabled={availableSlotsCount === 0}>
-                                                    {availableSlotsCount > 0 ? 'Request Slot' : 'No Slots Available'}
-                                                </Button>
-                                            </EventBookingDialog>
-                                        </CardContent>
+                                                <div className="mb-4">
+                                                    <p className="font-semibold mb-2">Slot Numbers:</p>
+                                                    <div className="flex flex-wrap gap-2">
+                                                        {allSlotNumbers.map(num => (
+                                                            <Badge key={num} variant="outline" className={cn("border-primary text-primary", bookedSlotNumbers.has(num) && "border-destructive text-destructive line-through")}>#{num}</Badge>
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                                
+                                                <div className="flex-grow mb-4">
+                                                    <p className="font-semibold mb-2">Bookings:</p>
+                                                    <div className="space-y-2 text-sm">
+                                                        {area.bookings && area.bookings.length > 0 ? area.bookings.map(booking => (
+                                                            <div key={booking.id}>
+                                                                <p className="font-medium">#{booking.slotNumber}: {booking.vtcName}</p>
+                                                                <Badge variant="default" className={cn("text-xs mt-1", booking.status === 'approved' && 'bg-green-600', booking.status === 'pending' && 'bg-yellow-600', booking.status === 'rejected' && 'bg-red-600', booking.status === 'hold' && 'bg-orange-600' )}>{booking.status}</Badge>
+                                                            </div>
+                                                        )) : <p className="text-muted-foreground">No bookings yet.</p>}
+                                                    </div>
+                                                </div>
+
+                                                <EventBookingDialog 
+                                                    eventId={event.id} 
+                                                    area={area} 
+                                                    availableSlots={availableSlots}
+                                                >
+                                                    <Button className="w-full mt-auto" disabled={availableSlotsCount === 0}>
+                                                        {availableSlotsCount > 0 ? 'Request Slot' : 'No Slots Available'}
+                                                    </Button>
+                                                </EventBookingDialog>
+                                            </CardContent>
+                                        </div>
                                     </Card>
                                 );
                             })}
