@@ -3,7 +3,6 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
@@ -17,10 +16,13 @@ import {
     Map,
     X,
 } from 'lucide-react';
-import type { Event } from '@/lib/events';
+import type { Event, SlotArea } from '@/lib/events';
 import type { ImagePlaceholder } from '@/lib/placeholder-images';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
+import { EventBookingDialog } from '@/components/app/event-booking-dialog';
+import { Button } from '@/components/ui/button';
+
 
 type EventWithImage = Event & { image: ImagePlaceholder | undefined };
 
@@ -168,9 +170,12 @@ export function EventDetailClient({ event }: { event: EventWithImage }) {
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                             {event.slots.map(area => {
                                 const totalSlots = area.endSlot - area.startSlot + 1;
-                                const bookedSlots = area.bookings?.filter(b => b.status === 'approved').length || 0;
-                                const availableSlots = totalSlots - bookedSlots;
+                                const approvedBookings = area.bookings?.filter(b => b.status === 'approved') || [];
+                                const availableSlotsCount = totalSlots - approvedBookings.length;
+                                
                                 const allSlotNumbers = Array.from({ length: totalSlots }, (_, i) => area.startSlot + i);
+                                const bookedSlotNumbers = new Set(approvedBookings.map(b => b.slotNumber));
+                                const availableSlots = allSlotNumbers.filter(num => !bookedSlotNumbers.has(num));
 
                                 return (
                                     <Card key={area.id} className="bg-card/80 border-border/50 shadow-lg flex flex-col">
@@ -187,8 +192,8 @@ export function EventDetailClient({ event }: { event: EventWithImage }) {
                                         <CardContent className="p-4 flex-grow flex flex-col">
                                             <p className="text-center text-sm text-primary mb-2">Click on the image to view</p>
                                             <div className="flex justify-center gap-2 mb-4">
-                                                <Badge variant={availableSlots > 0 ? 'default' : 'destructive'} className={cn(availableSlots > 0 && 'bg-green-500')}>
-                                                    {availableSlots} slots available
+                                                <Badge variant={availableSlotsCount > 0 ? 'default' : 'destructive'} className={cn(availableSlotsCount > 0 && 'bg-green-500')}>
+                                                    {availableSlotsCount} slots available
                                                 </Badge>
                                                 <Badge variant="secondary">{totalSlots} total slots</Badge>
                                             </div>
@@ -197,7 +202,7 @@ export function EventDetailClient({ event }: { event: EventWithImage }) {
                                                 <p className="font-semibold mb-2">Slot Numbers:</p>
                                                 <div className="flex flex-wrap gap-2">
                                                     {allSlotNumbers.map(num => (
-                                                        <Badge key={num} variant="outline" className="border-primary text-primary">#{num}</Badge>
+                                                        <Badge key={num} variant="outline" className={cn("border-primary text-primary", bookedSlotNumbers.has(num) && "border-destructive text-destructive line-through")}>#{num}</Badge>
                                                     ))}
                                                 </div>
                                             </div>
@@ -208,15 +213,21 @@ export function EventDetailClient({ event }: { event: EventWithImage }) {
                                                     {area.bookings && area.bookings.length > 0 ? area.bookings.map(booking => (
                                                         <div key={booking.id}>
                                                             <p className="font-medium">#{booking.slotNumber}: {booking.vtcName}</p>
-                                                            <Badge variant="default" className="bg-green-600 text-xs mt-1">{booking.status}</Badge>
+                                                            <Badge variant="default" className={cn("text-xs mt-1", booking.status === 'approved' && 'bg-green-600', booking.status === 'pending' && 'bg-yellow-600', booking.status === 'rejected' && 'bg-red-600' )}>{booking.status}</Badge>
                                                         </div>
                                                     )) : <p className="text-muted-foreground">No bookings yet.</p>}
                                                 </div>
                                             </div>
 
-                                            <Button className="w-full mt-auto" disabled={availableSlots === 0}>
-                                                {availableSlots > 0 ? 'Request Slot' : 'No Slots Available'}
-                                            </Button>
+                                            <EventBookingDialog 
+                                                eventId={event.id} 
+                                                area={area} 
+                                                availableSlots={availableSlots}
+                                            >
+                                                <Button className="w-full mt-auto" disabled={availableSlotsCount === 0}>
+                                                    {availableSlotsCount > 0 ? 'Request Slot' : 'No Slots Available'}
+                                                </Button>
+                                            </EventBookingDialog>
                                         </CardContent>
                                     </Card>
                                 );
