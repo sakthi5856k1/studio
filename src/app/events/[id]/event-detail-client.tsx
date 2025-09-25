@@ -63,9 +63,9 @@ export function EventDetailClient({ event }: { event: EventWithImage }) {
                 <div className="absolute bottom-0 left-0 container mx-auto px-4 py-8">
                     <h1 className="text-5xl font-headline font-bold mb-4">{event.title}</h1>
                     <div className="flex items-center gap-4 text-lg">
-                        <span className="flex items-center gap-2 bg-red-500/80 text-white px-4 py-2 rounded-full text-base font-bold"> <Clock size={16}/> UPCOMING</span>
-                        <span className="flex items-center gap-2 bg-green-500/80 text-white px-4 py-2 rounded-full text-base font-bold"><Users size={16}/> {confirmedAttendees} attending</span>
-                        <span className="flex items-center gap-1 text-xl"><MapPin size={20}/> {event.departure} <ChevronRight size={20} /> {event.arrival}</span>
+                        <span className="flex items-center gap-2 bg-red-500/80 text-white px-4 py-2 rounded-full text-xl font-bold"> <Clock size={20}/> UPCOMING</span>
+                        <span className="flex items-center gap-2 bg-green-500/80 text-white px-4 py-2 rounded-full text-xl font-bold"><Users size={20}/> {confirmedAttendees} attending</span>
+                        <span className="flex items-center gap-1 text-2xl"><MapPin size={24}/> {event.departure} <ChevronRight size={24} /> {event.arrival}</span>
                     </div>
                 </div>
             </div>
@@ -193,28 +193,28 @@ export function EventDetailClient({ event }: { event: EventWithImage }) {
                                             <CardContent className="p-4 flex-grow flex flex-col">
                                                 <p className="text-center text-sm text-primary mb-2">Click on the image to view</p>
                                                 <div className="flex justify-center gap-2 mb-4">
-                                                    <Badge variant={availableSlotsCount > 0 ? 'default' : 'destructive'} className={cn('text-base', availableSlotsCount > 0 && 'bg-green-500')}>
+                                                    <Badge variant={availableSlotsCount > 0 ? 'default' : 'destructive'} className={cn('text-lg', availableSlotsCount > 0 && 'bg-green-500')}>
                                                         {availableSlotsCount} slots available
                                                     </Badge>
-                                                    <Badge variant="secondary" className="text-base">{totalSlots} total slots</Badge>
+                                                    <Badge variant="secondary" className="text-lg">{totalSlots} total slots</Badge>
                                                 </div>
 
                                                 <div className="mb-4">
                                                     <p className="font-semibold mb-2 text-lg">Slot Numbers:</p>
                                                     <div className="flex flex-wrap gap-2">
                                                         {allSlotNumbers.map(num => (
-                                                            <Badge key={num} variant="outline" className={cn("text-base border-primary text-primary", bookedSlotNumbers.has(num) && "border-destructive text-destructive line-through")}>#{num}</Badge>
+                                                            <Badge key={num} variant="outline" className={cn("text-lg border-primary text-primary", bookedSlotNumbers.has(num) && "border-destructive text-destructive line-through")}>Slot {num}</Badge>
                                                         ))}
                                                     </div>
                                                 </div>
                                                 
                                                 <div className="flex-grow mb-4">
                                                     <p className="font-semibold mb-2 text-lg">Bookings:</p>
-                                                    <div className="space-y-2 text-base">
+                                                    <div className="space-y-2 text-lg">
                                                         {area.bookings && area.bookings.length > 0 ? area.bookings.map(booking => (
                                                             <div key={booking.id}>
-                                                                <p className="font-medium text-lg">#{booking.slotNumber}: {booking.vtcName}</p>
-                                                                <Badge variant="default" className={cn("text-base mt-1", booking.status === 'approved' && 'bg-green-600', booking.status === 'pending' && 'bg-yellow-600', booking.status === 'rejected' && 'bg-red-600', booking.status === 'hold' && 'bg-orange-600' )}>{booking.status}</Badge>
+                                                                <p className="font-medium text-xl">Slot {booking.slotNumber}: {booking.vtcName}</p>
+                                                                <Badge variant="default" className={cn("text-lg mt-1", booking.status === 'approved' && 'bg-green-600', booking.status === 'pending' && 'bg-yellow-600', booking.status === 'rejected' && 'bg-red-600', booking.status === 'hold' && 'bg-orange-600' )}>{booking.status}</Badge>
                                                             </div>
                                                         )) : <p className="text-muted-foreground">No bookings yet.</p>}
                                                     </div>
