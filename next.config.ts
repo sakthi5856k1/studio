@@ -45,6 +45,12 @@ const nextConfig: NextConfig = {
         hostname: 'skit.ng',
         port: '',
         pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images-ext-1.discordapp.net',
+        port: '',
+        pathname: '/**',
       }
     ],
   },
