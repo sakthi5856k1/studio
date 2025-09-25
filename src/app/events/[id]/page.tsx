@@ -65,7 +65,6 @@ export default function EventDetailPage({ params }: { params: { id: string } }) 
                             <span className="flex items-center gap-1"><MapPin size={14}/> {event.departure} <ChevronRight size={14} /> {event.arrival}</span>
                             <span className="flex items-center gap-1"><Truck size={14}/> {event.server}</span>
                         </div>
-                        <Button className="mt-4">Book Slot</Button>
                     </div>
                 </div>
 
@@ -129,9 +128,7 @@ export default function EventDetailPage({ params }: { params: { id: string } }) 
                                     <CardTitle>Quick Actions</CardTitle>
                                 </CardHeader>
                                 <CardContent className="space-y-2">
-                                    <Button asChild className="w-full" variant="outline"><Link href="/api/redirect/voice-chat" target="_blank"><Mic/> Join Voice Chat</Link></Button>
                                     <Button asChild className="w-full" variant="outline"><Link href={event.url} target="_blank"><Globe/> Visit Event Website</Link></Button>
-                                    <Button asChild className="w-full" variant="secondary"><Link href={event.url} target="_blank"><BadgeCheck/> Click here to book slots</Link></Button>
                                     <Button asChild className="w-full" variant="outline"><Link href="#" target="_blank"><Map/> View Route Map</Link></Button>
                                 </CardContent>
                             </Card>
