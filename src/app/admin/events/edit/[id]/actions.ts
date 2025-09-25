@@ -41,8 +41,6 @@ const formSchema = z.object({
   imageUrl: z.string().url('Must be a valid URL'),
   url: z.string().url('Must be a valid URL'),
   type: z.enum(['internal', 'partner']),
-  attendees: z.coerce.number().min(0, 'Attendees must be a positive number'),
-  vtcs: z.coerce.number().min(0, 'VTCs must be a positive number'),
   departure: z.string().min(1, 'Departure location is required'),
   arrival: z.string().min(1, 'Arrival location is required'),
   server: z.string().min(1, 'Server is required'),

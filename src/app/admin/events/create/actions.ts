@@ -41,8 +41,6 @@ const formSchema = z.object({
   type: z.enum(['internal', 'partner'], {
     errorMap: () => ({ message: 'Please select an event type' }),
   }),
-  attendees: z.coerce.number().min(0, 'Attendees must be a positive number'),
-  vtcs: z.coerce.number().min(0, 'VTCs must be a positive number'),
   departure: z.string().min(1, 'Departure location is required'),
   arrival: z.string().min(1, 'Arrival location is required'),
   server: z.string().min(1, 'Server is required'),
@@ -111,6 +109,8 @@ export async function createEvent(values: FormValues) {
       id: imageId,
       imageId: imageId,
       ...restOfData,
+      attendees: 0,
+      vtcs: 0,
       date: formatDateTime(eventDate, meetupTime),
       meetupTime: formatDateTime(eventDate, meetupTime),
       departureTime: formatDateTime(eventDate, departureTime),

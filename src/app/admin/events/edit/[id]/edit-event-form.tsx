@@ -65,8 +65,6 @@ const formSchema = z.object({
   imageUrl: z.string().url('Must be a valid URL'),
   url: z.string().url('Must be a valid URL'),
   type: z.enum(['internal', 'partner']),
-  attendees: z.coerce.number().min(0),
-  vtcs: z.coerce.number().min(0),
   departure: z.string().min(1, 'Departure location is required'),
   arrival: z.string().min(1, 'Arrival location is required'),
   server: z.string().min(1, 'Server is required'),
@@ -237,10 +235,6 @@ export function EditEventForm({ event }: { event: EventWithImageUrl }) {
                     {form.formState.errors.departureTime?.hour?.message || form.formState.errors.departureTime?.minute?.message || form.formState.errors.departureTime?.timezone?.message}
                 </FormMessage>
             </FormItem>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <FormField control={form.control} name="attendees" render={({ field }) => ( <FormItem> <FormLabel>Attendees</FormLabel> <FormControl><Input type="number" placeholder="e.g., 100" {...field} /></FormControl> <FormMessage /> </FormItem> )}/>
-          <FormField control={form.control} name="vtcs" render={({ field }) => ( <FormItem> <FormLabel>VTCs</FormLabel> <FormControl><Input type="number" placeholder="e.g., 30" {...field} /></FormControl> <FormMessage /> </FormItem> )}/>
         </div>
         <FormField control={form.control} name="description" render={({ field }) => ( <FormItem> <FormLabel>Description</FormLabel> <FormControl><Textarea placeholder="Enter a description for the event" {...field} /></FormControl> <FormMessage /> </FormItem> )}/>
         <FormField control={form.control} name="rules" render={({ field }) => ( <FormItem> <FormLabel>Rules</FormLabel> <FormControl><Textarea placeholder="Enter the rules for the event" {...field} /></FormControl> <FormMessage /> </FormItem> )}/>
