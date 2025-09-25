@@ -1,6 +1,22 @@
-
 {
   "events": [
+    {
+      "id": "event-1758792559379",
+      "title": "test",
+      "date": "01.01,2025",
+      "imageId": "event-november",
+      "url": "https://truckersmp.com/events/26299",
+      "type": "internal",
+      "attendees": 0,
+      "vtcs": 0,
+      "departure": "Svalöv",
+      "arrival": "Oslo",
+      "server": "sim",
+      "meetupTime": "12:30 UTC",
+      "departureTime": "13:00 UTC",
+      "description": "jhgjgj",
+      "rules": "Follow all TruckersMP rules. No reckless driving. Keep a safe distance."
+    },
     {
       "id": "event-1",
       "title": "Tamil Pasanga October Convoy #61",

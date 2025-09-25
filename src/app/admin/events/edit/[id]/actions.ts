@@ -9,6 +9,21 @@ import type { EventsData, Event } from '@/lib/events';
 
 export type { Event };
 
+const bookingSchema = z.object({
+  id: z.string(),
+  slotNumber: z.coerce.number(),
+  vtcName: z.string(),
+  status: z.enum(['approved', 'pending', 'rejected']),
+});
+
+const slotAreaSchema = z.object({
+  id: z.string(),
+  areaName: z.string().min(1, 'Area name is required'),
+  imageUrl: z.string().url('Image URL must be a valid URL'),
+  totalSlots: z.coerce.number().min(1, 'Total slots must be at least 1'),
+  bookings: z.array(bookingSchema),
+});
+
 const formSchema = z.object({
   title: z.string().min(1, 'Title is required'),
   date: z.string().min(1, 'Date is required'),
@@ -24,6 +39,7 @@ const formSchema = z.object({
   departureTime: z.string().min(1, 'Departure time is required'),
   description: z.string().min(1, 'Description is required'),
   rules: z.string().min(1, 'Rules are required'),
+  slots: z.array(slotAreaSchema).optional(),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -55,6 +71,7 @@ export async function getEvent(id: string): Promise<Event | undefined> {
 export async function updateEvent(id: string, values: FormValues) {
   const validation = formSchema.safeParse(values);
   if (!validation.success) {
+    console.error(validation.error.flatten().fieldErrors)
     return { success: false, message: 'Invalid data provided.' };
   }
 
@@ -69,6 +86,7 @@ export async function updateEvent(id: string, values: FormValues) {
     eventsData.events[eventIndex] = {
         ...eventsData.events[eventIndex],
         ...validation.data,
+        slots: validation.data.slots || [],
     };
 
     await writeJsonFile(eventsFilePath, eventsData);

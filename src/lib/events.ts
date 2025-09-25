@@ -1,4 +1,19 @@
 
+export type Booking = {
+    id: string;
+    slotNumber: number;
+    vtcName: string;
+    status: 'approved' | 'pending' | 'rejected';
+};
+
+export type SlotArea = {
+    id: string;
+    areaName: string;
+    imageUrl: string;
+    totalSlots: number;
+    bookings: Booking[];
+};
+
 export type Event = {
     id: string;
     title: string;
@@ -15,6 +30,7 @@ export type Event = {
     departureTime: string;
     description: string;
     rules: string;
+    slots?: SlotArea[];
 };
 
 export type EventsData = {
