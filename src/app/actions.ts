@@ -67,16 +67,17 @@ export async function submitApplication(data: ApplicationData): Promise<SubmitRe
         return { success: false, message: 'Server error: Could not save application.' };
     }
 
-    const { name, discordTag, email, steamUrl, experience, howYouFound, friendsMention, othersMention } = validation.data;
+    // Try to send Discord notification if webhook URL is configured
     const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
     
-
     if (!webhookUrl) {
-        console.error('DISCORD_WEBHOOK_URL is not set in .env file');
-        return { success: false, message: 'Server configuration error.' };
+        console.warn('DISCORD_WEBHOOK_URL is not set - skipping Discord notification');
+        return { success: true, message: 'Application submitted successfully!', applicationId };
     }
 
-    let howFoundValue = howYouFound;
+    const { name, discordTag, email, steamUrl, experience, howYouFound, friendsMention, othersMention } = validation.data;
+
+    let howFoundValue: string = howYouFound;
     if (howYouFound === 'friends' && friendsMention) {
         howFoundValue = `Friends: ${friendsMention}`;
     } else if (howYouFound === 'others' && othersMention) {

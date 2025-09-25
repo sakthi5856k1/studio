@@ -135,7 +135,7 @@ export async function updateApplicationStatus(
                     name: application.name,
                     role: role || 'Trainee',
                     imageId: 'testimonial-avatar',
-                    imageUrl: "https://media.discordapp.net/attachments/1116720480544636999/1274425873201631304/TP_NEW_WB_PNGxxxhdpi.png?ex=68d4d8d5&is=68d38755&hm=b6d4e0e4ef2c3215a4de4fb2f592189a60ddd94c651f96fe04deac2e7f96ddc6&=&format=webp&quality=lossless&width=826&height=826",
+                    imageUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=826&h=826&fit=crop&crop=face",
                     steamUrl: application.steamUrl,
                     truckersmpUrl: "",
                 };
