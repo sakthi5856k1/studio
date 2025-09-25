@@ -8,7 +8,7 @@ import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { Calendar } from 'lucide-react';
+import { Calendar, Image as ImageIcon } from 'lucide-react';
 import type { Event } from '@/lib/events';
 import eventsData from '@/lib/events.json';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
@@ -38,11 +38,21 @@ const EventCard = ({ event }: { event: Event }) => {
                     <Calendar className="h-4 w-4" />
                     <span>{event.date}</span>
                 </div>
-                <Button asChild className="w-full">
-                    <Link href={linkHref} target={event.type === 'partner' ? '_blank' : '_self'}>
-                        {event.type === 'internal' ? 'Slot Booking' : 'View Event'}
-                    </Link>
-                </Button>
+                <div className="flex flex-col sm:flex-row gap-2">
+                    <Button asChild className="w-full">
+                        <Link href={linkHref} target={event.type === 'partner' ? '_blank' : '_self'}>
+                            {event.type === 'internal' ? 'Slot Booking' : 'View Event'}
+                        </Link>
+                    </Button>
+                     {event.type === 'internal' && (
+                        <Button asChild variant="secondary" className="w-full">
+                            <Link href={`/events/${event.id}#event-slots`}>
+                                <ImageIcon className="mr-2 h-4 w-4" />
+                                Book Slot Image
+                            </Link>
+                        </Button>
+                    )}
+                </div>
             </CardContent>
         </Card>
     );
