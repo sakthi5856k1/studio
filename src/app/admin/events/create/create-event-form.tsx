@@ -27,7 +27,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
@@ -63,7 +62,7 @@ const timeSchema = z.object({
 const formSchema = z.object({
   title: z.string().min(1, 'Title is required'),
   eventDate: z.date({ required_error: "An event date is required." }),
-  imageId: z.string().min(1, 'An image ID is required'),
+  imageUrl: z.string().url('Must be a valid URL'),
   url: z.string().url('Must be a valid URL'),
   type: z.enum(['internal', 'partner']),
   attendees: z.coerce.number().min(0),
@@ -80,8 +79,6 @@ const formSchema = z.object({
 
 type FormValues = z.infer<typeof formSchema>;
 
-const eventImageOptions = PlaceHolderImages.filter(img => img.id.startsWith('event-'));
-
 export function CreateEventForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
@@ -91,7 +88,7 @@ export function CreateEventForm() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: "",
-      imageId: "",
+      imageUrl: "",
       url: "",
       type: "internal",
       attendees: 0,
@@ -179,7 +176,7 @@ export function CreateEventForm() {
             />
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <FormField control={form.control} name="imageId" render={({ field }) => ( <FormItem> <FormLabel>Event Image</FormLabel> <Select onValueChange={field.onChange} defaultValue={field.value}> <FormControl><SelectTrigger><SelectValue placeholder="Select an image" /></SelectTrigger></FormControl> <SelectContent> {eventImageOptions.map(image => ( <SelectItem key={image.id} value={image.id}>{image.description}</SelectItem> ))} </SelectContent> </Select> <FormMessage /> </FormItem> )}/>
+            <FormField control={form.control} name="imageUrl" render={({ field }) => ( <FormItem> <FormLabel>Event Image URL</FormLabel> <FormControl><Input placeholder="https://example.com/image.png" {...field} /></FormControl> <FormMessage /> </FormItem> )}/>
             <FormField control={form.control} name="url" render={({ field }) => ( <FormItem> <FormLabel>Event URL</FormLabel> <FormControl><Input placeholder="https://truckersmp.com/..." {...field} /></FormControl> <FormMessage /> </FormItem> )}/>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

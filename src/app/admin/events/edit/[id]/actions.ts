@@ -6,6 +6,7 @@ import fs from 'fs/promises';
 import path from 'path';
 import { revalidatePath } from 'next/cache';
 import type { EventsData, Event } from '@/lib/events';
+import type { ImagePlaceholder } from '@/lib/placeholder-images';
 
 export type { Event };
 
@@ -37,7 +38,7 @@ const timeSchema = z.object({
 const formSchema = z.object({
   title: z.string().min(1, 'Title is required'),
   eventDate: z.date({ required_error: "An event date is required." }),
-  imageId: z.string().min(1, 'Image ID is required'),
+  imageUrl: z.string().url('Must be a valid URL'),
   url: z.string().url('Must be a valid URL'),
   type: z.enum(['internal', 'partner']),
   attendees: z.coerce.number().min(0, 'Attendees must be a positive number'),
@@ -55,6 +56,8 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>;
 
 const eventsFilePath = path.join(process.cwd(), 'src', 'lib', 'events.json');
+const imagesFilePath = path.join(process.cwd(), 'src', 'lib', 'placeholder-images.json');
+
 
 async function readJsonFile<T>(filePath: string): Promise<T> {
     try {
@@ -62,7 +65,8 @@ async function readJsonFile<T>(filePath: string): Promise<T> {
         return JSON.parse(fileContent);
     } catch (error) {
         if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
-            return { events: [] } as any;
+            if (filePath.includes('events.json')) return { events: [] } as any;
+            if (filePath.includes('placeholder-images.json')) return { placeholderImages: [] } as any;
         }
         throw error;
     }
@@ -72,10 +76,21 @@ async function writeJsonFile(filePath: string, data: any): Promise<void> {
     await fs.writeFile(filePath, JSON.stringify(data, null, 2));
 }
 
-export async function getEvent(id: string): Promise<Event | undefined> {
+export type EventWithImageUrl = Event & { imageUrl: string };
+
+export async function getEvent(id: string): Promise<EventWithImageUrl | undefined> {
     const eventsData = await readJsonFile<EventsData>(eventsFilePath);
     const event = eventsData.events.find((e) => e.id === id);
-    return event;
+
+    if (!event) return undefined;
+    
+    const imagesData = await readJsonFile<{ placeholderImages: ImagePlaceholder[] }>(imagesFilePath);
+    const image = imagesData.placeholderImages.find(img => img.id === event.imageId);
+    
+    return {
+        ...event,
+        imageUrl: image?.imageUrl || '',
+    };
 }
 
 const formatDateTime = (date: Date, time: z.infer<typeof timeSchema>): string => {
@@ -94,13 +109,14 @@ export async function updateEvent(id: string, values: FormValues) {
 
   try {
     const eventsData = await readJsonFile<EventsData>(eventsFilePath);
+    const imagesData = await readJsonFile<{ placeholderImages: ImagePlaceholder[] }>(imagesFilePath);
     
     const eventIndex = eventsData.events.findIndex((e) => e.id === id);
     if (eventIndex === -1) {
         return { success: false, message: 'Event not found.' };
     }
 
-    const { eventDate, meetupTime, departureTime, ...restOfData } = validation.data;
+    const { eventDate, meetupTime, departureTime, imageUrl, ...restOfData } = validation.data;
 
     eventsData.events[eventIndex] = {
         ...eventsData.events[eventIndex],
@@ -110,8 +126,15 @@ export async function updateEvent(id: string, values: FormValues) {
         departureTime: formatDateTime(eventDate, departureTime),
         slots: validation.data.slots || [],
     };
+    
+    const imageIndex = imagesData.placeholderImages.findIndex(img => img.id === eventsData.events[eventIndex].imageId);
+    if (imageIndex !== -1) {
+        imagesData.placeholderImages[imageIndex].imageUrl = imageUrl;
+        imagesData.placeholderImages[imageIndex].description = `Image for ${validation.data.title}`;
+    }
 
     await writeJsonFile(eventsFilePath, eventsData);
+    await writeJsonFile(imagesFilePath, imagesData);
 
     revalidatePath('/admin/events');
     revalidatePath(`/admin/events/edit/${id}`);

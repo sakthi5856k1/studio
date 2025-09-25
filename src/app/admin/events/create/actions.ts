@@ -6,6 +6,7 @@ import fs from 'fs/promises';
 import path from 'path';
 import { revalidatePath } from 'next/cache';
 import type { EventsData, Event, SlotArea } from '@/lib/events';
+import type { ImagePlaceholder } from '@/lib/placeholder-images';
 
 const bookingSchema = z.object({
   id: z.string(),
@@ -35,7 +36,7 @@ const timeSchema = z.object({
 const formSchema = z.object({
   title: z.string().min(1, 'Title is required'),
   eventDate: z.date({ required_error: "An event date is required." }),
-  imageId: z.string().min(1, 'Image ID is required'),
+  imageUrl: z.string().url('Must be a valid URL'),
   url: z.string().url('Must be a valid URL'),
   type: z.enum(['internal', 'partner'], {
     errorMap: () => ({ message: 'Please select an event type' }),
@@ -55,6 +56,8 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>;
 
 const eventsFilePath = path.join(process.cwd(), 'src', 'lib', 'events.json');
+const imagesFilePath = path.join(process.cwd(), 'src', 'lib', 'placeholder-images.json');
+
 
 async function readJsonFile<T>(filePath: string): Promise<T> {
     try {
@@ -62,7 +65,8 @@ async function readJsonFile<T>(filePath: string): Promise<T> {
         return JSON.parse(fileContent);
     } catch (error) {
         if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
-            return { events: [] } as any;
+            if (filePath.includes('events.json')) return { events: [] } as any;
+            if (filePath.includes('placeholder-images.json')) return { placeholderImages: [] } as any;
         }
         throw error;
     }
@@ -89,11 +93,23 @@ export async function createEvent(values: FormValues) {
 
   try {
     const eventsData = await readJsonFile<EventsData>(eventsFilePath);
+    const imagesData = await readJsonFile<{ placeholderImages: ImagePlaceholder[] }>(imagesFilePath);
 
-    const { eventDate, meetupTime, departureTime, ...restOfData } = validation.data;
+    const { eventDate, meetupTime, departureTime, imageUrl, ...restOfData } = validation.data;
+
+    const imageId = `event-${Date.now()}`;
+    const newImage: ImagePlaceholder = {
+        id: imageId,
+        description: `Image for ${validation.data.title}`,
+        imageUrl: imageUrl,
+        imageHint: 'custom event',
+    };
+    imagesData.placeholderImages.unshift(newImage);
+
 
     const newEvent: Event = {
-      id: `event-${Date.now()}`,
+      id: imageId,
+      imageId: imageId,
       ...restOfData,
       date: formatDateTime(eventDate, meetupTime),
       meetupTime: formatDateTime(eventDate, meetupTime),
@@ -104,6 +120,7 @@ export async function createEvent(values: FormValues) {
     eventsData.events.unshift(newEvent);
 
     await writeJsonFile(eventsFilePath, eventsData);
+    await writeJsonFile(imagesFilePath, imagesData);
     
     revalidatePath('/admin/events');
     revalidatePath('/events');
