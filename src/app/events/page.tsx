@@ -34,7 +34,7 @@ const EventCard = ({ event }: { event: Event }) => {
                     <span>{event.date}</span>
                 </div>
                 <Button asChild className="w-full">
-                    <Link href={event.url} target="_blank">
+                    <Link href={`/events/${event.id}`}>
                         {event.type === 'internal' ? 'Slot Booking' : 'View Event'}
                     </Link>
                 </Button>
@@ -91,3 +91,4 @@ export default function EventsPage() {
         </div>
     );
 }
+
