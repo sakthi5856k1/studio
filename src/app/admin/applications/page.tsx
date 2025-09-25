@@ -12,9 +12,10 @@ import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { format } from 'date-fns';
-import { UpdateApplicationStatus } from "./actions";
-import { getApplications } from './server-actions';
+import { UpdateApplicationStatus, UpdateBookingStatus } from "./actions";
+import { getApplications, getEventsWithBookings } from './server-actions';
 import { Skeleton } from '@/components/ui/skeleton';
+import type { Event } from '@/lib/events';
 
 const statusInfo = {
     Accepted: { icon: <CheckCircle className="h-4 w-4 text-green-500" />, badge: <Badge variant="default" className="bg-green-500">Accepted</Badge> },
@@ -79,25 +80,64 @@ function ApplicationRow({ app }: { app: Application }) {
     );
 }
 
+function BookingRow({ event, area, booking }: { event: Event; area: NonNullable<Event['slots']>[0]; booking: NonNullable<NonNullable<Event['slots']>[0]['bookings']>[0] }) {
+  return (
+     <TableRow>
+        <TableCell></TableCell>
+        <TableCell className="font-medium">{booking.id}</TableCell>
+        <TableCell>{booking.vtcName}</TableCell>
+        <TableCell>{event.title}</TableCell>
+        <TableCell>Slot #{booking.slotNumber} ({area.areaName})</TableCell>
+        <TableCell><Badge className={booking.status === 'approved' ? 'bg-green-500' : booking.status === 'rejected' ? 'bg-red-500' : 'bg-yellow-500'}>{booking.status}</Badge></TableCell>
+        <TableCell className="text-right">
+             <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" className="h-8 w-8 p-0" disabled={booking.status !== 'pending'}>
+                    <span className="sr-only">Open menu</span>
+                    <MoreHorizontal className="h-4 w-4" />
+                    </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                    <UpdateBookingStatus eventId={event.id} areaId={area.id} bookingId={booking.id} newStatus="approved" />
+                    <UpdateBookingStatus eventId={event.id} areaId={area.id} bookingId={booking.id} newStatus="rejected" />
+                </DropdownMenuContent>
+            </DropdownMenu>
+        </TableCell>
+    </TableRow>
+  );
+}
+
 
 export default function ApplicationsAdminPage() {
     const [applications, setApplications] = useState<Application[]>([]);
+    const [bookingEvents, setBookingEvents] = useState<Event[]>([]);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        async function loadApplications() {
+        async function loadData() {
             setIsLoading(true);
             try {
-                const fetchedApplications = await getApplications();
+                const [fetchedApplications, fetchedEvents] = await Promise.all([
+                    getApplications(),
+                    getEventsWithBookings()
+                ]);
                 setApplications(fetchedApplications);
+                setBookingEvents(fetchedEvents);
             } catch (error) {
-                console.error("Failed to load applications:", error);
+                console.error("Failed to load data:", error);
             } finally {
                 setIsLoading(false);
             }
         }
-        loadApplications();
+        loadData();
     }, []);
+    
+    const allBookings = bookingEvents.flatMap(event => 
+        event.slots?.flatMap(area => 
+            area.bookings?.map(booking => ({ event, area, booking })) || []
+        ) || []
+    );
+
 
     return (
         <div className="flex flex-col min-h-screen bg-background">
@@ -106,7 +146,7 @@ export default function ApplicationsAdminPage() {
                     <div className="flex items-center justify-between mb-8">
                         <h1 className="text-3xl font-headline flex items-center gap-2">
                             <FileText />
-                            Manage Applications
+                            Manage Applications & Bookings
                         </h1>
                     </div>
 
@@ -148,6 +188,50 @@ export default function ApplicationsAdminPage() {
                             </Table>
                         </CardContent>
                     </Card>
+                    
+                     <Card className="mt-8">
+                        <CardHeader>
+                            <CardTitle>Slot Booking Requests</CardTitle>
+                            <CardDescription>
+                                {isLoading ? 'Loading booking requests...' : `${allBookings.length} booking request(s) found.`}
+                            </CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                           <Table>
+                                <TableHeader>
+                                    <TableRow>
+                                        <TableHead className="w-12"></TableHead>
+                                        <TableHead>Booking ID</TableHead>
+                                        <TableHead>VTC Name</TableHead>
+                                        <TableHead>Event</TableHead>
+                                        <TableHead>Slot</TableHead>
+                                        <TableHead>Status</TableHead>
+                                        <TableHead className="text-right">Actions</TableHead>
+                                    </TableRow>
+                                </TableHeader>
+                                <TableBody>
+                                     {isLoading ? (
+                                        Array.from({ length: 3 }).map((_, index) => (
+                                            <TableRow key={`booking-skel-${index}`}>
+                                                <TableCell colSpan={7}>
+                                                    <Skeleton className="h-8 w-full" />
+                                                </TableCell>
+                                            </TableRow>
+                                        ))
+                                    ) : allBookings.length > 0 ? (
+                                        allBookings.map(({ event, area, booking }) => (
+                                            <BookingRow key={booking.id} event={event} area={area} booking={booking} />
+                                        ))
+                                    ) : (
+                                        <TableRow>
+                                            <TableCell colSpan={7} className="text-center">No booking requests found.</TableCell>
+                                        </TableRow>
+                                    )}
+                                </TableBody>
+                            </Table>
+                        </CardContent>
+                    </Card>
+
                      <div className="mt-8 text-center">
                         <Button variant="outline" asChild>
                             <Link href="/admin">Back to Admin</Link>

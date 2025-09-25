@@ -2,7 +2,7 @@
 'use client';
 
 import { useTransition, useState } from 'react';
-import { updateApplicationStatus as updateStatusAction } from './server-actions';
+import { updateApplicationStatus as updateStatusAction, updateBookingStatus as updateBookingAction } from './server-actions';
 import type { ApplicationStatus } from '@/lib/applications';
 import { DropdownMenuItem, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuPortal, DropdownMenuRadioGroup, DropdownMenuRadioItem } from '@/components/ui/dropdown-menu';
 import { CheckCircle, XCircle, AlertCircle, Loader2 } from 'lucide-react';
@@ -93,4 +93,47 @@ export function UpdateApplicationStatus({
       {config.label}
     </DropdownMenuItem>
   );
+}
+
+export function UpdateBookingStatus({
+    eventId,
+    areaId,
+    bookingId,
+    newStatus,
+}: {
+    eventId: string;
+    areaId: string;
+    bookingId: string;
+    newStatus: 'approved' | 'rejected';
+}) {
+    const [isPending, startTransition] = useTransition();
+    const { toast } = useToast();
+    
+    const isApproval = newStatus === 'approved';
+    const icon = isApproval ? <CheckCircle className="mr-2 h-4 w-4 text-green-500" /> : <XCircle className="mr-2 h-4 w-4 text-red-500" />;
+    const label = isApproval ? 'Approve' : 'Reject';
+    const className = isApproval ? 'text-green-500' : 'text-red-500';
+
+    const handleUpdate = () => {
+        startTransition(async () => {
+            const result = await updateBookingAction(eventId, areaId, bookingId, newStatus);
+            if (result.success) {
+                toast({ title: 'Success', description: result.message });
+            } else {
+                toast({ variant: 'destructive', title: 'Error', description: result.message });
+            }
+        });
+    };
+
+    return (
+        <DropdownMenuItem
+            onClick={handleUpdate}
+            disabled={isPending}
+            className={className}
+            onSelect={(e) => e.preventDefault()}
+        >
+            {isPending ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : icon}
+            {label}
+        </DropdownMenuItem>
+    );
 }
