@@ -47,14 +47,16 @@ const formSchema = z.object({
   server: z.string().optional(),
   meetupTime: timeSchema,
   departureTime: timeSchema,
-  description: z.string().min(1, 'Description is required'),
-  rules: z.string().min(1, 'Rules are required'),
+  description: z.string().optional(),
+  rules: z.string().optional(),
   slots: z.array(slotAreaSchema).optional(),
 }).superRefine((data, ctx) => {
     if (data.type === 'internal') {
         if (!data.departure) ctx.addIssue({ code: 'custom', message: 'Departure is required', path: ['departure'] });
         if (!data.arrival) ctx.addIssue({ code: 'custom', message: 'Arrival is required', path: ['arrival'] });
         if (!data.server) ctx.addIssue({ code: 'custom', message: 'Server is required', path: ['server'] });
+        if (!data.description) ctx.addIssue({ code: 'custom', message: 'Description is required', path: ['description'] });
+        if (!data.rules) ctx.addIssue({ code: 'custom', message: 'Rules are required', path: ['rules'] });
     }
 });
 
@@ -119,8 +121,8 @@ export async function createEvent(values: FormValues) {
       title: restOfData.title,
       url: restOfData.url,
       type: restOfData.type,
-      description: restOfData.description,
-      rules: restOfData.rules,
+      description: restOfData.description || '',
+      rules: restOfData.rules || '',
       attendees: 0,
       vtcs: 0,
       date: formatDateTime(eventDate, meetupTime),

@@ -73,14 +73,16 @@ const formSchema = z.object({
   server: z.string().optional(),
   meetupTime: timeSchema,
   departureTime: timeSchema,
-  description: z.string().min(1, 'Description is required'),
-  rules: z.string().min(1, 'Rules are required'),
+  description: z.string().optional(),
+  rules: z.string().optional(),
   slots: z.array(slotAreaSchema).optional(),
 }).superRefine((data, ctx) => {
     if (data.type === 'internal') {
         if (!data.departure) ctx.addIssue({ code: 'custom', message: 'Departure is required', path: ['departure'] });
         if (!data.arrival) ctx.addIssue({ code: 'custom', message: 'Arrival is required', path: ['arrival'] });
         if (!data.server) ctx.addIssue({ code: 'custom', message: 'Server is required', path: ['server'] });
+        if (!data.description) ctx.addIssue({ code: 'custom', message: 'Description is required', path: ['description'] });
+        if (!data.rules) ctx.addIssue({ code: 'custom', message: 'Rules are required', path: ['rules'] });
     }
 });
 
@@ -234,36 +236,39 @@ export function CreateEventForm() {
                 </FormMessage>
             </FormItem>
         </div>
-        <FormField control={form.control} name="description" render={({ field }) => ( <FormItem> <FormLabel>Description</FormLabel> <FormControl><Textarea placeholder="Enter a description for the event" {...field} /></FormControl> <FormMessage /> </FormItem> )}/>
-        <FormField control={form.control} name="rules" render={({ field }) => ( <FormItem> <FormLabel>Rules</FormLabel> <FormControl><Textarea placeholder="Enter the rules for the event" {...field} /></FormControl> <FormMessage /> </FormItem> )}/>
         
         {eventType === 'internal' && (
-          <Card>
-              <CardHeader>
-                  <CardTitle>Event Slots</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                  {fields.map((field, index) => (
-                      <Card key={field.id} className="p-4 relative">
-                          <div className="space-y-4">
-                              <FormField control={form.control} name={`slots.${index}.areaName`} render={({ field }) => ( <FormItem> <FormLabel>Area Name</FormLabel> <FormControl><Input placeholder="e.g., Main Parking" {...field} /></FormControl> <FormMessage /> </FormItem> )}/>
-                              <div className="grid grid-cols-2 gap-4">
-                                  <FormField control={form.control} name={`slots.${index}.startSlot`} render={({ field }) => ( <FormItem> <FormLabel>Start Slot</FormLabel> <FormControl><Input type="number" placeholder="e.g., 1" {...field} /></FormControl> <FormMessage /> </FormItem> )}/>
-                                  <FormField control={form.control} name={`slots.${index}.endSlot`} render={({ field }) => ( <FormItem> <FormLabel>End Slot</FormLabel> <FormControl><Input type="number" placeholder="e.g., 10" {...field} /></FormControl> <FormMessage /> </FormItem> )}/>
-                              </div>
-                              <FormField control={form.control} name={`slots.${index}.imageUrl`} render={({ field }) => ( <FormItem> <FormLabel>Image URL</FormLabel> <FormControl><Input placeholder="https://example.com/slot-map.png" {...field} /></FormControl> <FormMessage /> </FormItem> )}/>
-                          </div>
-                          <Button type="button" variant="destructive" size="icon" className="absolute top-2 right-2" onClick={() => remove(index)}>
-                              <Trash2 className="h-4 w-4" />
-                          </Button>
-                      </Card>
-                  ))}
-                  <Button type="button" variant="outline" onClick={() => append({ id: `slot-area-${Date.now()}`, areaName: '', imageUrl: '', startSlot: 1, endSlot: 10, bookings: [] })}>
-                      <PlusCircle className="mr-2 h-4 w-4" />
-                      Add Slot Area
-                  </Button>
-              </CardContent>
-          </Card>
+          <>
+            <FormField control={form.control} name="description" render={({ field }) => ( <FormItem> <FormLabel>Description</FormLabel> <FormControl><Textarea placeholder="Enter a description for the event" {...field} /></FormControl> <FormMessage /> </FormItem> )}/>
+            <FormField control={form.control} name="rules" render={({ field }) => ( <FormItem> <FormLabel>Rules</FormLabel> <FormControl><Textarea placeholder="Enter the rules for the event" {...field} /></FormControl> <FormMessage /> </FormItem> )}/>
+            
+            <Card>
+                <CardHeader>
+                    <CardTitle>Event Slots</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                    {fields.map((field, index) => (
+                        <Card key={field.id} className="p-4 relative">
+                            <div className="space-y-4">
+                                <FormField control={form.control} name={`slots.${index}.areaName`} render={({ field }) => ( <FormItem> <FormLabel>Area Name</FormLabel> <FormControl><Input placeholder="e.g., Main Parking" {...field} /></FormControl> <FormMessage /> </FormItem> )}/>
+                                <div className="grid grid-cols-2 gap-4">
+                                    <FormField control={form.control} name={`slots.${index}.startSlot`} render={({ field }) => ( <FormItem> <FormLabel>Start Slot</FormLabel> <FormControl><Input type="number" placeholder="e.g., 1" {...field} /></FormControl> <FormMessage /> </FormItem> )}/>
+                                    <FormField control={form.control} name={`slots.${index}.endSlot`} render={({ field }) => ( <FormItem> <FormLabel>End Slot</FormLabel> <FormControl><Input type="number" placeholder="e.g., 10" {...field} /></FormControl> <FormMessage /> </FormItem> )}/>
+                                </div>
+                                <FormField control={form.control} name={`slots.${index}.imageUrl`} render={({ field }) => ( <FormItem> <FormLabel>Image URL</FormLabel> <FormControl><Input placeholder="https://example.com/slot-map.png" {...field} /></FormControl> <FormMessage /> </FormItem> )}/>
+                            </div>
+                            <Button type="button" variant="destructive" size="icon" className="absolute top-2 right-2" onClick={() => remove(index)}>
+                                <Trash2 className="h-4 w-4" />
+                            </Button>
+                        </Card>
+                    ))}
+                    <Button type="button" variant="outline" onClick={() => append({ id: `slot-area-${Date.now()}`, areaName: '', imageUrl: '', startSlot: 1, endSlot: 10, bookings: [] })}>
+                        <PlusCircle className="mr-2 h-4 w-4" />
+                        Add Slot Area
+                    </Button>
+                </CardContent>
+            </Card>
+          </>
         )}
 
         <div className="flex justify-end gap-4">
