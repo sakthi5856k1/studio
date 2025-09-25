@@ -28,9 +28,15 @@ const slotAreaSchema = z.object({
     path: ["endSlot"],
 });
 
+const timeSchema = z.object({
+  hour: z.string().min(1, { message: 'HH' }),
+  minute: z.string().min(1, { message: 'MM' }),
+  timezone: z.string().min(1, { message: 'Zone' })
+});
+
 const formSchema = z.object({
   title: z.string().min(1, 'Title is required'),
-  date: z.string().min(1, 'Date is required'),
+  eventDate: z.date({ required_error: "An event date is required." }),
   imageId: z.string().min(1, 'Image ID is required'),
   url: z.string().url('Must be a valid URL'),
   type: z.enum(['internal', 'partner']),
@@ -39,8 +45,8 @@ const formSchema = z.object({
   departure: z.string().min(1, 'Departure location is required'),
   arrival: z.string().min(1, 'Arrival location is required'),
   server: z.string().min(1, 'Server is required'),
-  meetupTime: z.string().min(1, 'Meetup time is required'),
-  departureTime: z.string().min(1, 'Departure time is required'),
+  meetupTime: timeSchema,
+  departureTime: timeSchema,
   description: z.string().min(1, 'Description is required'),
   rules: z.string().min(1, 'Rules are required'),
   slots: z.array(slotAreaSchema).optional(),
@@ -72,6 +78,13 @@ export async function getEvent(id: string): Promise<Event | undefined> {
     return event;
 }
 
+const formatDateTime = (date: Date, time: z.infer<typeof timeSchema>): string => {
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}.${month}.${year} | ${time.hour}:${time.minute} ${time.timezone}`;
+};
+
 export async function updateEvent(id: string, values: FormValues) {
   const validation = formSchema.safeParse(values);
   if (!validation.success) {
@@ -87,9 +100,14 @@ export async function updateEvent(id: string, values: FormValues) {
         return { success: false, message: 'Event not found.' };
     }
 
+    const { eventDate, meetupTime, departureTime, ...restOfData } = validation.data;
+
     eventsData.events[eventIndex] = {
         ...eventsData.events[eventIndex],
-        ...validation.data,
+        ...restOfData,
+        date: formatDateTime(eventDate, meetupTime),
+        meetupTime: formatDateTime(eventDate, meetupTime),
+        departureTime: formatDateTime(eventDate, departureTime),
         slots: validation.data.slots || [],
     };
 

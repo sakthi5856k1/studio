@@ -18,7 +18,7 @@ import { updateEvent, type Event } from "./actions";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { Loader2, PlusCircle, Trash2 } from "lucide-react";
+import { CalendarIcon, Loader2, PlusCircle, Trash2 } from "lucide-react";
 import Link from "next/link";
 import {
   Select,
@@ -30,6 +30,10 @@ import {
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
+import { Calendar } from "@/components/ui/calendar";
+import { cn } from "@/lib/utils";
+import { format } from "date-fns";
 
 const bookingSchema = z.object({
   id: z.string(),
@@ -50,9 +54,15 @@ const slotAreaSchema = z.object({
     path: ["endSlot"],
 });
 
+const timeSchema = z.object({
+  hour: z.string().min(1, { message: 'HH' }).max(2),
+  minute: z.string().min(1, { message: 'MM' }).max(2),
+  timezone: z.string().min(1, { message: 'Zone' })
+});
+
 const formSchema = z.object({
   title: z.string().min(1, 'Title is required'),
-  date: z.string().min(1, 'Date is required'),
+  eventDate: z.date({ required_error: "An event date is required." }),
   imageId: z.string().min(1, 'An image ID is required'),
   url: z.string().url('Must be a valid URL'),
   type: z.enum(['internal', 'partner']),
@@ -61,8 +71,8 @@ const formSchema = z.object({
   departure: z.string().min(1, 'Departure location is required'),
   arrival: z.string().min(1, 'Arrival location is required'),
   server: z.string().min(1, 'Server is required'),
-  meetupTime: z.string().min(1, 'Meetup time is required'),
-  departureTime: z.string().min(1, 'Departure time is required'),
+  meetupTime: timeSchema,
+  departureTime: timeSchema,
   description: z.string().min(1, 'Description is required'),
   rules: z.string().min(1, 'Rules are required'),
   slots: z.array(slotAreaSchema).optional(),
@@ -72,15 +82,52 @@ type FormValues = z.infer<typeof formSchema>;
 
 const eventImageOptions = PlaceHolderImages.filter(img => img.id.startsWith('event-'));
 
+// Helper to parse the date/time string from events.json
+const parseDateTime = (dateTimeStr: string): { date: Date, time: z.infer<typeof timeSchema> } => {
+    try {
+        const [datePart, timePart] = dateTimeStr.split(' | ');
+        const [day, month, year] = datePart.split('.').map(Number);
+        
+        const [time, timezone] = timePart.split(' ');
+        const [hour, minute] = time.split(':');
+
+        return {
+            date: new Date(year, month - 1, day),
+            time: { hour, minute, timezone }
+        };
+    } catch (e) {
+         // Fallback for just date or invalid format
+        try {
+            const [day, month, year] = dateTimeStr.split('.').map(Number);
+            return {
+                date: new Date(year, month - 1, day),
+                time: { hour: '13', minute: '00', timezone: 'UTC' }
+            }
+        } catch {
+            return {
+                date: new Date(),
+                time: { hour: '13', minute: '00', timezone: 'UTC' }
+            }
+        }
+    }
+}
+
+
 export function EditEventForm({ event }: { event: Event }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
   const router = useRouter();
 
+  const parsedMeetup = parseDateTime(event.meetupTime);
+  const parsedDeparture = parseDateTime(event.departureTime);
+
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       ...event,
+      eventDate: parsedMeetup.date,
+      meetupTime: parsedMeetup.time,
+      departureTime: parsedDeparture.time,
       slots: event.slots?.map(s => ({...s, bookings: s.bookings || []})) || [],
     },
   });
@@ -116,7 +163,45 @@ export function EditEventForm({ event }: { event: Event }) {
        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <FormField control={form.control} name="title" render={({ field }) => ( <FormItem> <FormLabel>Event Title</FormLabel> <FormControl><Input placeholder="Enter event title" {...field} /></FormControl> <FormMessage /> </FormItem> )}/>
-          <FormField control={form.control} name="date" render={({ field }) => ( <FormItem> <FormLabel>Event Date</FormLabel> <FormControl><Input placeholder="e.g., DD.MM.YYYY | HH:MM UTC" {...field} /></FormControl> <FormMessage /> </FormItem> )}/>
+          <FormField
+              control={form.control}
+              name="eventDate"
+              render={({ field }) => (
+                <FormItem className="flex flex-col">
+                  <FormLabel>Event Date</FormLabel>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <FormControl>
+                        <Button
+                          variant={"outline"}
+                          className={cn(
+                            "w-full pl-3 text-left font-normal",
+                            !field.value && "text-muted-foreground"
+                          )}
+                        >
+                          {field.value ? (
+                            format(field.value, "PPP")
+                          ) : (
+                            <span>Pick a date</span>
+                          )}
+                          <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                        </Button>
+                      </FormControl>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0" align="start">
+                      <Calendar
+                        mode="single"
+                        selected={field.value}
+                        onSelect={field.onChange}
+                        disabled={(date) => date < new Date("1900-01-01")}
+                        initialFocus
+                      />
+                    </PopoverContent>
+                  </Popover>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <FormField control={form.control} name="imageId" render={({ field }) => ( <FormItem> <FormLabel>Event Image</FormLabel> <Select onValueChange={field.onChange} defaultValue={field.value}> <FormControl><SelectTrigger><SelectValue placeholder="Select an image" /></SelectTrigger></FormControl> <SelectContent> {eventImageOptions.map(image => ( <SelectItem key={image.id} value={image.id}>{image.description}</SelectItem> ))} </SelectContent> </Select> <FormMessage /> </FormItem> )}/>
@@ -131,8 +216,30 @@ export function EditEventForm({ event }: { event: Event }) {
           <FormField control={form.control} name="arrival" render={({ field }) => ( <FormItem> <FormLabel>Arrival</FormLabel> <FormControl><Input placeholder="e.g., Prague" {...field} /></FormControl> <FormMessage /> </FormItem> )}/>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <FormField control={form.control} name="meetupTime" render={({ field }) => ( <FormItem> <FormLabel>Meetup Time</FormLabel> <FormControl><Input placeholder="e.g., 10-Oct-2025 20:30" {...field} /></FormControl> <FormMessage /> </FormItem> )}/>
-          <FormField control={form.control} name="departureTime" render={({ field }) => ( <FormItem> <FormLabel>Departure Time</FormLabel> <FormControl><Input placeholder="e.g., 10-Oct-2025 21:30" {...field} /></FormControl> <FormMessage /> </FormItem> )}/>
+            <FormItem>
+                <FormLabel>Meetup Time</FormLabel>
+                <div className="flex items-center gap-2">
+                    <FormField control={form.control} name="meetupTime.hour" render={({ field }) => (<FormItem><FormControl><Input placeholder="HH" {...field} /></FormControl></FormItem>)}/>
+                    <span>:</span>
+                    <FormField control={form.control} name="meetupTime.minute" render={({ field }) => (<FormItem><FormControl><Input placeholder="MM" {...field} /></FormControl></FormItem>)}/>
+                    <FormField control={form.control} name="meetupTime.timezone" render={({ field }) => (<FormItem><Select onValueChange={field.onChange} defaultValue={field.value}><FormControl><SelectTrigger><SelectValue/></SelectTrigger></FormControl><SelectContent><SelectItem value="UTC">UTC</SelectItem><SelectItem value="IST">IST</SelectItem><SelectItem value="CET">CET</SelectItem></SelectContent></Select></FormItem>)}/>
+                </div>
+                 <FormMessage>
+                    {form.formState.errors.meetupTime?.hour?.message || form.formState.errors.meetupTime?.minute?.message || form.formState.errors.meetupTime?.timezone?.message}
+                </FormMessage>
+            </FormItem>
+             <FormItem>
+                <FormLabel>Departure Time</FormLabel>
+                <div className="flex items-center gap-2">
+                    <FormField control={form.control} name="departureTime.hour" render={({ field }) => (<FormItem><FormControl><Input placeholder="HH" {...field} /></FormControl></FormItem>)}/>
+                    <span>:</span>
+                    <FormField control={form.control} name="departureTime.minute" render={({ field }) => (<FormItem><FormControl><Input placeholder="MM" {...field} /></FormControl></FormItem>)}/>
+                    <FormField control={form.control} name="departureTime.timezone" render={({ field }) => (<FormItem><Select onValueChange={field.onChange} defaultValue={field.value}><FormControl><SelectTrigger><SelectValue/></SelectTrigger></FormControl><SelectContent><SelectItem value="UTC">UTC</SelectItem><SelectItem value="IST">IST</SelectItem><SelectItem value="CET">CET</SelectItem></SelectContent></Select></FormItem>)}/>
+                </div>
+                 <FormMessage>
+                    {form.formState.errors.departureTime?.hour?.message || form.formState.errors.departureTime?.minute?.message || form.formState.errors.departureTime?.timezone?.message}
+                </FormMessage>
+            </FormItem>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <FormField control={form.control} name="attendees" render={({ field }) => ( <FormItem> <FormLabel>Attendees</FormLabel> <FormControl><Input type="number" placeholder="e.g., 100" {...field} /></FormControl> <FormMessage /> </FormItem> )}/>
