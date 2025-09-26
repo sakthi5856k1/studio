@@ -112,7 +112,6 @@ function respondEphimerally(content: string) {
 }
 
 async function sendFollowupMessage(interactionToken: string, content: string) {
-  const fetch = (await import('node-fetch')).default;
   const url = `https://discord.com/api/v10/webhooks/${process.env.DISCORD_APPLICATION_ID}/${interactionToken}`;
   
   await fetch(url, {
