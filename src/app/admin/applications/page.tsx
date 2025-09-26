@@ -118,6 +118,7 @@ function BookingRow({ event, area, booking }: { event: Event; area: NonNullable<
 
 
 export default function ApplicationsAdminPage({ searchParams }: { searchParams?: { [key: string]: string | string[] | undefined } }) {
+export default function ApplicationsAdminPage() {
     const [applications, setApplications] = useState<Application[]>([]);
     const [bookingEvents, setBookingEvents] = useState<Event[]>([]);
     const [isLoading, setIsLoading] = useState(true);
