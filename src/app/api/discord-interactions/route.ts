@@ -111,6 +111,7 @@ function respondEphimerally(content: string) {
     });
 }
 
+async function sendFollowupMessage(interactionToken: string, content: string) {
   const url = `https://discord.com/api/v10/webhooks/${process.env.DISCORD_APPLICATION_ID}/${interactionToken}`;
   
   await fetch(url, {
